@@ -46,11 +46,37 @@ class Helpers: NSObject {
         return "http://anfutong.cq1b1.com/"
     }
     
-    public class func updateTimeForRow(_ str: String){
+    public class func updateTimeForRow(_ str: String) -> String {
         let currentTime = Date().timeIntervalSince1970
-//        let createTime = Float(str) / 1000
+        let createTime = Double(str)! / 1000
+        let time = currentTime - createTime
         
+        let small =  time / 60
+        if small == 0 {
+            return "刚刚"
+        }
         
+        if small < 60 {
+            return "\(small)分钟前"
+        }
+        
+        let hours = time / 3600
+        if hours < 24 {
+            return "\(hours)小时前"
+        }
+        
+        let days = time / 3600 / 24
+        if days < 30 {
+            return "\(days)天前"
+        }
+        
+        let mouths = time / 3600 / 24 / 30
+        if mouths < 12 {
+            return "\(mouths)月前"
+        }
+        
+        let years = time / 3600 / 24 / 30 / 12
+        return "\(years)年前"
     }
     
 }

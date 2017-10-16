@@ -13,11 +13,15 @@ class MainCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
-    var imgArr: NSArray?
+    var imgArr: NSArray?{
+        didSet{
+            collectionView.reloadData()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        collectionViewHeight.constant = (Helpers.screanSize().width - 30) / 4
+        collectionViewHeight.constant = (Helpers.screanSize().width - 39) / 4
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,15 +32,23 @@ class MainCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
     
     //MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        if imgArr == nil {
+            return 0
+        }
+        return imgArr!.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (Helpers.screanSize().width - 30) / 4, height: (Helpers.screanSize().width - 30) / 4)
+        return CGSize(width: (Helpers.screanSize().width - 39) / 4, height: (Helpers.screanSize().width - 39) / 4)
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        let dic = self.imgArr?[indexPath.row] as! NSDictionary
+        cell.viewWithTag(1)?.layer.cornerRadius = 4
+        cell.viewWithTag(1)?.layer.borderColor = #colorLiteral(red: 0.8797392845, green: 0.8797599673, blue: 0.8797488809, alpha: 1)
+        cell.viewWithTag(1)?.layer.borderWidth = 1
+        (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
         return cell
     }
 

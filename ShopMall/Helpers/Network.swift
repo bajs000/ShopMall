@@ -33,9 +33,9 @@ class Network: NSObject {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         NSURLConnection.sendAsynchronousRequest(req, queue: OperationQueue(), completionHandler: {
             (_ response:URLResponse?, data:Data?, error:Error?) -> Void in
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
             if error == nil {
                 DispatchQueue.main.async(execute: {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     do {
                         let dic = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
                         if complete != nil {
