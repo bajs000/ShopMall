@@ -48,7 +48,7 @@ class Helpers: NSObject {
     
     public class func updateTimeForRow(_ str: String) -> String {
         let currentTime = Date().timeIntervalSince1970
-        let createTime = Double(str)! / 1000
+        let createTime = Double(str)!
         let time = currentTime - createTime
         
         let small =  time / 60
@@ -57,26 +57,26 @@ class Helpers: NSObject {
         }
         
         if small < 60 {
-            return "\(small)分钟前"
+            return "\(Int(small))分钟前"
         }
         
         let hours = time / 3600
         if hours < 24 {
-            return "\(hours)小时前"
+            return "\(Int(hours))小时前"
         }
         
         let days = time / 3600 / 24
         if days < 30 {
-            return "\(days)天前"
+            return "\(Int(days))天前"
         }
         
         let mouths = time / 3600 / 24 / 30
         if mouths < 12 {
-            return "\(mouths)月前"
+            return "\(Int(mouths))月前"
         }
         
         let years = time / 3600 / 24 / 30 / 12
-        return "\(years)年前"
+        return "\(Int(years))年前"
     }
     
 }
