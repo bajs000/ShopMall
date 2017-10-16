@@ -13,6 +13,8 @@ class MainCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
+    var imgArr: NSArray?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         collectionViewHeight.constant = (Helpers.screanSize().width - 30) / 4

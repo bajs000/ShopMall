@@ -43,7 +43,14 @@ class Helpers: NSObject {
     }
     
     public class func baseImgUrl() -> String {
-        return "http://112.74.124.86/ybb/"
+        return "http://anfutong.cq1b1.com/"
+    }
+    
+    public class func updateTimeForRow(_ str: String){
+        let currentTime = Date().timeIntervalSince1970
+//        let createTime = Float(str) / 1000
+        
+        
     }
     
 }

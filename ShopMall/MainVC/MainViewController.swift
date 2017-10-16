@@ -7,15 +7,28 @@
 //
 
 import UIKit
+import Masonry
+import SVProgressHUD
+import SDWebImage
 
 class MainViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
     
     @IBOutlet var functionView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var dataSource: NSDictionary?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
+        self.view.addSubview(functionView)
+        functionView.mas_makeConstraints { (make) in
+            _ = make?.top.equalTo()(self.view.mas_top)
+            _ = make?.left.equalTo()(self.view.mas_left)
+            _ = make?.right.equalTo()(self.view.mas_right)
+            _ = make?.height.equalTo()(44)
+        }
+        requestMain()
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,7 +38,10 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        if self.dataSource != nil {
+            return 0
+        }
+        return (self.dataSource!["list"] as! NSArray).count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,13 +60,22 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        
+        let dic = (self.dataSource!["list"] as! NSArray)[indexPath.row] as! NSDictionary
+        (cell as! MainCell).imgArr = [dic["img"] as! String]
+        cell.viewWithTag(1)?.layer.cornerRadius = 15
+        (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
+        (cell.viewWithTag(2) as! UILabel).text = dic[""] as? String
+        (cell.viewWithTag(2) as! UILabel).text = dic[""] as? String
+        (cell.viewWithTag(2) as! UILabel).text = dic[""] as? String
         return cell
     }
     
     // MARK: - UICollectionViewDelegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        if self.dataSource != nil {
+            return 0
+        }
+        return (self.dataSource!["img"] as! NSArray).count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -59,6 +84,8 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
+        let dic = (self.dataSource!["img"] as! NSArray)[indexPath.row] as! NSDictionary
+        (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["bigpic"] as! String)), completed: nil)
         return cell
     }
     
@@ -66,6 +93,17 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+    }
+    
+    func requestMain() {
+        SVProgressHUD.show()
+        Network.request(["type_id":"1","page":"1"], url: "Public") { (dic) in
+            print(dic)
+            SVProgressHUD.dismiss()
+            self.dataSource = dic as? NSDictionary
+            self.tableView.reloadData()
+            self.collectionView.reloadData()
+        }
     }
 
 }
