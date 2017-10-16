@@ -8,7 +8,7 @@ target 'ShopMall' do
 
   pod 'SVProgressHUD'
   pod 'Masonry'
-  #pod 'SDWebImage'
+  pod 'SDWebImage'
   pod 'AFNetworking'
   
 

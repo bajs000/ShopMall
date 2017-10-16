@@ -15,18 +15,23 @@ PODS:
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
   - Masonry (1.1.0)
+  - SDWebImage (4.1.2):
+    - SDWebImage/Core (= 4.1.2)
+  - SDWebImage/Core (4.1.2)
   - SVProgressHUD (2.2.1)
 
 DEPENDENCIES:
   - AFNetworking
   - Masonry
+  - SDWebImage
   - SVProgressHUD
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
   SVProgressHUD: db27c54e6e18bc903341661fc9feb55e04905cc4
 
-PODFILE CHECKSUM: 2799cda5f1798a863cacfd528e9536b4aa9ee205
+PODFILE CHECKSUM: 8df4b0ffcaf434273e3d19594587bb243eb89081
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1
