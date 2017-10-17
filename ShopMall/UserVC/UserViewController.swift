@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class UserViewController: UITableViewController {
 
@@ -20,6 +21,9 @@ class UserViewController: UITableViewController {
         mainFuncView.layer.shadowOpacity = 0.08
         mainFuncView.layer.shadowRadius = 4
         mainFuncView.layer.shadowOffset = CGSize(width: 4, height: 4)
+        avatarImg.layer.cornerRadius = 36
+        avatarImg.sd_setImage(with: URL(string: Helpers.baseImgUrl() + UserModel.share.face)!, completed: nil)
+        userName.text = UserModel.share.name
     }
 
     override func didReceiveMemoryWarning() {
