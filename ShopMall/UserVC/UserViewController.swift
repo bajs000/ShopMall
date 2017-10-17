@@ -22,10 +22,13 @@ class UserViewController: UITableViewController {
         mainFuncView.layer.shadowRadius = 4
         mainFuncView.layer.shadowOffset = CGSize(width: 4, height: 4)
         avatarImg.layer.cornerRadius = 36
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
         avatarImg.sd_setImage(with: URL(string: Helpers.baseImgUrl() + UserModel.share.face)!, completed: nil)
         userName.text = UserModel.share.name
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
