@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import SVProgressHUD
 
 class UserViewController: UITableViewController {
 
@@ -22,11 +23,12 @@ class UserViewController: UITableViewController {
         mainFuncView.layer.shadowRadius = 4
         mainFuncView.layer.shadowOffset = CGSize(width: 4, height: 4)
         avatarImg.layer.cornerRadius = 36
+        avatarImg.sd_setImage(with: URL(string: Helpers.baseImgUrl() + UserModel.share.face)!, completed: nil)
+        userName.text = UserModel.share.name
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        avatarImg.sd_setImage(with: URL(string: Helpers.baseImgUrl() + UserModel.share.face)!, completed: nil)
-        userName.text = UserModel.share.name
+        requestUser()
     }
     
     override func didReceiveMemoryWarning() {
@@ -40,4 +42,19 @@ class UserViewController: UITableViewController {
         
     }
 
+    func requestUser() {
+        SVProgressHUD.show()
+        Network.request(["user_id":UserModel.share.userId], url: "User") { (dic) in
+            print(dic)
+            if (dic as! NSDictionary)["code"] as! String == "200" {
+                SVProgressHUD.dismiss()
+                UserModel.saveUserinfo(dic)
+                self.avatarImg.sd_setImage(with: URL(string: Helpers.baseImgUrl() + UserModel.share.face)!, completed: nil)
+                self.userName.text = UserModel.share.name
+            }else {
+                SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
+            }
+        }
+    }
+    
 }

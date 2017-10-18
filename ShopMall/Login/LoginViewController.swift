@@ -29,6 +29,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var type: registType = .user
     var registArr:[[String:Any]]!
     var verifyCode: String?
+    var currentVenderType: NSDictionary?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +40,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
@@ -109,18 +111,28 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if indexPath.row == 2 {
             (cell.viewWithTag(3) as! UIButton).addTarget(self, action: #selector(getVerifyAction), for: .touchUpInside)
         }
+        if indexPath.row == 6 {
+            (cell.viewWithTag(2) as! UITextField).text = "所属类目"
+            (cell.viewWithTag(3) as! UILabel).text = registArr[indexPath.row]["text"] as? String
+        }
         return cell
     }
-
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let type = segue.destination as! TypeViewController
+        type.completeType = {(dic) in
+            print(dic)
+            self.currentVenderType = dic
+            let tempDic = NSMutableDictionary(dictionary: self.registArr[6])
+            tempDic["text"] = dic["type_title"] as! String + "    "
+            self.registArr.remove(at: 6)
+            self.registArr.insert(tempDic as! [String : Any], at: 6)
+            self.occlusionView.isHidden = false//防止注册信息不显示
+            self.tableView.reloadData()
+            self.occlusionView.isHidden = true
+        }
     }
-    */
     
     @objc func textFieldChangeAction(_ sender: UITextField) -> Void {
         let cell = Helpers.findSuperViewClass(UITableViewCell.self, with: sender)
@@ -170,7 +182,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                          ["icon":"login-pwd","placeholder":"请输入请设置密码","text":"","keyboardType":UIKeyboardType.default],
                          ["icon":"login-wechat-icon","placeholder":"请输入微信号","text":"","keyboardType":UIKeyboardType.default],
                          ["icon":"login-qq-icon","placeholder":"请输入QQ号","text":"","keyboardType":UIKeyboardType.numberPad],
-                         ["icon":"main-menu","placeholder":"","text":"所属类目","keyboardType":UIKeyboardType.default]]
+                         ["icon":"main-menu","placeholder":"请选择所属类目","text":"","keyboardType":UIKeyboardType.default]]
         }
         UIView.animate(withDuration: 0.5, animations: {
             self.occlusionView.viewWithTag(1)?.alpha = 0
@@ -231,7 +243,8 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 }
             }else {
                 if (registArr[i]["text"] as? String)?.characters.count == 0 {
-                    
+                    SVProgressHUD.showError(withStatus: registArr[i]["placeholder"] as? String)
+                    return
                 }
             }
         }
@@ -244,13 +257,20 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                      "phone":registArr[1]["text"] as! String,
                      "pass":registArr[3]["text"] as! String]
         }else {
-            
+            url = "Register/bus_register"
+            param = ["name":registArr[0]["text"] as! String,
+                     "phone":registArr[1]["text"] as! String,
+                     "pass":registArr[3]["text"] as! String,
+                     "weixin":registArr[4]["text"] as! String,
+                     "qq":registArr[5]["text"] as! String,
+                     "type":currentVenderType!["type_roue_id"] as! String,
+                     "address":""]
         }
         Network.request(param as NSDictionary, url: url) { (dic) in
             print(dic)
             if (dic as! NSDictionary)["code"] as! String == "200" {
                 SVProgressHUD.showSuccess(withStatus: "注册成功")
-                self.saveUserinfo(dic)
+                UserModel.saveUserinfo(dic)
                 self.dismiss(animated: true, completion: nil)
             }else {
                 SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
@@ -272,30 +292,12 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
             print(dic)
             if (dic as! NSDictionary)["code"] as! String == "200" {
                 SVProgressHUD.showSuccess(withStatus: "登陆成功")
-                self.saveUserinfo(dic)
+                UserModel.saveUserinfo(dic)
                 self.dismiss(animated: true, completion: nil)
             }else {
                 SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
             }
         }
-    }
-    
-    func saveUserinfo(_ dic:Any) -> Void {
-        let userDefault = UserDefaults.standard
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["address"], forKey: "ADDRESS")
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["face"], forKey: "FACE")
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["goods_type"], forKey: "GOODSTYPE")
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["jianjie"], forKey: "JIANJIE")
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["name"], forKey: "NAME")
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["password"], forKey: "PASSWORD")
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["phone"], forKey: "PHONE")
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["qq"], forKey: "QQ")
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["shakey"], forKey: "SHAKEY")
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["time"], forKey: "TIME")
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["type"], forKey: "TYPE")
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["user_id"], forKey: "USERID")
-        userDefault.set(((dic as! NSDictionary)["uinfo"] as! NSDictionary)["weixin"], forKey: "WEIXIN")
-        userDefault.synchronize()
     }
     
 }

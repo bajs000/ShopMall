@@ -13,6 +13,9 @@ class UserInfoViewController: UITableViewController, UINavigationControllerDeleg
 
     @IBOutlet weak var avatar: UIImageView!
     @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var qqLabel: UILabel!
+    @IBOutlet weak var wechatLabel: UILabel!
+    @IBOutlet weak var abstractLabel: UILabel!
     
     let imagePicker = UIImagePickerController()
     
@@ -23,6 +26,18 @@ class UserInfoViewController: UITableViewController, UINavigationControllerDeleg
         imagePicker.allowsEditing = true
         avatar.sd_setImage(with: URL(string: Helpers.baseImgUrl() + UserModel.share.face)!, completed: nil)
         userName.text = UserModel.share.name
+        qqLabel.text = UserModel.share.qq
+        if (qqLabel.text?.characters.count)! > 0 {
+            qqLabel.superview?.viewWithTag(1)?.isHidden = true
+        }
+        wechatLabel.text = UserModel.share.weixin
+        if (wechatLabel.text?.characters.count)! > 0 {
+            wechatLabel.superview?.viewWithTag(1)?.isHidden = true
+        }
+        abstractLabel.text = UserModel.share.jianjie
+        if (abstractLabel.text?.characters.count)! > 0 {
+            abstractLabel.superview?.viewWithTag(1)?.isHidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -30,6 +45,10 @@ class UserInfoViewController: UITableViewController, UINavigationControllerDeleg
     }
 
     // MARK: - Table view data source
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let alert = (Bundle.main.loadNibNamed("SMAlertView", owner: self, options: nil)![0]) as! SMAlertView
+        alert.showOnWindows()
+    }
     
     // MARK:- UIImagePickerControllerDelegate
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -43,6 +62,7 @@ class UserInfoViewController: UITableViewController, UINavigationControllerDeleg
             print(dic)
             if (dic as! NSDictionary)["code"] as! String == "200" {
                 SVProgressHUD.showSuccess(withStatus: "修改成功")
+                UserModel.share.resetAvatar()
             }else {
                 SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
             }

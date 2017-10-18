@@ -217,4 +217,44 @@ class UserModel: NSObject {
         }
     }
     
+    public class func saveUserinfo(_ dic:Any) -> Void {
+        let userDefault = UserDefaults.standard
+        var dict = NSDictionary()
+        if (dic as! NSDictionary)["uinfo"] != nil {
+            dict = (dic as! NSDictionary)["uinfo"] as! NSDictionary
+        }else {
+            dict = (dic as! NSDictionary)["list"] as! NSDictionary
+        }
+        userDefault.set(dict["address"], forKey: "ADDRESS")
+        userDefault.set(dict["face"], forKey: "FACE")
+        userDefault.set(dict["goods_type"], forKey: "GOODSTYPE")
+        userDefault.set(dict["jianjie"], forKey: "JIANJIE")
+        userDefault.set(dict["name"], forKey: "NAME")
+        userDefault.set(dict["password"], forKey: "PASSWORD")
+        userDefault.set(dict["phone"], forKey: "PHONE")
+        userDefault.set(dict["qq"], forKey: "QQ")
+        userDefault.set(dict["shakey"], forKey: "SHAKEY")
+        userDefault.set(dict["time"], forKey: "TIME")
+        userDefault.set(dict["type"], forKey: "TYPE")
+        userDefault.set(dict["user_id"], forKey: "USERID")
+        userDefault.set(dict["weixin"], forKey: "WEIXIN")
+        userDefault.synchronize()
+    }
+    
+    func resetAvatar() -> Void {
+        _face = nil
+    }
+    
+    func resetQQ() -> Void {
+        _qq = nil
+    }
+    
+    func resetWeixin() -> Void {
+        _weixin = nil
+    }
+    
+    func resetJianjie() -> Void {
+        _jianjie = nil
+    }
+    
 }
