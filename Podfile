@@ -10,7 +10,7 @@ target 'ShopMall' do
   pod 'Masonry'
   pod 'SDWebImage'
   pod 'AFNetworking'
-  
+  pod 'SnapKit'
 
   target 'ShopMallTests' do
     inherit! :search_paths

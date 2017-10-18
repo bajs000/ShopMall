@@ -8,22 +8,32 @@
 
 import UIKit
 import Masonry
+import SnapKit
 
-class SMAlertView: UIView {
+class SMAlertView: UIView, UITextViewDelegate {
 
     @IBOutlet weak var alertView: UITextView!
+    @IBOutlet weak var alertCenterY: NSLayoutConstraint!
+    
+    var placeholderStr: String?
+    var text: String?
+    var keyboardType: UIKeyboardType = .default
+    var completeEnter: ((String) -> Void)?
     
     override func awakeFromNib() {
         superview?.awakeFromNib()
-        alertView.textContainerInset = UIEdgeInsetsMake(20, 0, 44, 0)
+        alertView.textContainerInset = UIEdgeInsetsMake(15, 0, 44, 0)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         let placeholder = UILabel()
         placeholder.font = UIFont.systemFont(ofSize: 14)
         placeholder.textColor = #colorLiteral(red: 0.7095867991, green: 0.7096036673, blue: 0.709594667, alpha: 1)
-        placeholder.text = "aaaaaaaaaaaa"
+        placeholder.tag = 9
         alertView.addSubview(placeholder)
         placeholder.mas_makeConstraints { (make) in
-            _ = make?.top.equalTo()(self.alertView.mas_top)?.with().offset()(18)
+            _ = make?.top.equalTo()(self.alertView.mas_top)?.with().offset()(14)
             _ = make?.left.equalTo()(self.alertView.mas_left)?.with().offset()(4)
         }
         
@@ -34,47 +44,42 @@ class SMAlertView: UIView {
         sureBtn.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         sureBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         alertView.addSubview(sureBtn)
-//        let left = NSLayoutConstraint(item: sureBtn, attribute: .left, relatedBy: .equal, toItem: alertView, attribute: .left, multiplier: 1, constant: 0)
-//        let bottom = NSLayoutConstraint(item: sureBtn, attribute: .bottom, relatedBy: .equal, toItem: alertView, attribute: .bottom, multiplier: 1, constant: 0)
-//        let width = NSLayoutConstraint(item: sureBtn, attribute: .width, relatedBy: .equal, toItem: alertView, attribute: .width, multiplier: 0.5, constant: 0)
-//        let height = NSLayoutConstraint(item: sureBtn, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .height, multiplier: 1, constant: 44)
-//        sureBtn.addConstraint(left)
-//        sureBtn.addConstraint(bottom)
-//        sureBtn.addConstraint(width)
-//        sureBtn.addConstraint(height)
-        sureBtn.mas_makeConstraints { (make) in
-            if #available(iOS 11.0, *) {
-                _ = make?.bottom.equalTo()(self.alertView.mas_safeAreaLayoutGuideBottom)
-            } else {
-                // Fallback on earlier versions
-            }
-            _ = make?.left.equalTo()(self.alertView.mas_left)
-            _ = make?.width.equalTo()(150)
-            _ = make?.height.equalTo()(44)
+        
+        let container = UILayoutGuide()
+        alertView.addLayoutGuide(container)
+        
+        container.snp.makeConstraints { (make) in
+            make.edges.equalTo(alertView)
+        }
+
+        sureBtn.snp.makeConstraints { (make) in
+            make.bottom.equalTo(container)
+            make.left.equalTo(container)
+            make.width.equalTo(150)
+            make.height.equalTo(44)
         }
         
         let line = UIView()
         line.backgroundColor = #colorLiteral(red: 0.5704585314, green: 0.5704723597, blue: 0.5704649091, alpha: 1)
         alertView.addSubview(line)
-        line.mas_makeConstraints { (make) in
-            _ = make?.left.equalTo()(self.alertView.mas_left)
-            _ = make?.right.equalTo()(self.alertView.mas_right)
-            _ = make?.height.equalTo()(0.5)
-            _ = make?.centerY.equalTo()(self.alertView.mas_centerY)
-            
+        line.snp.makeConstraints { (make) in
+            make.left.equalTo(container)
+            make.right.equalTo(container)
+            make.height.equalTo(0.5)
+            make.top.equalTo(sureBtn)
         }
         
         let cancelBtn = UIButton(type: .custom)
-        cancelBtn.tag = 2
+        cancelBtn.tag = 12
         alertView.addSubview(cancelBtn)
         cancelBtn.setTitle("取消", for: .normal)
         cancelBtn.setTitleColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), for: .normal)
         cancelBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-        cancelBtn.mas_makeConstraints { (make) in
-            _ = make?.bottom.equalTo()(self.alertView.mas_bottom)
-            _ = make?.right.equalTo()(self.alertView.mas_right)
-            _ = make?.width.equalTo()(self.alertView.mas_width)?.with().dividedBy()(2)
-            _ = make?.height.equalTo()(44)
+        cancelBtn.snp.makeConstraints { (make) in
+            make.bottom.equalTo(container)
+            make.right.equalTo(container)
+            make.width.equalTo(150)
+            make.height.equalTo(44)
         }
         
         sureBtn.addTarget(self, action: #selector(alertAction(_:)), for: .touchUpInside)
@@ -93,7 +98,7 @@ class SMAlertView: UIView {
                     UIView.animate(withDuration: 0.05, delay: 0.02, options: .curveEaseInOut, animations: ({
                         self.alertView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
                     }), completion: {(_ finish:Bool) -> Void in
-                        print(self.viewWithTag(11)!.frame)
+                        
                     })
                 })
             })
@@ -105,11 +110,56 @@ class SMAlertView: UIView {
         self.frame = window.frame
         window.addSubview(self)
         window.bringSubview(toFront: self)
+//        if (text?.characters.count)! > 0 {
+//            (self.viewWithTag(9) as! UILabel).isHidden = true
+//        }
+        (self.viewWithTag(9) as! UILabel).text = placeholderStr
+//        alertView.text = text
+        alertView.keyboardType = keyboardType
         self.layoutIfNeeded()
     }
     
     @objc func alertAction(_ sender: UIButton) {
+        if sender.tag == 11 {
+            if completeEnter != nil {
+                completeEnter!(alertView.text)
+            }
+        }else {
+            
+        }
         self.removeFromSuperview()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    // MARK: - UIKeyboard Show And Hide
+    @objc func keyboardWillShow(_ notification: NSNotification) -> Void {
+        let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        let keyboardRect:CGRect = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        UIView.animate(withDuration: duration, animations: {
+            self.alertCenterY.constant = -keyboardRect.size.height/2
+            self.layoutIfNeeded()
+        }) { (finish) in
+            
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: NSNotification) -> Void {
+        let duration = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! Double
+        UIView.animate(withDuration: duration, animations: {
+            self.alertCenterY.constant = 0
+            self.layoutIfNeeded()
+        }) { (finish) in
+            
+        }
+    }
+    
+    // MARK: - UITextViewDelegate
+    func textViewDidChange(_ textView: UITextView) {
+        self.viewWithTag(9)?.isHidden = (textView.text.characters.count != 0)
     }
     
 }

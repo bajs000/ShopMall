@@ -26,6 +26,15 @@ class UserInfoViewController: UITableViewController, UINavigationControllerDeleg
         imagePicker.allowsEditing = true
         avatar.sd_setImage(with: URL(string: Helpers.baseImgUrl() + UserModel.share.face)!, completed: nil)
         userName.text = UserModel.share.name
+        
+        setupInfo()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    func setupInfo() -> Void {
         qqLabel.text = UserModel.share.qq
         if (qqLabel.text?.characters.count)! > 0 {
             qqLabel.superview?.viewWithTag(1)?.isHidden = true
@@ -39,14 +48,40 @@ class UserInfoViewController: UITableViewController, UINavigationControllerDeleg
             abstractLabel.superview?.viewWithTag(1)?.isHidden = true
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let alert = (Bundle.main.loadNibNamed("SMAlertView", owner: self, options: nil)![0]) as! SMAlertView
+        if indexPath.row == 0 {
+            alert.placeholderStr = "请输入QQ"
+            alert.text = UserModel.share.qq
+            alert.keyboardType = .numberPad
+        }else if indexPath.row == 1 {
+            alert.placeholderStr = "请输入微信"
+            alert.text = UserModel.share.weixin
+        }else {
+            alert.placeholderStr = "请输入个人简介"
+            alert.text = UserModel.share.jianjie
+        }
+        alert.completeEnter = {(str) in
+            if indexPath.row == 0 {
+                self.qqLabel.text = str
+                if (self.qqLabel.text?.characters.count)! > 0 {
+                    self.qqLabel.superview?.viewWithTag(1)?.isHidden = true
+                }
+            }else if indexPath.row == 1 {
+                self.wechatLabel.text = str
+                if (self.wechatLabel.text?.characters.count)! > 0 {
+                    self.wechatLabel.superview?.viewWithTag(1)?.isHidden = true
+                }
+            }else {
+                self.abstractLabel.text = str
+                self.tableView.reloadData()
+                if (self.abstractLabel.text?.characters.count)! > 0 {
+                    self.abstractLabel.superview?.viewWithTag(1)?.isHidden = true
+                }
+            }
+        }
         alert.showOnWindows()
     }
     
@@ -93,4 +128,7 @@ class UserInfoViewController: UITableViewController, UINavigationControllerDeleg
         self.present(actionSheet, animated: true, completion: nil)
     }
     
+    @IBAction func saveAction(_ sender: Any) {
+        SVProgressHUD.show()
+    }
 }

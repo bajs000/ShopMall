@@ -143,6 +143,10 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         registArr.insert(tempDic as! [String : Any], at: indexPath!.row)
     }
 
+    @IBAction func tapToHideKeyboard(_ sender: Any) {
+        UIApplication.shared.keyWindow?.endEditing(true)
+    }
+    
     @IBAction func swicthAction(_ sender: UIButton) {
         UIView.animate(withDuration: 0.5) {
             if sender.tag == 1 {
