@@ -19,6 +19,7 @@
 		664F85701F94A8D300C94A2E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F856F1F94A8D300C94A2E /* Network.swift */; };
 		664F85761F959CB900C94A2E /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F85751F959CB900C94A2E /* DiscoveryViewController.swift */; };
 		664F85781F959D4D00C94A2E /* DiscoveryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F85771F959D4D00C94A2E /* DiscoveryHeaderView.swift */; };
+		6697DD851F9883DC00B3203E /* PublishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697DD841F9883DC00B3203E /* PublishViewController.swift */; };
 		669A4B151F949D7000AF19DF /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A4B141F949D7000AF19DF /* MainCell.swift */; };
 		669A4B181F949E1400AF19DF /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A4B171F949E1400AF19DF /* Helpers.swift */; };
 		66B22B251F9491E5000896AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B22B241F9491E5000896AF /* AppDelegate.swift */; };
@@ -62,6 +63,7 @@
 		664F85731F94A97900C94A2E /* ShopMall-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShopMall-Bridging-Header.h"; sourceTree = "<group>"; };
 		664F85751F959CB900C94A2E /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		664F85771F959D4D00C94A2E /* DiscoveryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryHeaderView.swift; sourceTree = "<group>"; };
+		6697DD841F9883DC00B3203E /* PublishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishViewController.swift; sourceTree = "<group>"; };
 		669A4B141F949D7000AF19DF /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		669A4B171F949E1400AF19DF /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		66B22B211F9491E5000896AF /* ShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,13 +138,13 @@
 			path = UserVC;
 			sourceTree = "<group>";
 		};
-		6626F8A51F95FD10009C7D3A /* Login */ = {
+		6626F8A51F95FD10009C7D3A /* LoginVC */ = {
 			isa = PBXGroup;
 			children = (
 				6626F8A61F95FD32009C7D3A /* LoginViewController.swift */,
 				6626F8A81F96E31E009C7D3A /* TypeViewController.swift */,
 			);
-			path = Login;
+			path = LoginVC;
 			sourceTree = "<group>";
 		};
 		664F85741F959C7A00C94A2E /* DiscoveryVC */ = {
@@ -151,6 +153,14 @@
 				664F85751F959CB900C94A2E /* DiscoveryViewController.swift */,
 			);
 			path = DiscoveryVC;
+			sourceTree = "<group>";
+		};
+		6697DD831F98824600B3203E /* PublishVC */ = {
+			isa = PBXGroup;
+			children = (
+				6697DD841F9883DC00B3203E /* PublishViewController.swift */,
+			);
+			path = PublishVC;
 			sourceTree = "<group>";
 		};
 		669A4B131F949D5C00AF19DF /* CustomView */ = {
@@ -200,7 +210,8 @@
 		66B22B231F9491E5000896AF /* ShopMall */ = {
 			isa = PBXGroup;
 			children = (
-				6626F8A51F95FD10009C7D3A /* Login */,
+				6697DD831F98824600B3203E /* PublishVC */,
+				6626F8A51F95FD10009C7D3A /* LoginVC */,
 				6626F8A01F95F24F009C7D3A /* UserVC */,
 				664F85741F959C7A00C94A2E /* DiscoveryVC */,
 				669A4B161F949DB500AF19DF /* Helpers */,
@@ -573,6 +584,7 @@
 				669A4B151F949D7000AF19DF /* MainCell.swift in Sources */,
 				6626F8A41F95F648009C7D3A /* UserModel.swift in Sources */,
 				6626F8A71F95FD32009C7D3A /* LoginViewController.swift in Sources */,
+				6697DD851F9883DC00B3203E /* PublishViewController.swift in Sources */,
 				669A4B181F949E1400AF19DF /* Helpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

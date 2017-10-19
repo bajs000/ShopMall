@@ -9,6 +9,12 @@
 import UIKit
 import SVProgressHUD
 
+enum UserInfoType {
+    case qq
+    case wechat
+    case abstract
+}
+
 class UserInfoViewController: UITableViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
 
     @IBOutlet weak var avatar: UIImageView!
@@ -69,17 +75,20 @@ class UserInfoViewController: UITableViewController, UINavigationControllerDeleg
                 if (self.qqLabel.text?.characters.count)! > 0 {
                     self.qqLabel.superview?.viewWithTag(1)?.isHidden = true
                 }
+                self.requestSaveInfo("User/qqedit",param: ["qq":str,"user_id":UserModel.share.userId],type: .qq)
             }else if indexPath.row == 1 {
                 self.wechatLabel.text = str
                 if (self.wechatLabel.text?.characters.count)! > 0 {
                     self.wechatLabel.superview?.viewWithTag(1)?.isHidden = true
                 }
+                self.requestSaveInfo("User/weixinedit",param: ["weixn":str,"user_id":UserModel.share.userId],type: .wechat)
             }else {
                 self.abstractLabel.text = str
                 self.tableView.reloadData()
                 if (self.abstractLabel.text?.characters.count)! > 0 {
                     self.abstractLabel.superview?.viewWithTag(1)?.isHidden = true
                 }
+                self.requestSaveInfo("User/jianjieedit",param: ["jianjie":str,"user_id":UserModel.share.userId],type: .abstract)
             }
         }
         alert.showOnWindows()
@@ -128,7 +137,27 @@ class UserInfoViewController: UITableViewController, UINavigationControllerDeleg
         self.present(actionSheet, animated: true, completion: nil)
     }
     
-    @IBAction func saveAction(_ sender: Any) {
+    func requestSaveInfo(_ url: String, param: [String:String], type: UserInfoType) -> Void {
         SVProgressHUD.show()
+        Network.request(param as NSDictionary, url: url) { (dic) in
+            print(dic)
+            if (dic as! NSDictionary)["code"] as! String == "200" {
+                SVProgressHUD.dismiss()
+                let userDefault = UserDefaults.standard
+                if type == .qq {
+                    UserModel.share.resetQQ()
+                    userDefault.set(param["qq"], forKey: "QQ")
+                }else if type == .wechat {
+                    UserModel.share.resetWeixin()
+                    userDefault.set(param["weixin"], forKey: "WEIXIN")
+                }else {
+                    UserModel.share.resetJianjie()
+                    userDefault.set(param["jianjie"], forKey: "JIANJIE")
+                }
+                userDefault.synchronize()
+            }else {
+                SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
+            }
+        }
     }
 }

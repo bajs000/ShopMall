@@ -19,6 +19,7 @@ class TypeViewController: UICollectionViewController {
     
     var completeType: ((NSDictionary) -> Void)?
     var choseCount = 0
+    var pushByMain: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +67,14 @@ class TypeViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if choseCount == 0 {
             let dic = type1Arr[indexPath.row] as! NSDictionary
+            if pushByMain {
+                if completeType != nil {
+                    let dic = type1Arr[indexPath.row] as! NSDictionary
+                    completeType!(dic)
+                }
+                _ = self.navigationController?.popViewController(animated: true)
+                return
+            }
             requestType(dic["type_id"] as? String)
             choseCount = 1
         }else {

@@ -23,15 +23,18 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     var currentTypeBtn: UIButton?
     var currentSupplyBtn: UIButton?
     var bgHeight:CGFloat = 0
+    var typeBtns = [UIButton]()
+    var type1 = "1"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        Helpers.barInit(self.tabBarController!)
         self.tableView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
         self.tabBarController!.view.addSubview(functionView)
         functionView.frame = CGRect(x: 0, y: 64, width: Helpers.screanSize().width, height: 44)
         self.tableView.tableHeaderView = headerView
         self.tabBarController?.delegate = self
-        requestMain()
+        requestMain(nil,type2: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -87,14 +90,16 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
             
             return cell
         }
-        let dic = (self.dataSource!["list"] as! NSArray)[indexPath.row] as! NSDictionary
+        let dic = (self.dataSource!["list"] as! NSArray)[indexPath.section] as! NSDictionary
         (cell as! MainCell).imgArr = dic["release_img"] as? NSArray
         cell.viewWithTag(1)?.layer.cornerRadius = 15
         (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
         (cell.viewWithTag(2) as! UILabel).text = dic[""] as? String
         (cell.viewWithTag(3) as! UILabel).text = Helpers.updateTimeForRow(dic["time"] as! String)
-        if (dic["gongqiu"] as! String) == "1" {
+        if (dic["gongqiu"] as! String) == "2" {
             (cell.viewWithTag(4) as! UIImageView).image = #imageLiteral(resourceName: "main-seek")
+        }else {
+            (cell.viewWithTag(4) as! UIImageView).image = #imageLiteral(resourceName: "main-offer")
         }
         (cell.viewWithTag(5) as! UILabel).text = dic["describe"] as? String
         (cell.viewWithTag(6) as! UILabel).text = dic["address"] as? String
@@ -141,7 +146,14 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.destination.isKind(of: TypeViewController.self) {
+            let type = segue.destination as! TypeViewController
+            type.pushByMain = true
+            type.completeType = {(dic) in
+                self.requestMain(dic["type_id"] as? String,type2: nil)
+                self.type1 = dic["type_id"] as! String
+            }
+        }
     }
     
     @IBAction func filterAction(_ sender: Any) {
@@ -178,6 +190,11 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
             self.tableView.tableHeaderView = headerView
         }
         self.tableView.reloadData()
+        if currentTypeBtn != nil {
+            self.requestMain(self.type1, type2: ((self.dataSource!["type"] as! NSArray)[currentTypeBtn!.tag - 1] as! NSDictionary)["type_id"] as? String)
+        }else {
+            self.requestMain(self.type1, type2: nil)
+        }
     }
     
     @IBAction func sureTypeAction(_ sender: Any) {
@@ -192,7 +209,9 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
             return
         }
         if currentTypeBtn != nil {
-            print("tag:\(currentTypeBtn!.tag)")
+            self.requestMain(self.type1, type2: ((self.dataSource!["type"] as! NSArray)[currentTypeBtn!.tag - 1] as! NSDictionary)["type_id"] as? String)
+        }else {
+            self.requestMain(self.type1, type2: nil)
         }
     }
     
@@ -212,9 +231,33 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         }
     }
     
-    func requestMain() {
+    func requestMain(_ sender: String?, type2: String?) {
         SVProgressHUD.show()
-        Network.request(["type_id":"1","page":"1"], url: "Public") { (dic) in
+        var param = ["type_id":"1","page":"1"]
+        if sender != nil {
+            param["type_id"] = sender!
+        }
+        if type2 != nil {
+            param["type_two_id"] = type2!
+        }
+        if UserModel.share.userId.characters.count > 0 {
+            param["user_id"] = UserModel.share.userId
+        }
+        var url = "Public"
+        if currentSupplyBtn != nil {
+            if currentSupplyBtn?.tag == 1 {
+                param["gq_type"] = "1"
+            }else if currentSupplyBtn?.tag == 2 {
+                param["gq_type"] = "2"
+            }else if currentSupplyBtn?.tag == 3 {
+                url = "Public/index_user"
+                param["gq_type"] = "1"
+            }else if currentSupplyBtn?.tag == 4 {
+                url = "Public/index_user"
+                param["gq_type"] = "2"
+            }
+        }
+        Network.request(param as NSDictionary, url: url) { (dic) in
             print(dic)
             SVProgressHUD.dismiss()
             self.dataSource = dic as? NSDictionary
@@ -223,6 +266,9 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
             
             var totalWidth:CGFloat = 15
             var totalHeight:CGFloat = 15
+            for btn in self.typeBtns {
+                btn.removeFromSuperview()
+            }
             if self.dataSource?["type"] != nil {
                 for i in 0...(self.dataSource?["type"] as! NSArray).count - 1 {
                     let dict = (self.dataSource?["type"] as! NSArray)[i] as! NSDictionary
@@ -236,6 +282,11 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
                     button.setTitle(dict["type_title"] as? String, for: .normal)
                     button.titleLabel?.font = UIFont.systemFont(ofSize: 13)
                     button.setTitleColor(#colorLiteral(red: 0.4078176022, green: 0.407827884, blue: 0.4078223705, alpha: 1), for: .normal)
+                    if self.currentTypeBtn != nil && self.currentTypeBtn?.tag == button.tag {
+                        button.backgroundColor = #colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1)
+                        button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
+                        self.currentTypeBtn = button
+                    }
                     button.addTarget(self, action: #selector(self.typeAction), for: .touchUpInside)
                     self.menuView.viewWithTag(2)?.addSubview(button)
                     
@@ -243,7 +294,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
                         totalHeight = totalHeight + 29 + 15
                         totalWidth = 15
                     }
-                    
+                    self.typeBtns.append(button)
                     button.mas_makeConstraints({ (make) in
                         _ = make?.width.equalTo()(width)
                         _ = make?.height.equalTo()(29)

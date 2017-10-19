@@ -79,4 +79,19 @@ class Helpers: NSObject {
         return "\(Int(years))年前"
     }
     
+    public class func barInit(_ tabBarController: UITabBarController) -> Void {
+        var i:Int = 0
+        var titleArr = ["首页","发现","发布","消息","我的"]
+        for item in (tabBarController.tabBar.items)! {
+            let normalImg = UIImage(named: "tabbar-not-" + String(i))?.withRenderingMode(.alwaysOriginal)
+            let selectImg = UIImage(named: "tabbar-" + String(i))?.withRenderingMode(.alwaysOriginal)
+            item.selectedImage = selectImg
+            item.image = normalImg
+            item.title = titleArr[i]
+            item .setTitleTextAttributes([NSAttributedStringKey.foregroundColor:#colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1)], for: .selected)
+            item .setTitleTextAttributes([NSAttributedStringKey.foregroundColor:#colorLiteral(red: 0.003166638315, green: 0.003166806418, blue: 0.003166715847, alpha: 1)], for: .normal)
+            i = i + 1
+        }
+    }
+    
 }
