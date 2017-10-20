@@ -51,5 +51,5 @@ class MainCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
         (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
         return cell
     }
-
+    
 }
