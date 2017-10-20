@@ -57,20 +57,23 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         if self.dataSource == nil {
             return 0
         }
-        if currentSupplyBtn?.tag == 3 {
+        if currentSupplyBtn?.tag == 3  || currentSupplyBtn?.tag == 4 {
             return 1
         }
         return (self.dataSource!["list"] as! NSArray).count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if currentSupplyBtn?.tag == 3 {
-            return 5
+        if currentSupplyBtn?.tag == 3  || currentSupplyBtn?.tag == 4 {
+            return (self.dataSource!["list"] as! NSArray).count
         }
         return 1
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if currentSupplyBtn?.tag == 3  || currentSupplyBtn?.tag == 4 {
+            return 0
+        }
         return 10
     }
     
@@ -82,12 +85,15 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cellIdentify = "Cell"
-        if currentSupplyBtn?.tag == 3 {
+        if currentSupplyBtn?.tag == 3 || currentSupplyBtn?.tag == 4{
             cellIdentify = "supplyCell"
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentify, for: indexPath)
-        if currentSupplyBtn?.tag == 3 {
-            
+        if currentSupplyBtn?.tag == 3  || currentSupplyBtn?.tag == 4{
+            let dic = (self.dataSource!["list"] as! NSArray)[indexPath.row] as! NSDictionary
+            (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["face"] as! String)), completed: nil)
+            (cell.viewWithTag(2) as! UILabel).text = dic["name"] as? String
+            (cell.viewWithTag(3) as! UILabel).text = dic["jianjie"] as? String
             return cell
         }
         let dic = (self.dataSource!["list"] as! NSArray)[indexPath.section] as! NSDictionary
@@ -106,12 +112,24 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         (cell.viewWithTag(7) as! UIButton).setTitle(dic["ping_num"] as? String, for: .normal)
         if (dic["shoucang_state"] as! NSNumber).stringValue == "1" {
             (cell.viewWithTag(8) as! UIButton).setTitleColor(#colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1), for: .normal)
+            (cell.viewWithTag(8) as! UIButton).setImage(#imageLiteral(resourceName: "main-like-not"), for: .normal)
+        }else {
+            (cell.viewWithTag(8) as! UIButton).setTitleColor(#colorLiteral(red: 0.7095867991, green: 0.7096036673, blue: 0.709594667, alpha: 1), for: .normal)
+            (cell.viewWithTag(8) as! UIButton).setImage(#imageLiteral(resourceName: "main-like"), for: .normal)
         }
         (cell.viewWithTag(8) as! UIButton).setTitle(dic["shoucang_num"] as? String, for: .normal)
-        if (dic["shoucang_state"] as! NSNumber).stringValue == "1" {
+        if (dic["zan_state"] as! NSNumber).stringValue == "1" {
             (cell.viewWithTag(9) as! UIButton).setTitleColor(#colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1), for: .normal)
+            (cell.viewWithTag(9) as! UIButton).setImage(#imageLiteral(resourceName: "main-praise"), for: .normal)
+        }else {
+            (cell.viewWithTag(9) as! UIButton).setTitleColor(#colorLiteral(red: 0.7095867991, green: 0.7096036673, blue: 0.709594667, alpha: 1), for: .normal)
+            (cell.viewWithTag(9) as! UIButton).setImage(#imageLiteral(resourceName: "main-praise-not"), for: .normal)
         }
         (cell.viewWithTag(9) as! UIButton).setTitle(dic["zan_num"] as? String, for: .normal)
+        
+        (cell.viewWithTag(7) as! UIButton).addTarget(self, action: #selector(goodsAction(_:)), for: .touchUpInside)
+        (cell.viewWithTag(8) as! UIButton).addTarget(self, action: #selector(goodsAction(_:)), for: .touchUpInside)
+        (cell.viewWithTag(9) as! UIButton).addTarget(self, action: #selector(goodsAction(_:)), for: .touchUpInside)
         return cell
     }
     
@@ -153,6 +171,19 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
                 self.requestMain(dic["type_id"] as? String,type2: nil)
                 self.type1 = dic["type_id"] as! String
             }
+        }else if segue.destination.isKind(of: GoodsDetailViewController.self) {
+            if (sender as! NSObject).isKind(of: UITableViewCell.self){
+                let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell)
+                (segue.destination as! GoodsDetailViewController).detailInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.section] as! NSDictionary
+            }else{
+                let cell = Helpers.findSuperViewClass(UITableViewCell.self, with: ((sender as! UITapGestureRecognizer).view as! UICollectionView))
+                let indexPath = self.tableView.indexPath(for: cell as! UITableViewCell)
+                (segue.destination as! GoodsDetailViewController).detailInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.section] as! NSDictionary
+            }
+        }else if segue.destination.isKind(of: CommentViewController.self){
+            let cell = Helpers.findSuperViewClass(UITableViewCell.self, with: sender as! UIButton)
+            let indexPath = self.tableView.indexPath(for: cell as! UITableViewCell)
+            (segue.destination as! CommentViewController).dataSource = ["list":(self.dataSource!["list"] as! NSArray)[indexPath!.section] as! NSDictionary]
         }
     }
     
@@ -184,12 +215,6 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
                 currentSupplyBtn = sender
             }
         }
-        if sender.tag == 3 {
-            self.tableView.tableHeaderView = nil
-        }else{
-            self.tableView.tableHeaderView = headerView
-        }
-        self.tableView.reloadData()
         if currentTypeBtn != nil {
             self.requestMain(self.type1, type2: ((self.dataSource!["type"] as! NSArray)[currentTypeBtn!.tag - 1] as! NSDictionary)["type_id"] as? String)
         }else {
@@ -231,6 +256,68 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         }
     }
     
+    @objc func goodsAction(_ sender: UIButton) {
+        if sender.tag == 7 {//评价
+            self.performSegue(withIdentifier: "commentPush", sender: sender)
+        }else if sender.tag == 8 {//收藏
+            let cell = Helpers.findSuperViewClass(UITableViewCell.self, with: sender)
+            let indexPath = self.tableView.indexPath(for: cell as! UITableViewCell)
+            let dict = (self.dataSource!["list"] as! NSArray)[indexPath!.section] as! NSDictionary
+            SVProgressHUD.show()
+            var url = "Public/shoucang_add"
+            if (dict["shoucang_state"] as! NSNumber).intValue == 1{
+                url = "Public/shoucang_del"
+            }
+            Network.request(["user_id":UserModel.share.userId,"release_id":dict["release_id"] as! String], url: url, complete: { (dic) in
+                print(dic)
+                if (dic as! NSDictionary)["code"] as! String == "200" {
+                    if (dict["shoucang_state"] as! NSNumber).intValue == 1 {
+                        SVProgressHUD.showSuccess(withStatus: "收藏成功")
+                    }else {
+                        SVProgressHUD.showSuccess(withStatus: "删除收藏成功")
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                        if self.currentTypeBtn != nil {
+                            self.requestMain(self.type1, type2: ((self.dataSource!["type"] as! NSArray)[self.currentTypeBtn!.tag - 1] as! NSDictionary)["type_id"] as? String)
+                        }else {
+                            self.requestMain(self.type1, type2: nil)
+                        }
+                    })
+                }else {
+                    SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
+                }
+            })
+        }else {// 点赞
+            let cell = Helpers.findSuperViewClass(UITableViewCell.self, with: sender)
+            let indexPath = self.tableView.indexPath(for: cell as! UITableViewCell)
+            let dict = (self.dataSource!["list"] as! NSArray)[indexPath!.section] as! NSDictionary
+            SVProgressHUD.show()
+            var url = "Public/zan_add"
+            if (dict["zan_state"] as! NSNumber).intValue == 1{
+                url = "Public/zan_del"
+            }
+            Network.request(["user_id":UserModel.share.userId,"release_id":dict["release_id"] as! String], url: url, complete: { (dic) in
+                print(dic)
+                if (dic as! NSDictionary)["code"] as! String == "200" {
+                    if (dict["zan_state"] as! NSNumber).intValue == 1 {
+                        SVProgressHUD.showSuccess(withStatus: "点赞成功")
+                    }else {
+                        SVProgressHUD.showSuccess(withStatus: "删除点赞成功")
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                        if self.currentTypeBtn != nil {
+                            self.requestMain(self.type1, type2: ((self.dataSource!["type"] as! NSArray)[self.currentTypeBtn!.tag - 1] as! NSDictionary)["type_id"] as? String)
+                        }else {
+                            self.requestMain(self.type1, type2: nil)
+                        }
+                    })
+                }else {
+                    SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
+                }
+            })
+        }
+    }
+    
     func requestMain(_ sender: String?, type2: String?) {
         SVProgressHUD.show()
         var param = ["type_id":"1","page":"1"]
@@ -261,6 +348,11 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
             print(dic)
             SVProgressHUD.dismiss()
             self.dataSource = dic as? NSDictionary
+            if self.currentSupplyBtn?.tag == 3 || self.currentSupplyBtn?.tag == 4 {
+                self.tableView.tableHeaderView = nil
+            }else{
+                self.tableView.tableHeaderView = self.headerView
+            }
             self.tableView.reloadData()
             self.collectionView.reloadData()
             

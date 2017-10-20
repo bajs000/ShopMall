@@ -16,10 +16,13 @@
 		6626F8A91F96E31E009C7D3A /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6626F8A81F96E31E009C7D3A /* TypeViewController.swift */; };
 		6626F8AB1F96FC1A009C7D3A /* SMAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6626F8AA1F96FC1A009C7D3A /* SMAlertView.xib */; };
 		6626F8AD1F96FC30009C7D3A /* SMAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6626F8AC1F96FC30009C7D3A /* SMAlertView.swift */; };
+		664EB6CF1F99DAE80038EB08 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664EB6CE1F99DAE80038EB08 /* CommentViewController.swift */; };
+		664EB6D11F99E7CA0038EB08 /* MinePublishTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664EB6D01F99E7CA0038EB08 /* MinePublishTableViewController.swift */; };
 		664F85701F94A8D300C94A2E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F856F1F94A8D300C94A2E /* Network.swift */; };
 		664F85761F959CB900C94A2E /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F85751F959CB900C94A2E /* DiscoveryViewController.swift */; };
 		664F85781F959D4D00C94A2E /* DiscoveryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F85771F959D4D00C94A2E /* DiscoveryHeaderView.swift */; };
 		6697DD851F9883DC00B3203E /* PublishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697DD841F9883DC00B3203E /* PublishViewController.swift */; };
+		6697DD881F9995F300B3203E /* GoodsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697DD871F9995F300B3203E /* GoodsDetailViewController.swift */; };
 		669A4B151F949D7000AF19DF /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A4B141F949D7000AF19DF /* MainCell.swift */; };
 		669A4B181F949E1400AF19DF /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A4B171F949E1400AF19DF /* Helpers.swift */; };
 		66B22B251F9491E5000896AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B22B241F9491E5000896AF /* AppDelegate.swift */; };
@@ -59,11 +62,14 @@
 		6626F8A81F96E31E009C7D3A /* TypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
 		6626F8AA1F96FC1A009C7D3A /* SMAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SMAlertView.xib; sourceTree = "<group>"; };
 		6626F8AC1F96FC30009C7D3A /* SMAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMAlertView.swift; sourceTree = "<group>"; };
+		664EB6CE1F99DAE80038EB08 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		664EB6D01F99E7CA0038EB08 /* MinePublishTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinePublishTableViewController.swift; sourceTree = "<group>"; };
 		664F856F1F94A8D300C94A2E /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		664F85731F94A97900C94A2E /* ShopMall-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShopMall-Bridging-Header.h"; sourceTree = "<group>"; };
 		664F85751F959CB900C94A2E /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		664F85771F959D4D00C94A2E /* DiscoveryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryHeaderView.swift; sourceTree = "<group>"; };
 		6697DD841F9883DC00B3203E /* PublishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishViewController.swift; sourceTree = "<group>"; };
+		6697DD871F9995F300B3203E /* GoodsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsDetailViewController.swift; sourceTree = "<group>"; };
 		669A4B141F949D7000AF19DF /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		669A4B171F949E1400AF19DF /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		66B22B211F9491E5000896AF /* ShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +169,15 @@
 			path = PublishVC;
 			sourceTree = "<group>";
 		};
+		6697DD861F99903100B3203E /* DetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				6697DD871F9995F300B3203E /* GoodsDetailViewController.swift */,
+				664EB6CE1F99DAE80038EB08 /* CommentViewController.swift */,
+			);
+			path = DetailVC;
+			sourceTree = "<group>";
+		};
 		669A4B131F949D5C00AF19DF /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +262,7 @@
 		66B22B521F9491FD000896AF /* MainVC */ = {
 			isa = PBXGroup;
 			children = (
+				6697DD861F99903100B3203E /* DetailVC */,
 				66B22B531F94925F000896AF /* MainViewController.swift */,
 			);
 			path = MainVC;
@@ -266,6 +282,7 @@
 			isa = PBXGroup;
 			children = (
 				AF84F7E61F963F960029F048 /* UserInfoViewController.swift */,
+				664EB6D01F99E7CA0038EB08 /* MinePublishTableViewController.swift */,
 			);
 			path = UserFunction;
 			sourceTree = "<group>";
@@ -580,6 +597,9 @@
 				6626F8AD1F96FC30009C7D3A /* SMAlertView.swift in Sources */,
 				664F85781F959D4D00C94A2E /* DiscoveryHeaderView.swift in Sources */,
 				AF84F7E71F963F960029F048 /* UserInfoViewController.swift in Sources */,
+				664EB6CF1F99DAE80038EB08 /* CommentViewController.swift in Sources */,
+				6697DD881F9995F300B3203E /* GoodsDetailViewController.swift in Sources */,
+				664EB6D11F99E7CA0038EB08 /* MinePublishTableViewController.swift in Sources */,
 				66B22B541F94925F000896AF /* MainViewController.swift in Sources */,
 				669A4B151F949D7000AF19DF /* MainCell.swift in Sources */,
 				6626F8A41F95F648009C7D3A /* UserModel.swift in Sources */,
