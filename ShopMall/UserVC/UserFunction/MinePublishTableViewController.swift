@@ -79,18 +79,18 @@ class MinePublishTableViewController: UITableViewController {
         if segue.destination.isKind(of: GoodsDetailViewController.self) {
             if (sender as! NSObject).isKind(of: UITableViewCell.self){
                 let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell)
-                (segue.destination as! GoodsDetailViewController).detailInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.section] as! NSDictionary
+                (segue.destination as! GoodsDetailViewController).detailInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as! NSDictionary
             }else{
                 let cell = Helpers.findSuperViewClass(UITableViewCell.self, with: ((sender as! UITapGestureRecognizer).view as! UICollectionView))
                 let indexPath = self.tableView.indexPath(for: cell as! UITableViewCell)
-                (segue.destination as! GoodsDetailViewController).detailInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.section] as! NSDictionary
+                (segue.destination as! GoodsDetailViewController).detailInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as! NSDictionary
             }
         }
     }
 
     func requestMine() {
         SVProgressHUD.show()
-        Network.request(["user_id":"1","page":"1"] as NSDictionary, url: "Public/release_list") { (dic) in
+        Network.request(["user_id":UserModel.share.userId,"page":"1"] as NSDictionary, url: "Public/release_list") { (dic) in
             print(dic)
             if (dic as! NSDictionary)["code"] as! String == "200" {
                 SVProgressHUD.dismiss()

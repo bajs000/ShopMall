@@ -21,6 +21,12 @@
 		664F85701F94A8D300C94A2E /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F856F1F94A8D300C94A2E /* Network.swift */; };
 		664F85761F959CB900C94A2E /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F85751F959CB900C94A2E /* DiscoveryViewController.swift */; };
 		664F85781F959D4D00C94A2E /* DiscoveryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F85771F959D4D00C94A2E /* DiscoveryHeaderView.swift */; };
+		667417B91F9EEE7F00B77A88 /* MineCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667417B81F9EEE7F00B77A88 /* MineCommentViewController.swift */; };
+		668C59001F9F226D007582E9 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668C58FF1F9F226D007582E9 /* BrowseViewController.swift */; };
+		668C59021F9F2E97007582E9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668C59011F9F2E97007582E9 /* SettingViewController.swift */; };
+		668C59041F9F3119007582E9 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668C59031F9F3119007582E9 /* StoreViewController.swift */; };
+		668C59061F9F3364007582E9 /* AttentionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668C59051F9F3364007582E9 /* AttentionViewController.swift */; };
+		668C59081F9F3540007582E9 /* PraiseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668C59071F9F3540007582E9 /* PraiseViewController.swift */; };
 		6697DD851F9883DC00B3203E /* PublishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697DD841F9883DC00B3203E /* PublishViewController.swift */; };
 		6697DD881F9995F300B3203E /* GoodsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697DD871F9995F300B3203E /* GoodsDetailViewController.swift */; };
 		669A4B151F949D7000AF19DF /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A4B141F949D7000AF19DF /* MainCell.swift */; };
@@ -68,6 +74,12 @@
 		664F85731F94A97900C94A2E /* ShopMall-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ShopMall-Bridging-Header.h"; sourceTree = "<group>"; };
 		664F85751F959CB900C94A2E /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		664F85771F959D4D00C94A2E /* DiscoveryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryHeaderView.swift; sourceTree = "<group>"; };
+		667417B81F9EEE7F00B77A88 /* MineCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineCommentViewController.swift; sourceTree = "<group>"; };
+		668C58FF1F9F226D007582E9 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
+		668C59011F9F2E97007582E9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		668C59031F9F3119007582E9 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
+		668C59051F9F3364007582E9 /* AttentionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttentionViewController.swift; sourceTree = "<group>"; };
+		668C59071F9F3540007582E9 /* PraiseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PraiseViewController.swift; sourceTree = "<group>"; };
 		6697DD841F9883DC00B3203E /* PublishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishViewController.swift; sourceTree = "<group>"; };
 		6697DD871F9995F300B3203E /* GoodsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsDetailViewController.swift; sourceTree = "<group>"; };
 		669A4B141F949D7000AF19DF /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
@@ -283,6 +295,12 @@
 			children = (
 				AF84F7E61F963F960029F048 /* UserInfoViewController.swift */,
 				664EB6D01F99E7CA0038EB08 /* MinePublishTableViewController.swift */,
+				667417B81F9EEE7F00B77A88 /* MineCommentViewController.swift */,
+				668C58FF1F9F226D007582E9 /* BrowseViewController.swift */,
+				668C59011F9F2E97007582E9 /* SettingViewController.swift */,
+				668C59031F9F3119007582E9 /* StoreViewController.swift */,
+				668C59051F9F3364007582E9 /* AttentionViewController.swift */,
+				668C59071F9F3540007582E9 /* PraiseViewController.swift */,
 			);
 			path = UserFunction;
 			sourceTree = "<group>";
@@ -589,7 +607,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				668C59081F9F3540007582E9 /* PraiseViewController.swift in Sources */,
 				6626F8A91F96E31E009C7D3A /* TypeViewController.swift in Sources */,
+				667417B91F9EEE7F00B77A88 /* MineCommentViewController.swift in Sources */,
 				664F85701F94A8D300C94A2E /* Network.swift in Sources */,
 				6626F8A21F95F278009C7D3A /* UserViewController.swift in Sources */,
 				664F85761F959CB900C94A2E /* DiscoveryViewController.swift in Sources */,
@@ -600,12 +620,16 @@
 				664EB6CF1F99DAE80038EB08 /* CommentViewController.swift in Sources */,
 				6697DD881F9995F300B3203E /* GoodsDetailViewController.swift in Sources */,
 				664EB6D11F99E7CA0038EB08 /* MinePublishTableViewController.swift in Sources */,
+				668C59001F9F226D007582E9 /* BrowseViewController.swift in Sources */,
 				66B22B541F94925F000896AF /* MainViewController.swift in Sources */,
 				669A4B151F949D7000AF19DF /* MainCell.swift in Sources */,
+				668C59061F9F3364007582E9 /* AttentionViewController.swift in Sources */,
+				668C59021F9F2E97007582E9 /* SettingViewController.swift in Sources */,
 				6626F8A41F95F648009C7D3A /* UserModel.swift in Sources */,
 				6626F8A71F95FD32009C7D3A /* LoginViewController.swift in Sources */,
 				6697DD851F9883DC00B3203E /* PublishViewController.swift in Sources */,
 				669A4B181F949E1400AF19DF /* Helpers.swift in Sources */,
+				668C59041F9F3119007582E9 /* StoreViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
