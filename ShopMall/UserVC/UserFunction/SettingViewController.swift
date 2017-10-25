@@ -10,8 +10,11 @@ import UIKit
 
 class SettingViewController: UITableViewController {
 
+    @IBOutlet weak var logoutBtn: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        logoutBtn.layer.cornerRadius = 8
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,5 +34,12 @@ class SettingViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
+    
+    @IBAction func logoutAction(_ sender: Any) {
+        UserDefaults.standard.removeObject(forKey: "USERID")
+        UserModel.share.resetUserId()
+//        self.tabBarController?.selectedIndex = 0
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 }

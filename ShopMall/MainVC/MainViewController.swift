@@ -155,7 +155,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     // MARK: - UITabBarControllerDelegate
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let vc = (viewController as! UINavigationController).topViewController
-        if (vc?.isKind(of: UserViewController.self))! {
+        if (vc?.isKind(of: UserViewController.self))! || (vc?.isKind(of: PublishViewController.self))! || (vc?.isKind(of: MsgViewController.self))! {
             return UserModel.checkUserLogin(at: tabBarController)
         }
         return true

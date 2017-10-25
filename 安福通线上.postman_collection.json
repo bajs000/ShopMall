@@ -22,8 +22,11 @@
 				"de3fb2c0-f531-1a99-92c2-38fe94283084",
 				"6931c4d6-c430-8046-0626-e5a559d76dfa",
 				"ab9d47b1-3060-bdf2-7271-bda0b8002cf3",
-				"6ad48a55-beb1-01c7-acd9-3579d13444aa",
-				"9df0b3a0-5087-ed56-fc28-02905cd6dd19"
+				"a2a8e73e-2d5b-7f12-4c14-5e28d0f67e8c",
+				"00e248c5-bb6c-7843-06f5-96834016a748",
+				"b851aa4e-5e13-d4ea-f3d2-5ab9c12c27f7",
+				"65c7fc6e-8f56-3095-77ef-c2474f05953a",
+				"a0c10f2b-e99f-e3d2-bf69-4592276c1bda"
 			]
 		},
 		{
@@ -142,6 +145,52 @@
 	"public": false,
 	"requests": [
 		{
+			"id": "00e248c5-bb6c-7843-06f5-96834016a748",
+			"headers": "",
+			"headerData": [],
+			"url": "http://anfutong.cq1b1.com/api.php/User/renzheng",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "version",
+					"value": "1.1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "apikey",
+					"value": "f74dd39951a0b6bbed0fe73606ea5476",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user_id",
+					"value": "3",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "",
+					"value": "",
+					"description": "返回数据：0未认证，1已认证",
+					"type": "text",
+					"enabled": false
+				}
+			],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508901882650,
+			"name": "个人资料--认证中心",
+			"description": "",
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
+		},
+		{
 			"id": "0dbc3236-c676-1998-a00a-8a5f9361f58c",
 			"headers": "",
 			"headerData": [],
@@ -173,7 +222,7 @@
 				},
 				{
 					"key": "describe",
-					"value": "vivo X9，极致体验",
+					"value": "vivo X9，极致体验2222",
 					"description": "描述",
 					"type": "text",
 					"enabled": true
@@ -201,6 +250,7 @@
 				},
 				{
 					"key": "img[]",
+					"value": "Tulips.jpg",
 					"description": "图片",
 					"type": "file",
 					"enabled": true
@@ -209,14 +259,11 @@
 			"dataMode": "params",
 			"tests": "",
 			"currentHelper": "normal",
-			"helperAttributes": "{}",
-			"time": 1506411440616,
+			"helperAttributes": {},
+			"time": 1508817260105,
 			"name": "发布",
 			"description": "",
-			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2",
-			"folder": "374aed8c-ad09-c520-1000-de28f2df664c",
-			"isFromCollection": true,
-			"timestamp": null
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
 		},
 		{
 			"id": "13687e42-33dd-de84-d414-074e8063e4c3",
@@ -623,6 +670,115 @@
 			"folder": "6a03b3d2-f3c0-6f24-68b9-a44d0c1bba0d"
 		},
 		{
+			"id": "65c7fc6e-8f56-3095-77ef-c2474f05953a",
+			"headers": "",
+			"headerData": [],
+			"url": "http://anfutong.cq1b1.com/api.php/User/licenseadd",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "version",
+					"value": "1.1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "apikey",
+					"value": "f74dd39951a0b6bbed0fe73606ea5476",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user_id",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "name",
+					"value": "壹比壹网络",
+					"description": "商家名称",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "province",
+					"value": "500000",
+					"description": "省",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "city",
+					"value": "500100",
+					"description": "市",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "district",
+					"value": "500103",
+					"description": "区县",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "address",
+					"value": "重庆市渝中区袁家岗",
+					"description": "详细地址",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "zhuce_code",
+					"value": "123456789",
+					"description": "注册号",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "daibiao_name",
+					"value": "老大",
+					"description": "法人代表",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "sta_time",
+					"value": "2015-06-10",
+					"description": "营业期限--开始",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "end_time",
+					"value": "2025-06-10",
+					"description": "营业期限--结束",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "range",
+					"value": "网络技术",
+					"description": "经营范围",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508839671416,
+			"name": "个人资料--认证中心--营业执照认证",
+			"description": "",
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
+		},
+		{
 			"id": "6931c4d6-c430-8046-0626-e5a559d76dfa",
 			"headers": "",
 			"headerData": [],
@@ -658,52 +814,6 @@
 			"helperAttributes": {},
 			"time": 1508289922359,
 			"name": "个人资料",
-			"description": "",
-			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
-		},
-		{
-			"id": "6ad48a55-beb1-01c7-acd9-3579d13444aa",
-			"headers": "",
-			"headerData": [],
-			"url": "http://anfutong.cq1b1.com/api.php/User/weixinedit",
-			"queryParams": [],
-			"preRequestScript": "",
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [
-				{
-					"key": "version",
-					"value": "1.1",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "apikey",
-					"value": "f74dd39951a0b6bbed0fe73606ea5476",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "user_id",
-					"value": "1",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "weixn",
-					"value": "123456",
-					"description": "",
-					"type": "text",
-					"enabled": true
-				}
-			],
-			"dataMode": "params",
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1508291619549,
-			"name": "个人资料--修改微信",
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
 		},
@@ -790,11 +900,10 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1506415157913,
+			"time": 1508831194322,
 			"name": "发布信息详情",
 			"description": "",
-			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2",
-			"folder": "e7675511-4889-3b43-96ee-4260b4e849e0"
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
 		},
 		{
 			"id": "7372adbc-5ec7-3920-c724-99dcd16ff416",
@@ -1190,10 +1299,10 @@
 			"folder": "e7675511-4889-3b43-96ee-4260b4e849e0"
 		},
 		{
-			"id": "9df0b3a0-5087-ed56-fc28-02905cd6dd19",
+			"id": "a0c10f2b-e99f-e3d2-bf69-4592276c1bda",
 			"headers": "",
 			"headerData": [],
-			"url": "http://anfutong.cq1b1.com/api.php/User/jianjieedit",
+			"url": "http://anfutong.cq1b1.com/api.php/Public/addrelist",
 			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -1213,25 +1322,19 @@
 					"enabled": true
 				},
 				{
-					"key": "user_id",
-					"value": "1",
+					"key": "pid",
+					"value": "0",
 					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "jianjie",
-					"value": "123456",
-					"description": "",
-					"type": "text",
-					"enabled": true
+					"enabled": true,
+					"description": "0为省级"
 				}
 			],
 			"dataMode": "params",
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1508291652084,
-			"name": "个人资料--修改简介",
+			"time": 1508894129190,
+			"name": "认证中心--获取地址",
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
 		},
@@ -1284,10 +1387,56 @@
 			"folder": "e7675511-4889-3b43-96ee-4260b4e849e0"
 		},
 		{
+			"id": "a2a8e73e-2d5b-7f12-4c14-5e28d0f67e8c",
+			"headers": "",
+			"headerData": [],
+			"url": "http://anfutong.cq1b1.com/api.php/User/passedit",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "version",
+					"value": "1.1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "apikey",
+					"value": "f74dd39951a0b6bbed0fe73606ea5476",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user_id",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "pass",
+					"value": "123456",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508835499435,
+			"name": "个人资料--修改密码",
+			"description": "",
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
+		},
+		{
 			"id": "ab9d47b1-3060-bdf2-7271-bda0b8002cf3",
 			"headers": "",
 			"headerData": [],
-			"url": "http://anfutong.cq1b1.com/api.php/User/qqedit",
+			"url": "http://anfutong.cq1b1.com/api.php/User/useredit",
 			"queryParams": [],
 			"preRequestScript": "",
 			"pathVariables": {},
@@ -1315,7 +1464,28 @@
 				{
 					"key": "qq",
 					"value": "123456",
-					"description": "",
+					"description": "qq",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "weixin",
+					"value": "123456",
+					"description": "微信",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "jianjie",
+					"value": "啊啊啊啊",
+					"description": "个人简介",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "name",
+					"value": "老大",
+					"description": "昵称",
 					"type": "text",
 					"enabled": true
 				}
@@ -1324,8 +1494,8 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1508290107659,
-			"name": "个人资料--修改QQ",
+			"time": 1508903132466,
+			"name": "个人资料--修改个人信息",
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
 		},
@@ -1395,6 +1565,73 @@
 			"time": 1508221106513,
 			"name": "首页--商家、用户",
 			"description": "发布信息返回值说明：ping-num评价数量，shoucang-num收藏数量，shoucang-state收藏状态0未收藏、1已收藏，zan-num赞数量，zan-state赞状态0未赞、1已赞",
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
+		},
+		{
+			"id": "b851aa4e-5e13-d4ea-f3d2-5ab9c12c27f7",
+			"headers": "",
+			"headerData": [],
+			"url": "http://anfutong.cq1b1.com/api.php/User/IDcardadd",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "version",
+					"value": "1.1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "apikey",
+					"value": "f74dd39951a0b6bbed0fe73606ea5476",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user_id",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "ID_name",
+					"value": "身份证",
+					"description": "证件名称",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "IDnumber",
+					"value": "500231000000000000",
+					"description": "证件编号",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "ID_zimg",
+					"value": "Koala.jpg",
+					"description": "证件正面",
+					"type": "file",
+					"enabled": true
+				},
+				{
+					"key": "ID_fimg",
+					"value": "Penguins.jpg",
+					"description": "证件反面",
+					"type": "file",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1508839156996,
+			"name": "个人资料--认证中心--身份认证",
+			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
 		},
 		{
