@@ -139,7 +139,7 @@ class UserInfoViewController: UITableViewController, UINavigationControllerDeleg
     
     func requestSaveInfo(_ url: String, param: [String:String], type: UserInfoType) -> Void {
         SVProgressHUD.show()
-        Network.request(param as NSDictionary, url: url) { (dic) in
+        Network.request(param as NSDictionary, url: "User/useredit") { (dic) in
             print(dic)
             if (dic as! NSDictionary)["code"] as! String == "200" {
                 SVProgressHUD.dismiss()

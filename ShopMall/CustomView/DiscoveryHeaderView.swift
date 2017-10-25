@@ -12,6 +12,7 @@ class DiscoveryHeaderView: UIView, UICollectionViewDelegate, UICollectionViewDat
 
     @IBOutlet var adCollectionView: UICollectionView!
     @IBOutlet var funcCollectionView: UICollectionView!
+    var completeChose: ((NSDictionary) -> Void)!
     
     var dataSource: NSDictionary?{
         didSet{
@@ -57,4 +58,11 @@ class DiscoveryHeaderView: UIView, UICollectionViewDelegate, UICollectionViewDat
         return cell
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == funcCollectionView {
+            let dic = (self.dataSource!["type"] as! NSArray)[indexPath.row] as! NSDictionary
+            completeChose(dic)
+        }
+    }
+    
 }

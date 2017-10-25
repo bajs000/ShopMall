@@ -42,7 +42,9 @@
 		66B22B3A1F9491E5000896AF /* ShopMallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B22B391F9491E5000896AF /* ShopMallTests.swift */; };
 		66B22B451F9491E5000896AF /* ShopMallUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B22B441F9491E5000896AF /* ShopMallUITests.swift */; };
 		66B22B541F94925F000896AF /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B22B531F94925F000896AF /* MainViewController.swift */; };
+		AF6D4FE51FA0C426008FEA08 /* LicenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF6D4FE41FA0C426008FEA08 /* LicenseViewController.swift */; };
 		AF84F7E71F963F960029F048 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF84F7E61F963F960029F048 /* UserInfoViewController.swift */; };
+		AFE0A74F1FA0C83700E255C3 /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFE0A74E1FA0C83700E255C3 /* PlaceViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,7 +109,9 @@
 		66B22B531F94925F000896AF /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		67C748BED313409A1C744688 /* Pods_ShopMallTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopMallTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C139C28D2D18DB5E3814F4A /* Pods-ShopMallUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopMallUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShopMallUITests/Pods-ShopMallUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AF6D4FE41FA0C426008FEA08 /* LicenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseViewController.swift; sourceTree = "<group>"; };
 		AF84F7E61F963F960029F048 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
+		AFE0A74E1FA0C83700E255C3 /* PlaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceViewController.swift; sourceTree = "<group>"; };
 		B1A2780A5D38C02747C52B44 /* Pods-ShopMallUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopMallUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShopMallUITests/Pods-ShopMallUITests.release.xcconfig"; sourceTree = "<group>"; };
 		BE8989AC1A65A11C290AE0E8 /* Pods-ShopMallTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopMallTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShopMallTests/Pods-ShopMallTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C9B4D57BD4FE659905CC37CF /* Pods_ShopMallUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopMallUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -329,6 +333,8 @@
 				668C59071F9F3540007582E9 /* PraiseViewController.swift */,
 				6699588A1FA03C29006DE7FE /* AuthenticationViewController.swift */,
 				6699588C1FA06424006DE7FE /* CardViewController.swift */,
+				AF6D4FE41FA0C426008FEA08 /* LicenseViewController.swift */,
+				AFE0A74E1FA0C83700E255C3 /* PlaceViewController.swift */,
 			);
 			path = UserFunction;
 			sourceTree = "<group>";
@@ -647,6 +653,7 @@
 				6626F8AD1F96FC30009C7D3A /* SMAlertView.swift in Sources */,
 				668C590E1FA011BF007582E9 /* MsgDetailViewController.swift in Sources */,
 				6699588B1FA03C29006DE7FE /* AuthenticationViewController.swift in Sources */,
+				AF6D4FE51FA0C426008FEA08 /* LicenseViewController.swift in Sources */,
 				664F85781F959D4D00C94A2E /* DiscoveryHeaderView.swift in Sources */,
 				AF84F7E71F963F960029F048 /* UserInfoViewController.swift in Sources */,
 				664EB6CF1F99DAE80038EB08 /* CommentViewController.swift in Sources */,
@@ -657,6 +664,7 @@
 				669A4B151F949D7000AF19DF /* MainCell.swift in Sources */,
 				668C59061F9F3364007582E9 /* AttentionViewController.swift in Sources */,
 				668C59021F9F2E97007582E9 /* SettingViewController.swift in Sources */,
+				AFE0A74F1FA0C83700E255C3 /* PlaceViewController.swift in Sources */,
 				6626F8A41F95F648009C7D3A /* UserModel.swift in Sources */,
 				6626F8A71F95FD32009C7D3A /* LoginViewController.swift in Sources */,
 				6697DD851F9883DC00B3203E /* PublishViewController.swift in Sources */,

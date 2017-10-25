@@ -361,7 +361,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
             for btn in self.typeBtns {
                 btn.removeFromSuperview()
             }
-            if self.dataSource?["type"] != nil {
+            if self.dataSource?["type"] != nil && (self.dataSource?["type"] as! NSArray).count > 0{
                 for i in 0...(self.dataSource?["type"] as! NSArray).count - 1 {
                     let dict = (self.dataSource?["type"] as! NSArray)[i] as! NSDictionary
                     let title = dict["type_title"] as! String

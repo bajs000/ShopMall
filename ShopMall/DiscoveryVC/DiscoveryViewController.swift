@@ -23,16 +23,24 @@ class DiscoveryViewController: UITableViewController {
     
     var type: DiscoveryType = .vender
     var dataSource: NSDictionary?
+    var type1 = "1"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableHeaderView = headerView
+        headerView.completeChose = {(dic) in
+            self.requestDiscovery(self.type1, type2: dic["type_id"] as? String)
+        }
+        requestDiscovery(self.type1,type2: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         setupTitleView()
-        requestDiscovery()
     }
     
     func setupTitleView() -> Void {
-        let discoveryTitleView = UIView(frame: CGRect(x: 0, y: 0, width: 150, height: 44))
+        let discoveryTitleView = CutomTitleView(frame: CGRect(x: 0, y: 0, width: 150, height: 44))
         self.navigationItem.titleView = discoveryTitleView
         
         let venderBtn = UIButton(type: .custom)
@@ -121,7 +129,14 @@ class DiscoveryViewController: UITableViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.destination.isKind(of: TypeViewController.self) {
+            let type = segue.destination as! TypeViewController
+            type.pushByMain = true
+            type.completeType = {(dic) in
+                self.requestDiscovery(dic["type_id"] as? String,type2: nil)
+                self.type1 = dic["type_id"] as! String
+            }
+        }
     }
     
     @objc func discoveryTypeAction(_ sender: UIButton) {
@@ -147,20 +162,32 @@ class DiscoveryViewController: UITableViewController {
         UIView.animate(withDuration: 0.5) {
             sender.superview!.layoutIfNeeded()
         }
-        
-        requestDiscovery()
+        self.type1 = "1"
+        requestDiscovery(self.type1,type2: nil)
     }
     
-    func requestDiscovery() -> Void {
+    func requestDiscovery(_ sender: String?, type2: String?) -> Void {
         SVProgressHUD.show()
         var url = ""
         var param = [String:String]()
         if type == .vender {
             url = "Public/find_bus"
-            param = ["type_id":"1"]
+            if sender == nil {
+                param = ["type_id":"1"]
+            }else {
+                param = ["type_id":sender!]
+            }
         }else {
             url = "Public/find_goods"
-            param = ["type_id":"1","page":"1"]
+            if sender == nil {
+                param = ["type_id":"1"]
+            }else {
+                param = ["type_id":sender!]
+            }
+            param["page"] = "1"
+        }
+        if type2 != nil {
+            param["type_two_id"] = type2!
         }
         Network.request(param as NSDictionary, url: url) { (dic) in
             SVProgressHUD.dismiss()
@@ -179,4 +206,10 @@ class DiscoveryViewController: UITableViewController {
         }
     }
     
+}
+
+class CutomTitleView: UIView {
+    override var intrinsicContentSize: CGSize{
+        return CGSize(width: 150, height: 44)
+    }
 }

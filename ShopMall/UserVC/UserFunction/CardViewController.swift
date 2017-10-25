@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class CardViewController: UITableViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
@@ -72,7 +73,28 @@ class CardViewController: UITableViewController, UINavigationControllerDelegate,
     }
 
     @IBAction func commitAction(_ sender: Any) {
-        
+        if cardText.text?.characters.count == 0 {
+            SVProgressHUD.showError(withStatus: "请输入身份证")
+            return
+        }
+        if frontImg.image == nil {
+            SVProgressHUD.showError(withStatus: "请选择身份证正面照")
+            return
+        }
+        if behindImg.image == nil {
+            SVProgressHUD.showError(withStatus: "请选择身份证背面照")
+            return
+        }
+        SVProgressHUD.show()
+        UploadNetwork.request(["ID_name":"身份证","IDnumber":cardText.text!,"user_id":UserModel.share.userId], datas: ["ID_zimg":frontImg.image!,"ID_fimg":behindImg.image!], paramName: nil, url: "User/IDcardadd") { (dic) in
+            print(dic)
+            if (dic as! NSDictionary)["code"] as! String == "200" {
+                SVProgressHUD.dismiss()
+                _ = self.navigationController?.popViewController(animated: true)
+            }else {
+                SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
+            }
+        }
     }
     
 }
