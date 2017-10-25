@@ -218,6 +218,7 @@ class UserModel: NSObject {
     }
     
     public class func saveUserinfo(_ dic:Any) -> Void {
+        UserModel.share.resetAll()
         let userDefault = UserDefaults.standard
         var dict = NSDictionary()
         if (dic as! NSDictionary)["uinfo"] != nil {
@@ -239,6 +240,26 @@ class UserModel: NSObject {
         userDefault.set(dict["user_id"], forKey: "USERID")
         userDefault.set(dict["weixin"], forKey: "WEIXIN")
         userDefault.synchronize()
+    }
+    
+    func resetAll() {
+        _address = nil
+        _face = nil
+        _goodsType = nil
+        _jianjie = nil
+        _name = nil
+        _password = nil
+        _phone = nil
+        _qq = nil
+        _shakey = nil
+        _time = nil
+        _type = nil
+        _userId = nil
+        _weixin = nil
+    }
+    
+    func resetUserId() {
+        _userId = nil
     }
     
     func resetAvatar() -> Void {

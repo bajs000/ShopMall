@@ -101,7 +101,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         cell.viewWithTag(1)?.layer.cornerRadius = 15
         (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
         (cell.viewWithTag(2) as! UILabel).text = dic[""] as? String
-        (cell.viewWithTag(3) as! UILabel).text = Helpers.updateTimeForRow(dic["time"] as! String)
+        (cell.viewWithTag(3) as! UILabel).text = dic["time"] as? String
         if (dic["gongqiu"] as! String) == "2" {
             (cell.viewWithTag(4) as! UIImageView).image = #imageLiteral(resourceName: "main-seek")
         }else {
@@ -155,7 +155,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     // MARK: - UITabBarControllerDelegate
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let vc = (viewController as! UINavigationController).topViewController
-        if (vc?.isKind(of: UserViewController.self))! {
+        if (vc?.isKind(of: UserViewController.self))! || (vc?.isKind(of: PublishViewController.self))! || (vc?.isKind(of: MsgViewController.self))! {
             return UserModel.checkUserLogin(at: tabBarController)
         }
         return true

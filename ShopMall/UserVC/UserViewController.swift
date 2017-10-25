@@ -28,7 +28,15 @@ class UserViewController: UITableViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        requestUser()
+        if UserModel.share.userId.characters.count == 0 {
+            avatarImg.image = nil
+            userName.text = ""
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5, execute: {
+                self.tabBarController?.selectedIndex = 0
+            })
+        }else {
+            requestUser()
+        }
     }
     
     override func didReceiveMemoryWarning() {
