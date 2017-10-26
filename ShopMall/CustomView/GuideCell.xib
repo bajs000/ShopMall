@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="STQ-PL-FRc" customClass="GuideCell" customModule="ShopMall" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SBe-Qx-1Xv">
+                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="SBe-Qx-1Xv" firstAttribute="top" secondItem="STQ-PL-FRc" secondAttribute="top" id="8tW-mK-eXD"/>
+                <constraint firstAttribute="trailing" secondItem="SBe-Qx-1Xv" secondAttribute="trailing" id="a5f-Oa-z8G"/>
+                <constraint firstAttribute="bottom" secondItem="SBe-Qx-1Xv" secondAttribute="bottom" id="deF-hC-Bkj"/>
+                <constraint firstItem="SBe-Qx-1Xv" firstAttribute="leading" secondItem="STQ-PL-FRc" secondAttribute="leading" id="v3U-ZI-3am"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Jmz-qr-apI"/>
+            <connections>
+                <outlet property="img" destination="SBe-Qx-1Xv" id="t9Y-dP-ylM"/>
+            </connections>
+            <point key="canvasLocation" x="68" y="60"/>
+        </collectionViewCell>
+    </objects>
+</document>

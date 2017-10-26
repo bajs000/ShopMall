@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         SVProgressHUD.setMinimumDismissTimeInterval(1)
         
+        
         return true
     }
 

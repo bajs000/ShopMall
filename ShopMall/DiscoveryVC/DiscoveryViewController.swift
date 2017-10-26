@@ -123,6 +123,7 @@ class DiscoveryViewController: UITableViewController {
             (cell.viewWithTag(2) as! UILabel).text = dic["name"] as? String
             (cell.viewWithTag(3) as! UILabel).text = dic["jianjie"] as? String
         }
+        (cell.viewWithTag(4) as! UIButton).addTarget(self, action: #selector(rightAction(_:)), for: .touchUpInside)
         return cell
     }
     
@@ -135,6 +136,27 @@ class DiscoveryViewController: UITableViewController {
             type.completeType = {(dic) in
                 self.requestDiscovery(dic["type_id"] as? String,type2: nil)
                 self.type1 = dic["type_id"] as! String
+            }
+        }
+    }
+    
+    @objc func rightAction(_ sender: UIButton) {
+        let cell = Helpers.findSuperViewClass(UITableViewCell.self, with: sender)
+        let indexPath = self.tableView.indexPath(for: cell as! UITableViewCell)
+        let dic = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as! NSDictionary
+        if type == .product {//联系
+            UIApplication.shared.openURL(URL(string:"tel://" + (dic["phone"] as! String))!)
+        }else {//关注
+            if UserModel.checkUserLogin(at: self) {
+                SVProgressHUD.show()
+                Network.request(["bus_id":dic["user_id"] as! String,"user_id":UserModel.share.userId], url: "Public/guanzhu_add", complete: { (dic) in
+                    print(dic)
+                    if (dic as! NSDictionary)["code"] as! String == "200" {
+                        SVProgressHUD.showSuccess(withStatus: "关注成功")
+                    }else {
+                        SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
+                    }
+                })
             }
         }
     }

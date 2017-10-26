@@ -169,7 +169,7 @@ class GoodsDetailViewController: UIViewController, UITableViewDelegate, UITableV
             })
             break
         case 3:
-            
+            UIApplication.shared.openURL(URL(string:"tel://" + (((self.dataSource!["list"] as! NSDictionary)["user"] as! NSDictionary)["phone"] as! String))!)
             break
         default:
             break

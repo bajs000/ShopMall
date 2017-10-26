@@ -10,6 +10,7 @@ import UIKit
 import Masonry
 import SVProgressHUD
 import SDWebImage
+import SnapKit
 
 class MainViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITabBarControllerDelegate {
     
@@ -18,6 +19,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     @IBOutlet var menuView: UIView!
     @IBOutlet weak var menuBtnBgHeight: NSLayoutConstraint!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     var dataSource: NSDictionary?
     var currentTypeBtn: UIButton?
@@ -34,7 +36,37 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         functionView.frame = CGRect(x: 0, y: 64, width: Helpers.screanSize().width, height: 44)
         self.tableView.tableHeaderView = headerView
         self.tabBarController?.delegate = self
-        requestMain(nil,type2: nil)
+        if UserDefaults.standard.object(forKey: "Version") == nil {
+            
+            let mask = UIImageView()
+            mask.image = UIImage(named: "mask")
+            mask.contentMode = .scaleAspectFill
+            mask.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: self, action: #selector(hideMask(_:)))
+            mask.addGestureRecognizer(tap)
+            self.tabBarController?.view.addSubview(mask)
+            mask.snp.makeConstraints({ (make) in
+                make.edges.equalTo(self.tabBarController!.view)
+            })
+            
+            let guideView = Bundle.main.loadNibNamed("GuideView", owner: self, options: nil)![0] as! GuideView
+            guideView.complete = {
+                self.requestMain(nil,type2: nil)
+            }
+            self.tabBarController?.view.addSubview(guideView)
+            guideView.snp.makeConstraints { (make) in
+                make.edges.equalTo(self.tabBarController!.view)
+            }
+            Network.request([:], url: "http://www.baidu.com", complete: { (dic) in
+                
+            })
+            UserDefaults.standard.set(Bundle.main.infoDictionary!["CFBundleShortVersionString"]!, forKey: "Version")
+            UserDefaults.standard.synchronize()
+        }else {
+            self.requestMain(nil,type2: nil)
+        }
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -152,6 +184,12 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         return cell
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.isKind(of: UICollectionView.self) {
+            self.pageControl.currentPage = Int(floor((scrollView.contentOffset.x - Helpers.screanSize().width / 2) / Helpers.screanSize().width) + 1)
+        }
+    }
+    
     // MARK: - UITabBarControllerDelegate
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let vc = (viewController as! UINavigationController).topViewController
@@ -184,6 +222,10 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
             let cell = Helpers.findSuperViewClass(UITableViewCell.self, with: sender as! UIButton)
             let indexPath = self.tableView.indexPath(for: cell as! UITableViewCell)
             (segue.destination as! CommentViewController).dataSource = ["list":(self.dataSource!["list"] as! NSArray)[indexPath!.section] as! NSDictionary]
+        }else if segue.destination.isKind(of: BusinessViewController.self) {
+            let cell = sender as! UITableViewCell
+            let indexPath = self.tableView.indexPath(for: cell)
+            (segue.destination as! BusinessViewController).businessInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as? NSDictionary
         }
     }
     
@@ -256,6 +298,10 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         }
     }
     
+    @objc func hideMask(_ sender: UITapGestureRecognizer) {
+        sender.view!.removeFromSuperview()
+    }
+    
     @objc func goodsAction(_ sender: UIButton) {
         if sender.tag == 7 {//评价
             self.performSegue(withIdentifier: "commentPush", sender: sender)
@@ -271,7 +317,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
             Network.request(["user_id":UserModel.share.userId,"release_id":dict["release_id"] as! String], url: url, complete: { (dic) in
                 print(dic)
                 if (dic as! NSDictionary)["code"] as! String == "200" {
-                    if (dict["shoucang_state"] as! NSNumber).intValue == 1 {
+                    if (dict["shoucang_state"] as! NSNumber).intValue == 0 {
                         SVProgressHUD.showSuccess(withStatus: "收藏成功")
                     }else {
                         SVProgressHUD.showSuccess(withStatus: "删除收藏成功")
@@ -353,6 +399,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
             }else{
                 self.tableView.tableHeaderView = self.headerView
             }
+            self.pageControl.numberOfPages = (self.dataSource!["img"] as! NSArray).count
             self.tableView.reloadData()
             self.collectionView.reloadData()
             

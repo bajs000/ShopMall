@@ -39,10 +39,10 @@ class AttentionViewController: UITableViewController {
         let dic = self.dataSource[indexPath.row] as! NSDictionary
         cell.viewWithTag(4)?.layer.borderWidth = 1
         cell.viewWithTag(4)?.layer.borderColor = #colorLiteral(red: 0.7095867991, green: 0.7096036673, blue: 0.709594667, alpha: 1)
-        (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
-        (cell.viewWithTag(2) as! UILabel).text = dic["describe"] as? String
-        let time = dic["time"] as! String
-        (cell.viewWithTag(3) as! UILabel).text = String(time[..<time.index(time.startIndex, offsetBy: 10)])
+        (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["face"] as! String)), completed: nil)
+        (cell.viewWithTag(2) as! UILabel).text = dic["name"] as? String
+//        let time = dic["time"] as! String
+        (cell.viewWithTag(3) as! UILabel).text = dic["jianjie"] as? String//String(time[..<time.index(time.startIndex, offsetBy: 10)])
         return cell
     }
 
@@ -50,12 +50,16 @@ class AttentionViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.destination.isKind(of: BusinessViewController.self) {
+            let cell = sender as! UITableViewCell
+            let indexPath = self.tableView.indexPath(for: cell)
+            (segue.destination as! BusinessViewController).businessInfo = self.dataSource[indexPath!.row] as? NSDictionary
+        }
     }
     
     func requestAttention() {
         SVProgressHUD.show()
-        Network.request(["user_id":UserModel.share.userId], url: "Public/shoucang_list") { (dic) in
+        Network.request(["user_id":UserModel.share.userId], url: "Public/guanzhu_list") { (dic) in
             print(dic)
             if (dic as! NSDictionary)["code"] as! String == "200" {
                 SVProgressHUD.dismiss()

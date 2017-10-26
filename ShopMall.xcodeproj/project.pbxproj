@@ -10,6 +10,11 @@
 		111F8C5C456D02FF7666DBB7 /* Pods_ShopMall.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62D6463A7541B0220E5F0248 /* Pods_ShopMall.framework */; };
 		17CBA3CE3342E17DDBC29830 /* Pods_ShopMallUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9B4D57BD4FE659905CC37CF /* Pods_ShopMallUITests.framework */; };
 		5929F45D91E804C2E1FF4558 /* Pods_ShopMallTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67C748BED313409A1C744688 /* Pods_ShopMallTests.framework */; };
+		6606299A1FA1B263002BC806 /* BusinessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660629991FA1B263002BC806 /* BusinessViewController.swift */; };
+		6606299C1FA1CA67002BC806 /* GuideView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6606299B1FA1CA67002BC806 /* GuideView.xib */; };
+		6606299E1FA1CAA1002BC806 /* GuideCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6606299D1FA1CAA1002BC806 /* GuideCell.xib */; };
+		660629A01FA1CAC7002BC806 /* GuideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6606299F1FA1CAC7002BC806 /* GuideView.swift */; };
+		660629A21FA1CBE7002BC806 /* GuideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 660629A11FA1CBE7002BC806 /* GuideCell.swift */; };
 		6626F8A21F95F278009C7D3A /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6626F8A11F95F278009C7D3A /* UserViewController.swift */; };
 		6626F8A41F95F648009C7D3A /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6626F8A31F95F648009C7D3A /* UserModel.swift */; };
 		6626F8A71F95FD32009C7D3A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6626F8A61F95FD32009C7D3A /* LoginViewController.swift */; };
@@ -69,6 +74,11 @@
 		2525281BE43BA92BFF7BB1EE /* Pods-ShopMall.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopMall.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ShopMall/Pods-ShopMall.debug.xcconfig"; sourceTree = "<group>"; };
 		42DD354DACAE358A7EBF2B26 /* Pods-ShopMallTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ShopMallTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ShopMallTests/Pods-ShopMallTests.release.xcconfig"; sourceTree = "<group>"; };
 		62D6463A7541B0220E5F0248 /* Pods_ShopMall.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ShopMall.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		660629991FA1B263002BC806 /* BusinessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessViewController.swift; sourceTree = "<group>"; };
+		6606299B1FA1CA67002BC806 /* GuideView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuideView.xib; sourceTree = "<group>"; };
+		6606299D1FA1CAA1002BC806 /* GuideCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GuideCell.xib; sourceTree = "<group>"; };
+		6606299F1FA1CAC7002BC806 /* GuideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideView.swift; sourceTree = "<group>"; };
+		660629A11FA1CBE7002BC806 /* GuideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideCell.swift; sourceTree = "<group>"; };
 		6626F8A11F95F278009C7D3A /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		6626F8A31F95F648009C7D3A /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		6626F8A61F95FD32009C7D3A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -218,6 +228,7 @@
 			children = (
 				6697DD871F9995F300B3203E /* GoodsDetailViewController.swift */,
 				664EB6CE1F99DAE80038EB08 /* CommentViewController.swift */,
+				660629991FA1B263002BC806 /* BusinessViewController.swift */,
 			);
 			path = DetailVC;
 			sourceTree = "<group>";
@@ -229,6 +240,10 @@
 				664F85771F959D4D00C94A2E /* DiscoveryHeaderView.swift */,
 				6626F8AC1F96FC30009C7D3A /* SMAlertView.swift */,
 				6626F8AA1F96FC1A009C7D3A /* SMAlertView.xib */,
+				6606299F1FA1CAC7002BC806 /* GuideView.swift */,
+				6606299B1FA1CA67002BC806 /* GuideView.xib */,
+				660629A11FA1CBE7002BC806 /* GuideCell.swift */,
+				6606299D1FA1CAA1002BC806 /* GuideCell.xib */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -461,6 +476,8 @@
 				66B22B2F1F9491E5000896AF /* LaunchScreen.storyboard in Resources */,
 				66B22B2C1F9491E5000896AF /* Assets.xcassets in Resources */,
 				66B22B2A1F9491E5000896AF /* Main.storyboard in Resources */,
+				6606299C1FA1CA67002BC806 /* GuideView.xib in Resources */,
+				6606299E1FA1CAA1002BC806 /* GuideCell.xib in Resources */,
 				6626F8AB1F96FC1A009C7D3A /* SMAlertView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -645,7 +662,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				668C590B1FA0116E007582E9 /* MsgViewController.swift in Sources */,
+				660629A21FA1CBE7002BC806 /* GuideCell.swift in Sources */,
 				668C59081F9F3540007582E9 /* PraiseViewController.swift in Sources */,
+				6606299A1FA1B263002BC806 /* BusinessViewController.swift in Sources */,
 				6626F8A91F96E31E009C7D3A /* TypeViewController.swift in Sources */,
 				6699588F1FA17297006DE7FE /* FindPwdViewController.swift in Sources */,
 				667417B91F9EEE7F00B77A88 /* MineCommentViewController.swift in Sources */,
@@ -662,6 +681,7 @@
 				AF84F7E71F963F960029F048 /* UserInfoViewController.swift in Sources */,
 				664EB6CF1F99DAE80038EB08 /* CommentViewController.swift in Sources */,
 				6697DD881F9995F300B3203E /* GoodsDetailViewController.swift in Sources */,
+				660629A01FA1CAC7002BC806 /* GuideView.swift in Sources */,
 				664EB6D11F99E7CA0038EB08 /* MinePublishTableViewController.swift in Sources */,
 				668C59001F9F226D007582E9 /* BrowseViewController.swift in Sources */,
 				66B22B541F94925F000896AF /* MainViewController.swift in Sources */,
@@ -841,11 +861,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZFBWMNWDED;
+				DEVELOPMENT_TEAM = PA5REWWP2Y;
 				INFOPLIST_FILE = ShopMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.work.ShopMall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yby.ShopMall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/ShopMall/Helpers/ShopMall-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
@@ -859,11 +879,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = ZFBWMNWDED;
+				DEVELOPMENT_TEAM = PA5REWWP2Y;
 				INFOPLIST_FILE = ShopMall/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.work.ShopMall;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yby.ShopMall;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/ShopMall/Helpers/ShopMall-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
