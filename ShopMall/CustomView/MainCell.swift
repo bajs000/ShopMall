@@ -45,9 +45,12 @@ class MainCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         let dic = self.imgArr?[indexPath.row] as! NSDictionary
+//        let imgView = cell.viewWithTag(1) as! UIImageView
+//        imgView.kt_addCorner(radius: 14)
         cell.viewWithTag(1)?.layer.cornerRadius = 4
         cell.viewWithTag(1)?.layer.borderColor = #colorLiteral(red: 0.8797392845, green: 0.8797599673, blue: 0.8797488809, alpha: 1)
         cell.viewWithTag(1)?.layer.borderWidth = 1
+        cell.viewWithTag(1)?.layer.shouldRasterize = true
         (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
         return cell
     }

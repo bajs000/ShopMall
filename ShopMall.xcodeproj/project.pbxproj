@@ -33,6 +33,7 @@
 		6697DD881F9995F300B3203E /* GoodsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6697DD871F9995F300B3203E /* GoodsDetailViewController.swift */; };
 		6699588B1FA03C29006DE7FE /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6699588A1FA03C29006DE7FE /* AuthenticationViewController.swift */; };
 		6699588D1FA06424006DE7FE /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6699588C1FA06424006DE7FE /* CardViewController.swift */; };
+		6699588F1FA17297006DE7FE /* FindPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6699588E1FA17297006DE7FE /* FindPwdViewController.swift */; };
 		669A4B151F949D7000AF19DF /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A4B141F949D7000AF19DF /* MainCell.swift */; };
 		669A4B181F949E1400AF19DF /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 669A4B171F949E1400AF19DF /* Helpers.swift */; };
 		66B22B251F9491E5000896AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66B22B241F9491E5000896AF /* AppDelegate.swift */; };
@@ -92,6 +93,7 @@
 		6697DD871F9995F300B3203E /* GoodsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoodsDetailViewController.swift; sourceTree = "<group>"; };
 		6699588A1FA03C29006DE7FE /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		6699588C1FA06424006DE7FE /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
+		6699588E1FA17297006DE7FE /* FindPwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPwdViewController.swift; sourceTree = "<group>"; };
 		669A4B141F949D7000AF19DF /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
 		669A4B171F949E1400AF19DF /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		66B22B211F9491E5000896AF /* ShopMall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ShopMall.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +175,7 @@
 			children = (
 				6626F8A61F95FD32009C7D3A /* LoginViewController.swift */,
 				6626F8A81F96E31E009C7D3A /* TypeViewController.swift */,
+				6699588E1FA17297006DE7FE /* FindPwdViewController.swift */,
 			);
 			path = LoginVC;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				668C590B1FA0116E007582E9 /* MsgViewController.swift in Sources */,
 				668C59081F9F3540007582E9 /* PraiseViewController.swift in Sources */,
 				6626F8A91F96E31E009C7D3A /* TypeViewController.swift in Sources */,
+				6699588F1FA17297006DE7FE /* FindPwdViewController.swift in Sources */,
 				667417B91F9EEE7F00B77A88 /* MineCommentViewController.swift in Sources */,
 				664F85701F94A8D300C94A2E /* Network.swift in Sources */,
 				6699588D1FA06424006DE7FE /* CardViewController.swift in Sources */,

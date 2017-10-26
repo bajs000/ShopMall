@@ -120,17 +120,19 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let type = segue.destination as! TypeViewController
-        type.completeType = {(dic) in
-            print(dic)
-            self.currentVenderType = dic
-            let tempDic = NSMutableDictionary(dictionary: self.registArr[6])
-            tempDic["text"] = dic["type_title"] as! String + "    "
-            self.registArr.remove(at: 6)
-            self.registArr.insert(tempDic as! [String : Any], at: 6)
-            self.occlusionView.isHidden = false//防止注册信息不显示
-            self.tableView.reloadData()
-            self.occlusionView.isHidden = true
+        if segue.destination.isKind(of: TypeViewController.self){
+            let type = segue.destination as! TypeViewController
+            type.completeType = {(dic) in
+                print(dic)
+                self.currentVenderType = dic
+                let tempDic = NSMutableDictionary(dictionary: self.registArr[6])
+                tempDic["text"] = dic["type_title"] as! String + "    "
+                self.registArr.remove(at: 6)
+                self.registArr.insert(tempDic as! [String : Any], at: 6)
+                self.occlusionView.isHidden = false//防止注册信息不显示
+                self.tableView.reloadData()
+                self.occlusionView.isHidden = true
+            }
         }
     }
     
