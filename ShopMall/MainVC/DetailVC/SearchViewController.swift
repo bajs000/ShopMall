@@ -16,18 +16,11 @@ class SearchViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let titleView = UIView()
+        titleView
         let searchBar = UISearchBar()
         searchBar.showsCancelButton = true
         
-        
-        if #available(iOS 11.0, *) {
-            self.navigationItem.searchController = UISearchController()
-            UISearchBar.appearance().setSearchFieldBackgroundImage(self.__searchFieldBackgroundImage(), for:.normal)
-            let textField = UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self,UINavigationBar.self])
-            textField.defaultTextAttributes = [NSAttributedStringKey.font.rawValue:UIFont.systemFont(ofSize: 13)]
-        } else {
-            self.navigationItem.titleView = searchBar
-        }
         
         requestSearch()
     }
