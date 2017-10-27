@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SDWebImage
+import SVProgressHUD
 
 class SettingViewController: UITableViewController {
 
@@ -23,7 +25,12 @@ class SettingViewController: UITableViewController {
     }
 
     // MARK: - Table view data source
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 2 {
+            SDImageCache.shared().clearDisk(onCompletion: nil)
+            SVProgressHUD.showSuccess(withStatus: "删除成功")
+        }
+    }
 
     /*
     // MARK: - Navigation

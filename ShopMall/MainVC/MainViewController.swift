@@ -303,6 +303,9 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     }
     
     @objc func goodsAction(_ sender: UIButton) {
+        if !UserModel.checkUserLogin(at: self) {
+            return
+        }
         if sender.tag == 7 {//评价
             self.performSegue(withIdentifier: "commentPush", sender: sender)
         }else if sender.tag == 8 {//收藏
@@ -345,7 +348,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
             Network.request(["user_id":UserModel.share.userId,"release_id":dict["release_id"] as! String], url: url, complete: { (dic) in
                 print(dic)
                 if (dic as! NSDictionary)["code"] as! String == "200" {
-                    if (dict["zan_state"] as! NSNumber).intValue == 1 {
+                    if (dict["zan_state"] as! NSNumber).intValue == 0 {
                         SVProgressHUD.showSuccess(withStatus: "点赞成功")
                     }else {
                         SVProgressHUD.showSuccess(withStatus: "删除点赞成功")
@@ -398,8 +401,8 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
                 self.tableView.tableHeaderView = nil
             }else{
                 self.tableView.tableHeaderView = self.headerView
+                self.pageControl.numberOfPages = (self.dataSource!["img"] as! NSArray).count
             }
-            self.pageControl.numberOfPages = (self.dataSource!["img"] as! NSArray).count
             self.tableView.reloadData()
             self.collectionView.reloadData()
             

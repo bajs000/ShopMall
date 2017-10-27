@@ -8,11 +8,16 @@
 
 import UIKit
 import SVProgressHUD
+import CoreLocation
 
-class PublishViewController: UITableViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PublishViewController: UITableViewController, UITextViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate {
     
     @IBOutlet weak var footerView: UIView!
     @IBOutlet weak var surePublishBtn: UIButton!
+    
+    var manager:CLLocationManager?
+    var userLocation: CLLocationCoordinate2D?
+    var lock = NSLock()
     
     var placeholader: UILabel!
     var textView: UITextView!
@@ -31,11 +36,49 @@ class PublishViewController: UITableViewController, UITextViewDelegate, UICollec
         self.imagePicker.delegate = self
         self.surePublishBtn.layer.cornerRadius = 8
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if CLLocationManager.locationServicesEnabled() {
+            manager = CLLocationManager()
+            manager?.delegate = self
+            manager?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+            manager?.distanceFilter = 200
+            manager?.requestWhenInUseAuthorization()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        userLocation = nil
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 
+    // MARK: - CoreLocationDelegate
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if (status == CLAuthorizationStatus.authorizedWhenInUse) {
+            manager.startUpdatingLocation()
+        }else {
+            SVProgressHUD.showError(withStatus: "请到设置里面打开定位，我们才能给你提供更好的服务")
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        manager.stopUpdatingLocation()
+        lock.lock()
+        if userLocation == nil {
+            let location = locations.last
+            userLocation = location?.coordinate
+            requestUserLocation()
+            print("latitude:\(String((location?.coordinate.latitude)!)),longitude:\(String((location?.coordinate.longitude)!))")
+        }
+        lock.unlock()
+    }
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
@@ -192,6 +235,19 @@ class PublishViewController: UITableViewController, UITextViewDelegate, UICollec
                                 }else {
                                     SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
                                 }
+        }
+    }
+    
+    func requestUserLocation() -> Void {
+        SVProgressHUD.show()
+        Network.requestLocation(url: "http://restapi.amap.com/v3/geocode/regeo?key=6632969fe0929070d2cd5c2a50f27ca9&location=" + String(userLocation!.longitude) + "," + String(userLocation!.latitude)) { (dic) in
+            if Int((dic as! NSDictionary)["status"] as! String) == 1 {
+                self.locationText?.text = ((dic as! NSDictionary)["regeocode"] as! NSDictionary)["formatted_address"] as? String
+                SVProgressHUD.dismiss()
+            }else {
+                SVProgressHUD.showError(withStatus: "定位错误")
+            }
+
         }
     }
     

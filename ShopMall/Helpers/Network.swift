@@ -54,6 +54,34 @@ class Network: NSObject {
         
     }
     
+    public class func requestLocation(url:String, complete: ((_ responseObject:Any) -> Void)?){
+        let reqUrl = url
+        var req = URLRequest(url: URL(string: (reqUrl as NSString).addingPercentEscapes(using: String.Encoding.utf8.rawValue)!)!)
+        req.httpMethod = "GET"
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        NSURLConnection.sendAsynchronousRequest(req, queue: OperationQueue(), completionHandler: {
+            (_ response:URLResponse?, data:Data?, error:Error?) -> Void in
+            if error == nil {
+                DispatchQueue.main.async(execute: {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    do {
+                        let dic = try JSONSerialization.jsonObject(with: data!, options: .allowFragments) as! NSDictionary
+                        if complete != nil {
+                            complete!(dic)
+                        }
+                    }catch{
+                        print(error)
+                    }
+                })
+            }else{
+                print(error!)
+                SVProgressHUD.dismiss()
+            }
+        })
+        
+        
+    }
+    
 }
 
 class UploadNetwork: NSObject {
