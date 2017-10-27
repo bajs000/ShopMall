@@ -9,22 +9,30 @@
 import UIKit
 import SVProgressHUD
 import SDWebImage
+import EVNCustomSearchBar
 
-class SearchViewController: UITableViewController {
+class SearchViewController: UITableViewController, EVNCustomSearchBarDelegate {
 
     var dataSource: NSDictionary?
+    var searchBar: EVNCustomSearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let titleView = UIView()
-        titleView
-        let searchBar = UISearchBar()
-        searchBar.showsCancelButton = true
-        
-        
-        requestSearch()
+        searchBar = EVNCustomSearchBar(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height, width: Helpers.screanSize().width, height: 44))
+        searchBar?.backgroundColor = UIColor.clear
+        searchBar.iconAlign = .center
+        searchBar.placeholder = "搜索"
+        searchBar.placeholderColor = #colorLiteral(red: 0.4756349325, green: 0.4756467342, blue: 0.4756404161, alpha: 1)
+        searchBar.delegate = self
+        searchBar.isHiddenCancelButton = true
+        searchBar.sizeToFit()
+        if #available(iOS 11.0, *) {
+            searchBar.heightAnchor.constraint(lessThanOrEqualToConstant: 44).isActive = true
+        }
+        self.navigationItem.titleView = searchBar
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -81,6 +89,12 @@ class SearchViewController: UITableViewController {
         return cell
     }
 
+    //MARK:- SearchBarDelegate
+    
+    func searchBarSearchButtonClicked(_ searchBar: EVNCustomSearchBar) {
+        self.requestSearch()
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -157,7 +171,7 @@ class SearchViewController: UITableViewController {
     
     func requestSearch() -> Void {
         SVProgressHUD.show()
-        Network.request(["title":"X20"], url: "Public/sousuo") { (dic) in
+        Network.request(["title":searchBar.text!], url: "Public/sousuo") { (dic) in
             print(dic)
 //            if (dic as! NSDictionary)["code"] as! String == "200" {
                 SVProgressHUD.dismiss()
@@ -184,4 +198,10 @@ class SearchViewController: UITableViewController {
         return image!
     }
     
+}
+
+class SearchTitleView : UIView {
+    override var intrinsicContentSize: CGSize{
+        return UILayoutFittingExpandedSize
+    }
 }

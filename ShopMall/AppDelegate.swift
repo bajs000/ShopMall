@@ -22,7 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UMSocialManager.default().umSocialAppkey = "59f2d0dcf43e487092000353"
         UMSocialManager.default().setPlaform(UMSocialPlatformType.QQ, appKey: "", appSecret: "", redirectURL: "")
         UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatSession, appKey: "", appSecret: "", redirectURL: "")
-        
+        if #available(iOS 11.0, *) {
+            UIScrollView.appearance().contentInsetAdjustmentBehavior = .never;
+        }
         return true
     }
 

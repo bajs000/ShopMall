@@ -11,6 +11,7 @@ target 'ShopMall' do
   pod 'SDWebImage'
   pod 'AFNetworking'
   pod 'SnapKit'
+  pod 'EVNCustomSearchBar', '~> 0.1.0'
   # U-Share SDK UI模块（分享面板，建议添加）
   pod 'UMengUShare/UI'
   # 集成微信(完整版14.4M)
