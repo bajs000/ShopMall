@@ -51,28 +51,42 @@ class MsgDetailViewController: UITableViewController {
         cell.viewWithTag(1)?.layer.cornerRadius = 22
         cell.viewWithTag(5)?.layer.borderColor = #colorLiteral(red: 0.8797392845, green: 0.8797599673, blue: 0.8797488809, alpha: 1)
         cell.viewWithTag(5)?.layer.borderWidth = 1
+        cell.viewWithTag(5)?.layer.shouldRasterize = true
         if type == .comment {
-//            (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + ((dic["user"] as! NSDictionary)["face"] as! String)), completed: nil)
-//            (cell.viewWithTag(2) as! UILabel).text = (dic["user"] as! NSDictionary)["name"] as? String
+            (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["face"] as! String)), completed: nil)
+            (cell.viewWithTag(2) as! UILabel).text = dic["name"] as? String
             cell.viewWithTag(6)?.isHidden = true
             (cell.viewWithTag(3) as! UILabel).text = dic["content"] as? String
             (cell.viewWithTag(4) as! UILabel).text = dic["time"] as? String
             (cell.viewWithTag(5) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + ((dic["release"] as! NSDictionary)["img"] as! String)), completed: nil)
         }else {
-            (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + ((dic["user"] as! NSDictionary)["face"] as! String)), completed: nil)
-            (cell.viewWithTag(2) as! UILabel).text = (dic["user"] as! NSDictionary)["name"] as? String
+            if dic["user"] != nil && (dic["user"] as! NSObject).isKind(of: NSDictionary.self){
+                (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + ((dic["user"] as! NSDictionary)["face"] as! String)), completed: nil)
+                (cell.viewWithTag(2) as! UILabel).text = (dic["user"] as! NSDictionary)["name"] as? String
+                (cell.viewWithTag(4) as! UILabel).text = (dic["user"] as! NSDictionary)["time"] as? String
+            }
             cell.viewWithTag(6)?.isHidden = false
             (cell.viewWithTag(3) as! UILabel).text = ""
-            (cell.viewWithTag(4) as! UILabel).text = (dic["user"] as! NSDictionary)["time"] as? String
             (cell.viewWithTag(5) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + ((dic["release"] as! NSDictionary)["img"] as! String)), completed: nil)
         }
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if type == .comment {
+            self.performSegue(withIdentifier: "commentPush", sender: indexPath)
+        }else {
+            
+        }
     }
 
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        if segue.destination.isKind(of: CommentViewController.self) {
+            let dic = dataSource[(sender as! IndexPath).row] as! NSDictionary
+            (segue.destination as! CommentViewController).dataSource = ["list":dic]
+        }
     }
     
     @IBAction func cleanAction(_ sender: Any) {
@@ -101,7 +115,7 @@ class MsgDetailViewController: UITableViewController {
         }else {
             url = "Public/zan_shou_list"
         }
-        Network.request(["user_id":"1"], url: url) { (dic) in
+        Network.request(["user_id":UserModel.share.userId], url: url) { (dic) in
             print(dic)
             if (dic as! NSDictionary)["code"] as! String == "200" {
                 SVProgressHUD.dismiss()

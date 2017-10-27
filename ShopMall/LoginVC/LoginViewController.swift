@@ -36,6 +36,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.tagLeading.constant = Helpers.screanSize().width / 4 - 9
         self.registBtn.layer.cornerRadius = 12
         self.tableView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
+        self.userPhone.text = UserModel.share.phone
     }
     
     override func viewWillAppear(_ animated: Bool) {

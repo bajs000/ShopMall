@@ -58,8 +58,11 @@ class CommentViewController: UITableViewController {
             (cell.viewWithTag(6) as! UILabel).text = dic["address"] as? String
         }else {
             let dic = (self.commentInfo!["ping"] as! NSArray)[indexPath.row] as! NSDictionary
+            print(dic)
             cell.viewWithTag(1)?.layer.cornerRadius = 17
-            (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["face"] as! String)), completed: nil)
+            if dic["face"] != nil && (dic["face"] as! NSObject).isKind(of: NSString.self) {
+                (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["face"] as! String)), completed: nil)
+            }
             (cell.viewWithTag(2) as! UILabel).text = dic["name"] as? String
             (cell.viewWithTag(3) as! UILabel).text = dic["time"] as? String
             (cell.viewWithTag(4) as! UILabel).text = dic["content"] as? String

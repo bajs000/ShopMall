@@ -21,8 +21,10 @@ class GoodsDetailViewController: UIViewController, UITableViewDelegate, UITableV
     var imgHeightDic = [String:CGFloat]()
     var dataSource: NSDictionary?{
         didSet {
-            for i in 0...((dataSource!["list"] as! NSDictionary)["graphic"] as! NSArray).count - 1 {
-                imgHeightDic[String(i)] = 50
+            if (dataSource!["list"] as! NSDictionary)["graphic"] != nil && ((dataSource!["list"] as! NSDictionary)["graphic"] as! NSObject).isKind(of: NSArray.self){
+                for i in 0...((dataSource!["list"] as! NSDictionary)["graphic"] as! NSArray).count - 1 {
+                    imgHeightDic[String(i)] = 50
+                }
             }
         }
     }
@@ -52,7 +54,10 @@ class GoodsDetailViewController: UIViewController, UITableViewDelegate, UITableV
         if section == 0 {
             return 1
         }else {
-            return 1 + ((dataSource!["list"] as! NSDictionary)["graphic"] as! NSArray).count
+            if (dataSource!["list"] as! NSDictionary)["graphic"] != nil && ((dataSource!["list"] as! NSDictionary)["graphic"] as! NSObject).isKind(of: NSArray.self){
+                return 1 + ((dataSource!["list"] as! NSDictionary)["graphic"] as! NSArray).count
+            }
+            return 1
         }
     }
     
@@ -118,13 +123,20 @@ class GoodsDetailViewController: UIViewController, UITableViewDelegate, UITableV
 
     // MARK: - Navigation
 
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        return UserModel.checkUserLogin(at: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.destination.isKind(of: CommentViewController.self) {
+         if segue.destination.isKind(of: CommentViewController.self) {
             (segue.destination as! CommentViewController).dataSource = self.dataSource!
         }
     }
     
     @IBAction func bottomAction(_ sender: UIButton) {
+        if !UserModel.checkUserLogin(at: self) {
+            return
+        }
         switch sender.tag {
         case 1:
             let alert = (Bundle.main.loadNibNamed("SMAlertView", owner: self, options: nil)![0]) as! SMAlertView
@@ -178,6 +190,11 @@ class GoodsDetailViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBAction func shareAction(_ sender: Any) {
         tapToHideAction(nil)
+        UMSocialUIManager.setPreDefinePlatforms([UMSocialPlatformType.wechatSession,UMSocialPlatformType.wechatFavorite,UMSocialPlatformType.QQ])
+        UMSocialUIManager.showShareMenuViewInWindow { (type, userInfo) in
+            print(type)
+            print(userInfo ?? "")
+        }
     }
     
     @IBAction func reportAction(_ sender: Any) {

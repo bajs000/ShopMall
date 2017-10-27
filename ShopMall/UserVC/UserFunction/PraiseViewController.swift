@@ -38,7 +38,7 @@ class PraiseViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let dic = dataSource[indexPath.row] as! NSDictionary
         cell.viewWithTag(1)?.layer.cornerRadius = 22
-        //        (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["face"] as! String)), completed: nil)
+        (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + UserModel.share.face), completed: nil)
         (cell.viewWithTag(2) as! UILabel).text = "我"
         (cell.viewWithTag(3) as! UILabel).text = "赞了这篇内容"
         (cell.viewWithTag(4) as! UILabel).text = dic["time"] as? String

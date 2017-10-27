@@ -20,6 +20,7 @@ class DiscoveryViewController: UITableViewController {
 
     @IBOutlet var headerView: DiscoveryHeaderView!
     @IBOutlet weak var typeLabel: UILabel!
+    @IBOutlet weak var pageControl: UIPageControl!
     
     var type: DiscoveryType = .vender
     var dataSource: NSDictionary?
@@ -127,6 +128,12 @@ class DiscoveryViewController: UITableViewController {
         return cell
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.isKind(of: UICollectionView.self) {
+            self.pageControl.currentPage = Int(floor((scrollView.contentOffset.x - Helpers.screanSize().width / 2) / Helpers.screanSize().width) + 1)
+        }
+    }
+    
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -222,6 +229,7 @@ class DiscoveryViewController: UITableViewController {
                 self.tableView.tableHeaderView = self.headerView
                 self.tableView.endUpdates()
             }
+            self.pageControl.numberOfPages = (self.dataSource!["img"] as! NSArray).count
             
             self.headerView.dataSource = self.dataSource
             self.tableView.reloadData()

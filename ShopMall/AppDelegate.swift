@@ -18,7 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         SVProgressHUD.setMinimumDismissTimeInterval(1)
-        
+        UMSocialManager.default().openLog(true)
+        UMSocialManager.default().umSocialAppkey = "59f2d0dcf43e487092000353"
+        UMSocialManager.default().setPlaform(UMSocialPlatformType.QQ, appKey: "", appSecret: "", redirectURL: "")
+        UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatSession, appKey: "", appSecret: "", redirectURL: "")
         
         return true
     }

@@ -27,6 +27,7 @@
 		664F85761F959CB900C94A2E /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F85751F959CB900C94A2E /* DiscoveryViewController.swift */; };
 		664F85781F959D4D00C94A2E /* DiscoveryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 664F85771F959D4D00C94A2E /* DiscoveryHeaderView.swift */; };
 		667417B91F9EEE7F00B77A88 /* MineCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667417B81F9EEE7F00B77A88 /* MineCommentViewController.swift */; };
+		667F5C951FA32962006B6231 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 667F5C941FA32962006B6231 /* SearchViewController.swift */; };
 		668C59001F9F226D007582E9 /* BrowseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668C58FF1F9F226D007582E9 /* BrowseViewController.swift */; };
 		668C59021F9F2E97007582E9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668C59011F9F2E97007582E9 /* SettingViewController.swift */; };
 		668C59041F9F3119007582E9 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 668C59031F9F3119007582E9 /* StoreViewController.swift */; };
@@ -92,6 +93,7 @@
 		664F85751F959CB900C94A2E /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
 		664F85771F959D4D00C94A2E /* DiscoveryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryHeaderView.swift; sourceTree = "<group>"; };
 		667417B81F9EEE7F00B77A88 /* MineCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MineCommentViewController.swift; sourceTree = "<group>"; };
+		667F5C941FA32962006B6231 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		668C58FF1F9F226D007582E9 /* BrowseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowseViewController.swift; sourceTree = "<group>"; };
 		668C59011F9F2E97007582E9 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		668C59031F9F3119007582E9 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 				6697DD871F9995F300B3203E /* GoodsDetailViewController.swift */,
 				664EB6CE1F99DAE80038EB08 /* CommentViewController.swift */,
 				660629991FA1B263002BC806 /* BusinessViewController.swift */,
+				667F5C941FA32962006B6231 /* SearchViewController.swift */,
 			);
 			path = DetailVC;
 			sourceTree = "<group>";
@@ -529,7 +532,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		39B2EC03BCDFFFA5DCC48DF8 /* [CP] Copy Pods Resources */ = {
@@ -562,7 +565,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		AD5CB2B5AECCABD956D81ECA /* [CP] Check Pods Manifest.lock */ = {
@@ -580,7 +583,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B999BA46B79E39B8B4955421 /* [CP] Embed Pods Frameworks */ = {
@@ -681,6 +684,7 @@
 				AF84F7E71F963F960029F048 /* UserInfoViewController.swift in Sources */,
 				664EB6CF1F99DAE80038EB08 /* CommentViewController.swift in Sources */,
 				6697DD881F9995F300B3203E /* GoodsDetailViewController.swift in Sources */,
+				667F5C951FA32962006B6231 /* SearchViewController.swift in Sources */,
 				660629A01FA1CAC7002BC806 /* GuideView.swift in Sources */,
 				664EB6D11F99E7CA0038EB08 /* MinePublishTableViewController.swift in Sources */,
 				668C59001F9F226D007582E9 /* BrowseViewController.swift in Sources */,
