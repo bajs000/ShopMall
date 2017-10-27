@@ -154,6 +154,9 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         }
         let dic = (self.dataSource!["list"] as! NSArray)[indexPath.section] as! NSDictionary
         (cell as! MainCell).imgArr = dic["release_img"] as? NSArray
+        (cell as! MainCell).collectionView.tapCollectionView = {(tap) in
+            self.performSegue(withIdentifier: "detailPush", sender: tap)
+        }
         cell.viewWithTag(1)?.layer.cornerRadius = 15
         (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
         (cell.viewWithTag(2) as! UILabel).text = dic[""] as? String

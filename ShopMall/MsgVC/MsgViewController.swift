@@ -12,6 +12,7 @@ class MsgViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
     }
 
     override func didReceiveMemoryWarning() {

@@ -23,6 +23,7 @@ class MsgDetailViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         requestMsgDetail()
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
         if type == .comment {
             self.title = "收到的评论"
         }else {

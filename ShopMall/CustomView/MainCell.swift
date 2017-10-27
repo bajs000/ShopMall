@@ -10,7 +10,7 @@ import UIKit
 
 class MainCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: TapCollectionView!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     
     var imgArr: NSArray?{
@@ -53,6 +53,21 @@ class MainCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
         cell.viewWithTag(1)?.layer.shouldRasterize = true
         (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
         return cell
+    }
+    
+}
+
+class TapCollectionView: UICollectionView {
+    
+    var tapCollectionView: ((UITapGestureRecognizer) -> Void)!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapAction(_:))))
+    }
+    
+    @objc func tapAction(_ sender: UITapGestureRecognizer) -> Void {
+        tapCollectionView(sender)
     }
     
 }

@@ -37,7 +37,9 @@ class BrowseViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let dic = self.dataSource[indexPath.row] as! NSDictionary
-        (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
+        if dic["img"] != nil && (dic["img"] as! NSObject).isKind(of: NSString.self)  {
+            (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
+        }
         (cell.viewWithTag(2) as! UILabel).text = dic["describe"] as? String
         (cell.viewWithTag(3) as! UILabel).text = dic[""] as? String
         (cell.viewWithTag(4) as! UILabel).text = dic["time"] as? String
@@ -45,6 +47,15 @@ class BrowseViewController: UITableViewController {
     }
 
     // MARK: - Navigation
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell)
+        let dic = self.dataSource[indexPath!.row] as! NSDictionary
+        if dic["release_id"] == nil {
+            SVProgressHUD.showError(withStatus: "该信息有误，请联系管理员")
+            return false
+        }
+        return true
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination.isKind(of: GoodsDetailViewController.self) {
