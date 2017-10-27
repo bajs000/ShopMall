@@ -16,6 +16,7 @@ PODS:
     - AFNetworking/NSURLSession
   - EVNCustomSearchBar (0.1.0)
   - Masonry (1.1.0)
+  - MJRefresh (3.1.14.1)
   - SDWebImage (4.1.2):
     - SDWebImage/Core (= 4.1.2)
   - SDWebImage/Core (4.1.2)
@@ -43,6 +44,7 @@ DEPENDENCIES:
   - AFNetworking
   - EVNCustomSearchBar (~> 0.1.0)
   - Masonry
+  - MJRefresh
   - SDWebImage
   - SnapKit
   - SVProgressHUD
@@ -55,11 +57,12 @@ SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   EVNCustomSearchBar: fa9d5c4201f08b45c948a919934b2d4ed5a89a05
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MJRefresh: 238e6a37e2dba12160ee3b79f6d2a2b26abcab42
   SDWebImage: cb6f9f266a9977741efcbc21e618e8be3734c774
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   UMengUShare: fdbbf86353976727af26a66e9a84314ecb59c816
 
-PODFILE CHECKSUM: 760e389cf7f861805eff766f7d46449d43adf0bb
+PODFILE CHECKSUM: a7d7d7a90e948e4796282a961b91f99fde9f68aa
 
 COCOAPODS: 1.3.1

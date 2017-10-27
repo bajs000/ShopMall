@@ -9,13 +9,25 @@
 import UIKit
 import SVProgressHUD
 import SDWebImage
+import MJRefresh
 
 class MineCommentViewController: UITableViewController {
 
     var dataSource = NSArray()
+    var page = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            [unowned self] in
+            self.page = 1
+            self.requestComment()
+        })
+        self.tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
+            [unowned self] in
+            self.page = self.page + 1
+            self.requestComment()
+        })
         requestComment()
     }
 
@@ -67,11 +79,19 @@ class MineCommentViewController: UITableViewController {
     
     func requestComment() -> Void {
         SVProgressHUD.show()
-        Network.request(["user_id":UserModel.share.userId,"page":"1"], url: "Public/ping_list") { (dic) in
+        Network.request(["user_id":UserModel.share.userId,"page":String(self.page)], url: "Public/ping_list") { (dic) in
             print(dic)
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
             if (dic as! NSDictionary)["code"] as! String == "200" {
                 SVProgressHUD.dismiss()
-                self.dataSource = (dic as! NSDictionary)["list"] as! NSArray
+                if self.page == 1 {
+                    self.dataSource = (dic as! NSDictionary)["list"] as! NSArray
+                }else {
+                    let arr = NSMutableArray(array: self.dataSource)
+                    arr.addObjects(from: (dic as! NSDictionary)["list"] as! [Any])
+                    self.dataSource = arr
+                }
                 self.tableView.reloadData()
             }else {
                 SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)

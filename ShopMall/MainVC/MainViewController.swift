@@ -11,6 +11,7 @@ import Masonry
 import SVProgressHUD
 import SDWebImage
 import SnapKit
+import MJRefresh
 
 class MainViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITabBarControllerDelegate {
     
@@ -27,6 +28,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     var bgHeight:CGFloat = 0
     var typeBtns = [UIButton]()
     var type1 = "1"
+    var page = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +38,28 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         functionView.frame = CGRect(x: 0, y: 64, width: Helpers.screanSize().width, height: 44)
         self.tableView.tableHeaderView = headerView
         self.tabBarController?.delegate = self
+        
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            [unowned self] in
+            self.page = 1
+            if self.currentTypeBtn != nil {
+                self.requestMain(self.type1, type2: ((self.dataSource!["type"] as! NSArray)[self.currentTypeBtn!.tag - 1] as! NSDictionary)["type_id"] as? String)
+            }else {
+                self.requestMain(self.type1, type2: nil)
+            }
+        })
+        
+        self.tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
+            [unowned self] in
+            self.page = self.page + 1
+            if self.currentTypeBtn != nil {
+                self.requestMain(self.type1, type2: ((self.dataSource!["type"] as! NSArray)[self.currentTypeBtn!.tag - 1] as! NSDictionary)["type_id"] as? String)
+            }else {
+                self.requestMain(self.type1, type2: nil)
+            }
+        })
+        
+        
         if UserDefaults.standard.object(forKey: "Version") == nil {
             
             let mask = UIImageView()
@@ -206,6 +230,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
             let type = segue.destination as! TypeViewController
             type.pushByMain = true
             type.completeType = {(dic) in
+                self.page = 1
                 self.requestMain(dic["type_id"] as? String,type2: nil)
                 self.type1 = dic["type_id"] as! String
             }
@@ -257,6 +282,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
                 currentSupplyBtn = sender
             }
         }
+        self.page = 1
         if currentTypeBtn != nil {
             self.requestMain(self.type1, type2: ((self.dataSource!["type"] as! NSArray)[currentTypeBtn!.tag - 1] as! NSDictionary)["type_id"] as? String)
         }else {
@@ -275,6 +301,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         if (sender as! NSObject).isKind(of: UITapGestureRecognizer.self) {
             return
         }
+        self.page = 1
         if currentTypeBtn != nil {
             self.requestMain(self.type1, type2: ((self.dataSource!["type"] as! NSArray)[currentTypeBtn!.tag - 1] as! NSDictionary)["type_id"] as? String)
         }else {
@@ -369,7 +396,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     
     func requestMain(_ sender: String?, type2: String?) {
         SVProgressHUD.show()
-        var param = ["type_id":"1","page":"1"]
+        var param = ["type_id":"1","page":String(self.page)]
         if sender != nil {
             param["type_id"] = sender!
         }
@@ -396,7 +423,17 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         Network.request(param as NSDictionary, url: url) { (dic) in
             print(dic)
             SVProgressHUD.dismiss()
-            self.dataSource = dic as? NSDictionary
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
+            if self.page == 1 {
+                self.dataSource = dic as? NSDictionary
+            }else {
+                let arr = NSMutableArray(array: self.dataSource!["list"] as! NSArray)
+                arr.addObjects(from: (dic as! NSDictionary)["list"] as! [Any])
+                let tempDic = NSMutableDictionary(dictionary: self.dataSource!)
+                tempDic.setValue(arr, forKey: "list")
+                self.dataSource = tempDic
+            }
             if self.currentSupplyBtn?.tag == 3 || self.currentSupplyBtn?.tag == 4 {
                 self.tableView.tableHeaderView = nil
             }else{

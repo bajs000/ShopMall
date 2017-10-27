@@ -10,6 +10,7 @@ import UIKit
 import Masonry
 import SVProgressHUD
 import SDWebImage
+import MJRefresh
 
 enum DiscoveryType {
     case vender
@@ -25,14 +26,29 @@ class DiscoveryViewController: UITableViewController {
     var type: DiscoveryType = .vender
     var dataSource: NSDictionary?
     var type1 = "1"
+    var type2: String?
+    var page = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableHeaderView = headerView
         headerView.completeChose = {(dic) in
+            self.page = 1
+            self.type2 = dic["type_id"] as? String
             self.requestDiscovery(self.type1, type2: dic["type_id"] as? String)
         }
         requestDiscovery(self.type1,type2: nil)
+        
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            [unowned self] in
+            self.page = 1
+            self.requestDiscovery(self.type1,type2: nil)
+        })
+        
+        self.tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
+            self.page = self.page + 1
+            self.requestDiscovery(self.type1,type2: self.type2)
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -141,9 +157,23 @@ class DiscoveryViewController: UITableViewController {
             let type = segue.destination as! TypeViewController
             type.pushByMain = true
             type.completeType = {(dic) in
+                self.page = 1
                 self.requestDiscovery(dic["type_id"] as? String,type2: nil)
                 self.type1 = dic["type_id"] as! String
             }
+        }else if segue.destination.isKind(of: GoodsDetailViewController.self) {
+            if (sender as! NSObject).isKind(of: UITableViewCell.self){
+                let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell)
+                (segue.destination as! GoodsDetailViewController).detailInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as! NSDictionary
+            }else{
+                let cell = Helpers.findSuperViewClass(UITableViewCell.self, with: ((sender as! UITapGestureRecognizer).view as! UICollectionView))
+                let indexPath = self.tableView.indexPath(for: cell as! UITableViewCell)
+                (segue.destination as! GoodsDetailViewController).detailInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as! NSDictionary
+            }
+        }else if segue.destination.isKind(of: BusinessViewController.self) {
+            let cell = sender as! UITableViewCell
+            let indexPath = self.tableView.indexPath(for: cell)
+            (segue.destination as! BusinessViewController).businessInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as? NSDictionary
         }
     }
     
@@ -192,6 +222,7 @@ class DiscoveryViewController: UITableViewController {
             sender.superview!.layoutIfNeeded()
         }
         self.type1 = "1"
+        self.page = 1
         requestDiscovery(self.type1,type2: nil)
     }
     
@@ -213,14 +244,28 @@ class DiscoveryViewController: UITableViewController {
             }else {
                 param = ["type_id":sender!]
             }
-            param["page"] = "1"
+            param["page"] = String(self.page)
         }
         if type2 != nil {
             param["type_two_id"] = type2!
         }
         Network.request(param as NSDictionary, url: url) { (dic) in
             SVProgressHUD.dismiss()
-            self.dataSource = dic as? NSDictionary
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
+            if self.type == .vender {
+                self.dataSource = dic as? NSDictionary
+            }else {
+                if self.page == 1 {
+                    self.dataSource = dic as? NSDictionary
+                }else {
+                    let arr = NSMutableArray(array: self.dataSource!["list"] as! NSArray)
+                    arr.addObjects(from: (dic as! NSDictionary)["list"] as! [Any])
+                    let tempDic = NSMutableDictionary(dictionary: self.dataSource!)
+                    tempDic.setValue(arr, forKey: "list")
+                    self.dataSource = tempDic
+                }
+            }
             
             let count = (self.dataSource?["type"] as! NSArray).count / 5
             if count > 0{

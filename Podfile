@@ -11,6 +11,7 @@ target 'ShopMall' do
   pod 'SDWebImage'
   pod 'AFNetworking'
   pod 'SnapKit'
+  pod 'MJRefresh' 
   pod 'EVNCustomSearchBar', '~> 0.1.0'
   # U-Share SDK UI模块（分享面板，建议添加）
   pod 'UMengUShare/UI'

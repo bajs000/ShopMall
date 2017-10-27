@@ -9,13 +9,25 @@
 import UIKit
 import SDWebImage
 import SVProgressHUD
+import MJRefresh
 
 class MinePublishTableViewController: UITableViewController {
 
     var dataSource: NSDictionary?
+    var page = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
+            [unowned self] in
+            self.page = 1
+            self.requestMine()
+        })
+        self.tableView.mj_footer = MJRefreshBackNormalFooter(refreshingBlock: {
+            [unowned self] in
+            self.page = self.page + 1
+            self.requestMine()
+        })
         requestMine()
     }
 
@@ -90,11 +102,21 @@ class MinePublishTableViewController: UITableViewController {
 
     func requestMine() {
         SVProgressHUD.show()
-        Network.request(["user_id":UserModel.share.userId,"page":"1"] as NSDictionary, url: "Public/release_list") { (dic) in
+        Network.request(["user_id":UserModel.share.userId,"page":String(self.page)] as NSDictionary, url: "Public/release_list") { (dic) in
             print(dic)
+            self.tableView.mj_header.endRefreshing()
+            self.tableView.mj_footer.endRefreshing()
             if (dic as! NSDictionary)["code"] as! String == "200" {
                 SVProgressHUD.dismiss()
-                self.dataSource = dic as? NSDictionary
+                if self.page == 1 {
+                    self.dataSource = dic as? NSDictionary
+                }else {
+                    let arr = NSMutableArray(array: self.dataSource!["list"] as! NSArray)
+                    arr.addObjects(from: (dic as! NSDictionary)["list"] as! [Any])
+                    let tempDic = NSMutableDictionary(dictionary: self.dataSource!)
+                    tempDic.setValue(arr, forKey: "list")
+                    self.dataSource = tempDic
+                }
                 self.tableView.reloadData()
             }else {
                 SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)

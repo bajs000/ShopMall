@@ -2542,6 +2542,9 @@
                                         <constraint firstAttribute="trailing" secondItem="z3K-WJ-tvI" secondAttribute="trailing" id="go5-ra-vcW"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="s7l-ph-tLM" kind="show" id="CIB-Pk-TTM"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="productCell" rowHeight="90" id="wb3-Op-JII">
                                 <rect key="frame" x="0.0" y="93" width="375" height="90"/>
@@ -2608,6 +2611,9 @@
                                         <constraint firstItem="5OC-u7-xMm" firstAttribute="centerY" secondItem="kPc-4u-A3j" secondAttribute="centerY" id="z9G-sf-m5J"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="teC-1i-I35" kind="show" id="uoD-5B-GRW"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -5931,9 +5937,9 @@
     <inferredMetricsTieBreakers>
         <segue reference="69i-Be-Mlf"/>
         <segue reference="50l-qf-1Te"/>
-        <segue reference="r19-wT-l6o"/>
-        <segue reference="ljD-2H-yec"/>
+        <segue reference="i5G-1x-J6B"/>
+        <segue reference="CIB-Pk-TTM"/>
         <segue reference="PFq-sf-Vmr"/>
-        <segue reference="4Hy-JS-28O"/>
+        <segue reference="uoD-5B-GRW"/>
     </inferredMetricsTieBreakers>
 </document>
