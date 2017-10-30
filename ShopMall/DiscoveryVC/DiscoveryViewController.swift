@@ -182,7 +182,11 @@ class DiscoveryViewController: UITableViewController {
         let indexPath = self.tableView.indexPath(for: cell as! UITableViewCell)
         let dic = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as! NSDictionary
         if type == .product {//联系
-            UIApplication.shared.openURL(URL(string:"tel://" + (dic["phone"] as! String))!)
+            if dic["phone"] != nil && (dic["phone"] as! NSObject).isKind(of: NSString.self){
+                UIApplication.shared.openURL(URL(string:"tel://" + (dic["phone"] as! String))!)
+            }else {
+                SVProgressHUD.showError(withStatus: "系统错误，请联系管理员")
+            }
         }else {//关注
             if UserModel.checkUserLogin(at: self) {
                 SVProgressHUD.show()

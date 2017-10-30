@@ -5196,7 +5196,14 @@
                             <outlet property="delegate" destination="rZj-nV-Bs9" id="qxM-Ic-tnT"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="浏览记录" id="OV3-sZ-QkG"/>
+                    <navigationItem key="navigationItem" title="浏览记录" id="OV3-sZ-QkG">
+                        <barButtonItem key="rightBarButtonItem" title="清空" id="0gf-3P-5ty">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="deleteAction:" destination="rZj-nV-Bs9" id="u3a-Aw-3jc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vhh-fr-ife" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

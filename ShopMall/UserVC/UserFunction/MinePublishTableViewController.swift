@@ -46,7 +46,10 @@ class MinePublishTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let dic = (self.dataSource!["list"] as! NSArray)[indexPath.row] as! NSDictionary
-        let imgArr = (dic["release_img"] as! NSArray)
+        var imgArr = NSArray()
+        if dic["release_img"] != nil && (dic["release_img"] as! NSObject).isKind(of: NSArray.self){
+            imgArr = (dic["release_img"] as! NSArray)
+        }
         var cellIdentify = "Cell"
         if imgArr.count == 0 {
             cellIdentify = "Cell"
@@ -71,7 +74,7 @@ class MinePublishTableViewController: UITableViewController {
         }
         (cell.viewWithTag(3) as! UILabel).text = address
         (cell.viewWithTag(5) as! UILabel).text = dic["describe"] as? String
-        if (dic["release_img"] as! NSArray).count == 0 {
+        if imgArr.count == 0 {
             
         }else {
             for i in 0...min(imgArr.count - 1, 3) {

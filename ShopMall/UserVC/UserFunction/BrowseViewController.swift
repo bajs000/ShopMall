@@ -65,6 +65,10 @@ class BrowseViewController: UITableViewController {
         }
     }
     
+    @IBAction func deleteAction(_ sender: Any) {
+        requestDelAllBrowse()
+    }
+    
     func requestBrowse() {
         SVProgressHUD.show()
         Network.request(["user_id":UserModel.share.userId], url: "Public/jilu_list") { (dic) in
@@ -73,6 +77,21 @@ class BrowseViewController: UITableViewController {
                 SVProgressHUD.dismiss()
                 self.dataSource = (dic as! NSDictionary)["list"] as! NSArray
                 self.tableView.reloadData()
+            }else {
+                self.dataSource = NSArray()
+                self.tableView.reloadData()
+                SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
+            }
+        }
+    }
+    
+    func requestDelAllBrowse() {
+        SVProgressHUD.show()
+        Network.request(["user_id":UserModel.share.userId], url: "Public/jilu_del") { (dic) in
+            print(dic)
+            if (dic as! NSDictionary)["code"] as! String == "200" {
+                SVProgressHUD.dismiss()
+                self.requestBrowse()
             }else {
                 SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
             }
