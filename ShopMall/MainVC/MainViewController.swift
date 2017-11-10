@@ -21,6 +21,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var menuBtnBgHeight: NSLayoutConstraint!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var allBtn: UIButton!
     
     var dataSource: NSDictionary?
     var currentTypeBtn: UIButton?
@@ -38,6 +39,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         functionView.frame = CGRect(x: 0, y: 64, width: Helpers.screanSize().width, height: 44)
         self.tableView.tableHeaderView = headerView
         self.tabBarController?.delegate = self
+        currentSupplyBtn = allBtn
         
         self.tableView.mj_header = MJRefreshNormalHeader(refreshingBlock: {
             [unowned self] in
@@ -140,18 +142,18 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cellIdentify = "Cell"
-        if currentSupplyBtn?.tag == 3 || currentSupplyBtn?.tag == 4{
-            cellIdentify = "supplyCell"
-        }
+        let cellIdentify = "Cell"
+//        if currentSupplyBtn?.tag == 3 || currentSupplyBtn?.tag == 4{
+//            cellIdentify = "supplyCell"
+//        }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentify, for: indexPath)
-        if currentSupplyBtn?.tag == 3  || currentSupplyBtn?.tag == 4{
-            let dic = (self.dataSource!["list"] as! NSArray)[indexPath.row] as! NSDictionary
-            (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["face"] as! String)), completed: nil)
-            (cell.viewWithTag(2) as! UILabel).text = dic["name"] as? String
-            (cell.viewWithTag(3) as! UILabel).text = dic["jianjie"] as? String
-            return cell
-        }
+//        if currentSupplyBtn?.tag == 3  || currentSupplyBtn?.tag == 4{
+//            let dic = (self.dataSource!["list"] as! NSArray)[indexPath.row] as! NSDictionary
+//            (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["face"] as! String)), completed: nil)
+//            (cell.viewWithTag(2) as! UILabel).text = dic["name"] as? String
+//            (cell.viewWithTag(3) as! UILabel).text = dic["jianjie"] as? String
+//            return cell
+//        }
         let dic = (self.dataSource!["list"] as! NSArray)[indexPath.section] as! NSDictionary
         (cell as! MainCell).imgArr = dic["release_img"] as? NSArray
         (cell as! MainCell).collectionView.tapCollectionView = {(tap) in
@@ -272,19 +274,32 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
     }
     
     @IBAction func supplyAndDemandAction(_ sender: UIButton) {
-        if currentSupplyBtn == nil {
-            currentSupplyBtn = sender
-            sender.setTitleColor(#colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1), for: .normal)
-        }else{
-            if currentSupplyBtn == sender{
-                sender.setTitleColor(#colorLiteral(red: 0.4078176022, green: 0.407827884, blue: 0.4078223705, alpha: 1), for: .normal)
-                currentSupplyBtn = nil
-            }else {
+//        if sender.tag == 1 {
+//            currentSupplyBtn?.setTitleColor(#colorLiteral(red: 0.4078176022, green: 0.407827884, blue: 0.4078223705, alpha: 1), for: .normal)
+//            sender.setTitleColor(#colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1), for: .normal)
+//            self.currentSupplyBtn = nil
+//        }else {
+//            if currentSupplyBtn == sender{
+//
+//            }else {
                 currentSupplyBtn?.setTitleColor(#colorLiteral(red: 0.4078176022, green: 0.407827884, blue: 0.4078223705, alpha: 1), for: .normal)
                 sender.setTitleColor(#colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1), for: .normal)
                 currentSupplyBtn = sender
-            }
-        }
+//            }
+//        }
+//        if currentSupplyBtn == nil {
+//            currentSupplyBtn = sender
+//            sender.setTitleColor(#colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1), for: .normal)
+//        }else{
+//            if currentSupplyBtn == sender{
+//                sender.setTitleColor(#colorLiteral(red: 0.4078176022, green: 0.407827884, blue: 0.4078223705, alpha: 1), for: .normal)
+//                currentSupplyBtn = nil
+//            }else {
+//                currentSupplyBtn?.setTitleColor(#colorLiteral(red: 0.4078176022, green: 0.407827884, blue: 0.4078223705, alpha: 1), for: .normal)
+//                sender.setTitleColor(#colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1), for: .normal)
+//                currentSupplyBtn = sender
+//            }
+//        }
         self.page = 1
         if currentTypeBtn != nil {
             self.requestMain(self.type1, type2: ((self.dataSource!["type"] as! NSArray)[currentTypeBtn!.tag - 1] as! NSDictionary)["type_id"] as? String)
@@ -411,11 +426,11 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         }
         var url = "Public"
         if currentSupplyBtn != nil {
-            if currentSupplyBtn?.tag == 1 {
+            if currentSupplyBtn?.tag == 2 {
                 param["gq_type"] = "1"
-            }else if currentSupplyBtn?.tag == 2 {
-                param["gq_type"] = "2"
             }else if currentSupplyBtn?.tag == 3 {
+                param["gq_type"] = "2"
+            }else if currentSupplyBtn?.tag == 4 {
                 url = "Public/index_user"
                 param["gq_type"] = "1"
             }else if currentSupplyBtn?.tag == 4 {
@@ -437,7 +452,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
                 tempDic.setValue(arr, forKey: "list")
                 self.dataSource = tempDic
             }
-            if self.currentSupplyBtn?.tag == 3 || self.currentSupplyBtn?.tag == 4 {
+            if /*self.currentSupplyBtn?.tag == 3 ||*/ self.currentSupplyBtn?.tag == 4 {
                 self.tableView.tableHeaderView = nil
             }else{
                 self.tableView.tableHeaderView = self.headerView

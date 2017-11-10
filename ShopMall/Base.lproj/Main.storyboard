@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Oz1-Mn-yoM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Oz1-Mn-yoM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -309,6 +309,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="allBtn" destination="yyJ-0j-KwW" id="58v-4Y-6Lk"/>
                         <outlet property="collectionView" destination="nQv-Nd-vPT" id="L97-Sg-ogT"/>
                         <outlet property="functionView" destination="bI4-rN-yG1" id="ejr-jr-1BS"/>
                         <outlet property="headerView" destination="aPI-2j-OnL" id="uw3-4a-iER"/>
@@ -397,8 +398,8 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="PqB-9t-k85"/>
                             </constraints>
-                            <state key="normal" title="供货">
-                                <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="全部">
+                                <color key="titleColor" red="0.94117647059999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="supplyAndDemandAction:" destination="oWq-tl-hOW" eventType="touchUpInside" id="gix-HZ-NZY"/>
@@ -417,7 +418,7 @@
                         <button tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtn-hT-EEK">
                             <rect key="frame" x="60" y="0.0" width="50" height="44"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="求购">
+                            <state key="normal" title="供货">
                                 <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -427,7 +428,7 @@
                         <button tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhr-AC-zb8">
                             <rect key="frame" x="111" y="0.0" width="50" height="44"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="厂家">
+                            <state key="normal" title="求购">
                                 <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -2389,7 +2390,7 @@
         <scene sceneID="wFB-4y-a5x">
             <objects>
                 <collectionViewController storyboardIdentifier="type" hidesBottomBarWhenPushed="YES" id="pqk-7b-BiU" customClass="TypeViewController" customModule="ShopMall" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="7Ir-c7-35B">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7Ir-c7-35B">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2400,7 +2401,7 @@
                             <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="tCG-wG-7BE">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="Cell" id="tCG-wG-7BE">
                                 <rect key="frame" x="5" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -2408,7 +2409,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cXd-jq-UkW">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="49"/>
                                         </imageView>
                                     </subviews>
                                 </view>
@@ -5938,7 +5939,7 @@
         <segue reference="50l-qf-1Te"/>
         <segue reference="r19-wT-l6o"/>
         <segue reference="ljD-2H-yec"/>
-        <segue reference="aCP-8D-nFV"/>
-        <segue reference="kGD-tr-dSh"/>
+        <segue reference="zad-If-0b1"/>
+        <segue reference="6Ue-XT-Fwj"/>
     </inferredMetricsTieBreakers>
 </document>

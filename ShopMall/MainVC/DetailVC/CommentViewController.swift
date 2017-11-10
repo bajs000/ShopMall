@@ -81,7 +81,7 @@ class CommentViewController: UITableViewController {
     */
     
     @IBAction func commentAction(_ sender: UIBarButtonItem) {
-        let alert = (Bundle.main.loadNibNamed("SMAlertView", owner: self, options: nil)![0]) as! SMAlertView
+        let alert = (Bundle.main.loadNibNamed("SMAlertBottomView", owner: self, options: nil)![0]) as! SMAlertBottomView
         alert.placeholderStr = "请评论"
         alert.keyboardType = .default
         alert.completeEnter = {(str) in

@@ -21,6 +21,8 @@ target 'ShopMall' do
   pod 'UMengUShare/Social/QQ'
   # 加入IDFA获取
   pod 'UMengUShare/Plugin/IDFA'
+  
+  pod 'MBProgressHUD'
 
   target 'ShopMallTests' do
     inherit! :search_paths

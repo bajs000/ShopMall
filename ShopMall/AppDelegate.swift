@@ -25,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 11.0, *) {
             UIScrollView.appearance().contentInsetAdjustmentBehavior = .never;
         }
+        
+        
         return true
     }
 

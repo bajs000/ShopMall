@@ -11,6 +11,7 @@ import Masonry
 import SVProgressHUD
 import SDWebImage
 import MJRefresh
+import MBProgressHUD
 
 enum DiscoveryType {
     case vender
@@ -195,7 +196,14 @@ class DiscoveryViewController: UITableViewController {
                     if (dic as! NSDictionary)["code"] as! String == "200" {
                         SVProgressHUD.showSuccess(withStatus: "关注成功")
                     }else {
-                        SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
+                        let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+                        hud.mode = .text
+                        hud.label.text = (dic as! NSDictionary)["msg"] as? String
+                        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2, execute: {
+                            hud.hide(animated: true)
+                        })
+//                        SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
+//                        SVProgressHUD.show(#imageLiteral(resourceName: "no_image"), status: (dic as! NSDictionary)["msg"] as? String)
                     }
                 })
             }

@@ -8,29 +8,6 @@
 
 #import "EVNCustomSearchBar.h"
 
-@interface CustomTextField : UITextField
-@end
-
-@implementation CustomTextField
-
-- (CGRect)borderRectForBounds:(CGRect)bounds{
-    return UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 10, 0, 20));
-}
-
-- (CGRect)editingRectForBounds:(CGRect)bounds{
-    return UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 10, 0, 20));
-}
-
-- (CGRect)placeholderRectForBounds:(CGRect)bounds{
-    return UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 10, 0, 20));
-}
-
-- (CGRect)textRectForBounds:(CGRect)bounds{
-    return UIEdgeInsetsInsetRect(bounds, UIEdgeInsetsMake(0, 10, 0, 20));
-}
-
-@end
-
 @interface EVNCustomSearchBar()<UITextFieldDelegate>
 {
     UIImageView *_iconImgV;
@@ -49,10 +26,6 @@
     if (self)
     {
         [self initView];
-        NSString *bundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"EVNCustomSearchBar.bundle"];
-        NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
-        NSString *img_path = [bundle pathForResource:@"EVNCustomSearchBar.png" ofType:@"png"];
-        [self setIconImage:[UIImage imageWithContentsOfFile:img_path]];
     }
     return self;
 }
@@ -122,7 +95,7 @@
 {
     if (!_textField)
     {
-        _textField = [[CustomTextField alloc] initWithFrame:CGRectMake(7, 7, self.frame.size.width-7*2, 30)];
+        _textField = [[UITextField alloc] initWithFrame:CGRectMake(7, 7, self.frame.size.width-7*2, 30)];
         _textField.delegate = self;
         _textField.borderStyle = UITextBorderStyleNone;
         _textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -133,7 +106,7 @@
         [_textField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
         _textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         _textField.borderStyle = UITextBorderStyleNone;
-        _textField.layer.cornerRadius = 15.0f;
+        _textField.layer.cornerRadius = 3.0f;
         _textField.layer.masksToBounds = YES;
         _textField.backgroundColor = [UIColor colorWithRed:240.0/255.0 green:245.0/255.0 blue:245.0/255.0 alpha:1.0];
     }
@@ -199,6 +172,7 @@
 - (void)setText:(NSString *)text
 {
     _textField.text = text?:@"";
+    [self setIconAlign:_iconAlign];
 }
 
 - (void)setTextFont:(UIFont *)textFont
@@ -330,6 +304,15 @@
 #pragma mark - textfield delegate
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(searchBarShouldBeginEditing:)])
+    {
+        return [self.delegate searchBarShouldBeginEditing:self];
+    }
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
     if(_iconAlignTemp == EVNCustomSearchBarIconAlignCenter)
     {
         self.iconAlign = EVNCustomSearchBarIconAlignLeft;
@@ -342,15 +325,6 @@
             // _textField.transform = CGAffineTransformMakeTranslation(-_cancelButton.frame.size.width,0);
         }];
     }
-    if (self.delegate && [self.delegate respondsToSelector:@selector(searchBarShouldBeginEditing:)])
-    {
-        return [self.delegate searchBarShouldBeginEditing:self];
-    }
-    return YES;
-}
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField
-{
     if (self.delegate && [self.delegate respondsToSelector:@selector(searchBarTextDidBeginEditing:)])
     {
         [self.delegate searchBarTextDidBeginEditing:self];
