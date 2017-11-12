@@ -88,6 +88,38 @@ class MinePublishTableViewController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
+        return "删除"
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let dic = (self.dataSource!["list"] as! NSArray)[indexPath.row] as! NSDictionary
+        SVProgressHUD.show()
+        Network.request(["release_id":dic["release_id"] as! String,"user_id":UserModel.share.userId], url: "Public/release_del") { (dic) in
+            print(dic)
+            if (dic as! NSDictionary)["code"] as! String == "200" {
+                SVProgressHUD.dismiss()
+                let tempArr = NSMutableArray(array: (self.dataSource!["list"] as! NSArray))
+                tempArr.removeObject(at: indexPath.row)
+                let tempDic = NSMutableDictionary(dictionary: self.dataSource!)
+                tempDic.setValue(tempArr, forKey: "list")
+                self.dataSource = tempDic
+                self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            }else {
+                SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
+            }
+        }
+    }
+    
     // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

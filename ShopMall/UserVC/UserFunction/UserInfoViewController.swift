@@ -102,7 +102,7 @@ class UserInfoViewController: UITableViewController, UINavigationControllerDeleg
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         self.avatar.image = (info[UIImagePickerControllerEditedImage] as! UIImage)
         self.dismiss(animated: true, completion: nil)
-        UploadNetwork.request(["user_id":UserModel.share.userId], data: self.avatar.image!, paramName: "face", url: "User/faceedit") { (dic) in
+        UploadNetwork.request(["user_id":UserModel.share.userId], data: self.avatar.image!, paramName: "face", url: "User/useredit") { (dic) in
             print(dic)
             if (dic as! NSDictionary)["code"] as! String == "200" {
                 SVProgressHUD.showSuccess(withStatus: "修改成功")

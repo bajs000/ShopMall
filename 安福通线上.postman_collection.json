@@ -18,7 +18,6 @@
 				"d7036c19-730a-9899-4caa-6504a281d64b",
 				"2339281d-f937-ee4f-f728-61762af32c0d",
 				"47fc05db-d8d8-ac92-10fd-cb1a7ccc9300",
-				"eba89906-0dd2-3765-5ed4-9cda9cfd8ecd",
 				"de3fb2c0-f531-1a99-92c2-38fe94283084",
 				"6931c4d6-c430-8046-0626-e5a559d76dfa",
 				"ab9d47b1-3060-bdf2-7271-bda0b8002cf3",
@@ -53,7 +52,8 @@
 			"name": "操作类",
 			"description": "",
 			"order": [
-				"0dbc3236-c676-1998-a00a-8a5f9361f58c"
+				"0dbc3236-c676-1998-a00a-8a5f9361f58c",
+				"57480d42-2540-e515-c087-48ba5c98b940"
 			],
 			"collectionId": "e60fa1ca-1f82-6984-879c-e084bcfeaf87"
 		},
@@ -88,7 +88,9 @@
 				"e14f19be-11f6-07e1-85ad-bdbbb3514777",
 				"a2199ac3-dfbe-6c69-8c26-de484a1bc301",
 				"9939191d-8568-113f-e5f9-6c5156a97ad7",
-				"4ff5b675-665c-3602-75c5-c2c9b329cbac"
+				"4ff5b675-665c-3602-75c5-c2c9b329cbac",
+				"cbc35e9d-f3da-ddd3-6d14-c07ee77252da",
+				"104c0713-f755-ef9c-7249-3992495679e1"
 			]
 		},
 		{
@@ -169,7 +171,7 @@
 				},
 				{
 					"key": "user_id",
-					"value": "3",
+					"value": "1",
 					"type": "text",
 					"enabled": true
 				},
@@ -185,7 +187,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1508901882650,
+			"time": 1509093248043,
 			"name": "个人资料--认证中心",
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
@@ -215,21 +217,21 @@
 				},
 				{
 					"key": "user_id",
-					"value": "1",
+					"value": "8",
 					"type": "text",
 					"enabled": true,
 					"description": "用户id"
 				},
 				{
 					"key": "describe",
-					"value": "vivo X9，极致体验2222",
+					"value": "努比亚Z17 无边框 8G+64G 全网通4G手机 双卡双待",
 					"description": "描述",
 					"type": "text",
 					"enabled": true
 				},
 				{
 					"key": "address",
-					"value": "重庆市渝中区袁家岗中新城上城6栋",
+					"value": "广东省 深圳市 华强北",
 					"description": "发布地址",
 					"type": "text",
 					"enabled": true
@@ -243,14 +245,14 @@
 				},
 				{
 					"key": "type_roue_id",
-					"value": ":1:17:",
+					"value": ":2:20:",
 					"description": "分类路由",
 					"type": "text",
 					"enabled": true
 				},
 				{
 					"key": "img[]",
-					"value": "Tulips.jpg",
+					"value": "列表_03.png",
 					"description": "图片",
 					"type": "file",
 					"enabled": true
@@ -260,8 +262,41 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1508817260105,
+			"time": 1509614235551,
 			"name": "发布",
+			"description": "",
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
+		},
+		{
+			"id": "104c0713-f755-ef9c-7249-3992495679e1",
+			"headers": "",
+			"headerData": [],
+			"url": "http://anfutong.cq1b1.com/api.php/Public/sousuolist",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "version",
+					"value": "1.1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "apikey",
+					"value": "f74dd39951a0b6bbed0fe73606ea5476",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1509335895357,
+			"name": "热门搜索词",
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
 		},
@@ -562,11 +597,10 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1506494922318,
+			"time": 1509437502197,
 			"name": "删除赞",
 			"description": "",
-			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2",
-			"folder": "8ac7b556-b321-fa37-317e-47dc0c144710"
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
 		},
 		{
 			"id": "4ff5b675-665c-3602-75c5-c2c9b329cbac",
@@ -622,6 +656,53 @@
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2",
 			"folder": "e7675511-4889-3b43-96ee-4260b4e849e0"
+		},
+		{
+			"id": "57480d42-2540-e515-c087-48ba5c98b940",
+			"headers": "",
+			"headerData": [],
+			"url": "http://anfutong.cq1b1.com/api.php/Public/release_del",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "version",
+					"value": "1.1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "apikey",
+					"value": "f74dd39951a0b6bbed0fe73606ea5476",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "release_id",
+					"value": "1",
+					"type": "text",
+					"enabled": true,
+					"description": "用户id"
+				},
+				{
+					"key": "user_id",
+					"value": "1",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1510472063646,
+			"name": "删除发布",
+			"description": "",
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
 		},
 		{
 			"id": "586fe192-b3a9-827c-ccec-f469274ae643",
@@ -1488,13 +1569,20 @@
 					"description": "昵称",
 					"type": "text",
 					"enabled": true
+				},
+				{
+					"key": "face",
+					"value": "",
+					"description": "头像",
+					"type": "file",
+					"enabled": true
 				}
 			],
 			"dataMode": "params",
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1508903132466,
+			"time": 1508903538183,
 			"name": "个人资料--修改个人信息",
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
@@ -1714,6 +1802,46 @@
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2",
 			"folder": "17d7f44c-f2c3-0402-d895-be61ce326458"
+		},
+		{
+			"id": "cbc35e9d-f3da-ddd3-6d14-c07ee77252da",
+			"headers": "",
+			"headerData": [],
+			"url": "http://anfutong.cq1b1.com/api.php/Public/sousuo",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "version",
+					"value": "1.1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "apikey",
+					"value": "f74dd39951a0b6bbed0fe73606ea5476",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "title",
+					"value": "X20",
+					"description": "搜索名称",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1509085661968,
+			"name": "搜索",
+			"description": "",
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
 		},
 		{
 			"id": "d1c3bf4e-894b-db04-c846-4c488a9fc232",
@@ -2015,53 +2143,6 @@
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2",
 			"folder": "e7675511-4889-3b43-96ee-4260b4e849e0"
-		},
-		{
-			"id": "eba89906-0dd2-3765-5ed4-9cda9cfd8ecd",
-			"headers": "",
-			"headerData": [],
-			"url": "http://anfutong.cq1b1.com/api.php/User/faceedit",
-			"queryParams": [],
-			"preRequestScript": "",
-			"pathVariables": {},
-			"pathVariableData": [],
-			"method": "POST",
-			"data": [
-				{
-					"key": "version",
-					"value": "1.1",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "apikey",
-					"value": "f74dd39951a0b6bbed0fe73606ea5476",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "user_id",
-					"value": "1",
-					"type": "text",
-					"enabled": true
-				},
-				{
-					"key": "face",
-					"value": "",
-					"description": "",
-					"type": "file",
-					"enabled": true
-				}
-			],
-			"dataMode": "params",
-			"tests": "",
-			"currentHelper": "normal",
-			"helperAttributes": {},
-			"time": 1506407907920,
-			"name": "修改头像",
-			"description": "",
-			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2",
-			"folder": "6a03b3d2-f3c0-6f24-68b9-a44d0c1bba0d"
 		},
 		{
 			"id": "efa7cffb-f494-3d84-cf9d-f6233a67420d",
