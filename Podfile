@@ -23,6 +23,8 @@ target 'ShopMall' do
   pod 'UMengUShare/Plugin/IDFA'
   
   pod 'MBProgressHUD'
+  pod 'PYPhotoBrowser', '~> 1.5.6'
+
 
   target 'ShopMallTests' do
     inherit! :search_paths

@@ -12,6 +12,7 @@ import SVProgressHUD
 import SDWebImage
 import SnapKit
 import MJRefresh
+import PYPhotoBrowser
 
 class MainViewController: UITableViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UITabBarControllerDelegate {
     
@@ -115,23 +116,23 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         if self.dataSource == nil {
             return 0
         }
-        if currentSupplyBtn?.tag == 3  || currentSupplyBtn?.tag == 4 {
-            return 1
-        }
+//        if currentSupplyBtn?.tag == 3  || currentSupplyBtn?.tag == 4 {
+//            return 1
+//        }
         return (self.dataSource!["list"] as! NSArray).count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if currentSupplyBtn?.tag == 3  || currentSupplyBtn?.tag == 4 {
-            return (self.dataSource!["list"] as! NSArray).count
-        }
+//        if currentSupplyBtn?.tag == 3  || currentSupplyBtn?.tag == 4 {
+//            return (self.dataSource!["list"] as! NSArray).count
+//        }
         return 1
     }
     
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if currentSupplyBtn?.tag == 3  || currentSupplyBtn?.tag == 4 {
-            return 0
-        }
+//        if currentSupplyBtn?.tag == 3  || currentSupplyBtn?.tag == 4 {
+//            return 0
+//        }
         return 10
     }
     
@@ -156,13 +157,17 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
 //        }
         let dic = (self.dataSource!["list"] as! NSArray)[indexPath.section] as! NSDictionary
         (cell as! MainCell).imgArr = dic["release_img"] as? NSArray
-        (cell as! MainCell).collectionView.tapCollectionView = {(tap) in
-            self.performSegue(withIdentifier: "detailPush", sender: tap)
-        }
+        (cell as! MainCell).nextResponder1 = self
+//        (cell as! MainCell).collectionView.tapCollectionView = {(tap) in
+//            self.performSegue(withIdentifier: "detailPush", sender: tap)
+//        }
         cell.viewWithTag(1)?.layer.cornerRadius = 15
         (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
         (cell.viewWithTag(2) as! UILabel).text = dic[""] as? String
         (cell.viewWithTag(3) as! UILabel).text = dic["time"] as? String
+        if dic["label"] != nil && (dic["label"] as! NSObject).isKind(of: NSString.self) &&  (dic["label"] as! String).count > 0 {
+            (cell.viewWithTag(97) as! UILabel).text = "标签：" + (dic["label"] as! String)
+        }
         if (dic["gongqiu"] as! String) == "2" {
             (cell.viewWithTag(4) as! UIImageView).image = #imageLiteral(resourceName: "main-seek")
         }else {

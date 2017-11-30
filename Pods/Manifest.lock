@@ -14,13 +14,22 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
+  - DACircularProgress (2.3.1)
   - EVNCustomSearchBar (0.1.1)
+  - FLAnimatedImage (1.0.12)
   - Masonry (1.1.0)
   - MBProgressHUD (1.0.0)
   - MJRefresh (3.1.15)
+  - PYPhotoBrowser (1.5.6):
+    - DACircularProgress
+    - MBProgressHUD
+    - SDWebImage/GIF (~> 4.2.1)
   - SDWebImage (4.2.2):
     - SDWebImage/Core (= 4.2.2)
   - SDWebImage/Core (4.2.2)
+  - SDWebImage/GIF (4.2.2):
+    - FLAnimatedImage (~> 1.0)
+    - SDWebImage/Core
   - SnapKit (4.0.0)
   - SVProgressHUD (2.2.2)
   - UMengUShare/Core (6.4.6):
@@ -47,6 +56,7 @@ DEPENDENCIES:
   - Masonry
   - MBProgressHUD
   - MJRefresh
+  - PYPhotoBrowser (~> 1.5.6)
   - SDWebImage
   - SnapKit
   - SVProgressHUD
@@ -57,15 +67,18 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
+  DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   EVNCustomSearchBar: b6167497f4da89665dda02f26d80d9036539cf03
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJRefresh: 9af70f5f9327a2cf87f0fb5929f35fcc2fa638ea
+  PYPhotoBrowser: 74f6526b290069a55943ed92e5a21f84c6d90ecf
   SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
   UMengUShare: fdbbf86353976727af26a66e9a84314ecb59c816
 
-PODFILE CHECKSUM: a90a04a0b77b14e9d1f5ce1037167c6438cca953
+PODFILE CHECKSUM: ac13792f32b9876fab3a5b5af473a8d0a7511178
 
 COCOAPODS: 1.3.1

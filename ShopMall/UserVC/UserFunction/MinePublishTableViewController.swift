@@ -62,7 +62,7 @@ class MinePublishTableViewController: UITableViewController {
         (cell.viewWithTag(1) as! UILabel).text = dic["day"] as? String
         (cell.viewWithTag(2) as! UILabel).text = (dic["month"] as! String) + "月"
         var address = dic["address"] as! String
-        if address.characters.count == 0 {
+        if address.count == 0 {
             address = "无地址"
         }else {
             let arr = (address as NSString).components(separatedBy: "市")
@@ -85,6 +85,8 @@ class MinePublishTableViewController: UITableViewController {
                 cell.viewWithTag(41 + i)?.layer.borderColor = #colorLiteral(red: 0.8797392845, green: 0.8797599673, blue: 0.8797488809, alpha: 1)
             }
         }
+        
+        (cell.viewWithTag(98) as! UIButton).addTarget(self, action: #selector(requestPublishAgain(_:)), for: .touchUpInside)
         return cell
     }
 
@@ -133,6 +135,13 @@ class MinePublishTableViewController: UITableViewController {
                 (segue.destination as! GoodsDetailViewController).detailInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as! NSDictionary
             }
         }
+    }
+    
+    @objc func requestPublishAgain(_ sender: UIButton) {
+        let cell = Helpers.findSuperViewClass(UITableViewCell.self, with: sender)
+        let indexPath = self.tableView.indexPath(for: cell as! UITableViewCell)
+        let dic = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as! NSDictionary
+        print(dic)
     }
 
     func requestMine() {

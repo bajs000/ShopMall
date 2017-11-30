@@ -90,7 +90,10 @@
 				"9939191d-8568-113f-e5f9-6c5156a97ad7",
 				"4ff5b675-665c-3602-75c5-c2c9b329cbac",
 				"cbc35e9d-f3da-ddd3-6d14-c07ee77252da",
-				"104c0713-f755-ef9c-7249-3992495679e1"
+				"104c0713-f755-ef9c-7249-3992495679e1",
+				"4469ea47-b899-20ad-5c8c-858e25d7944a",
+				"fc92199e-de32-3199-236e-f26c1ca60327",
+				"8a85a979-6b5c-5995-25b1-72a7a2a52327"
 			]
 		},
 		{
@@ -252,9 +255,16 @@
 				},
 				{
 					"key": "img[]",
-					"value": "列表_03.png",
+					"value": "",
 					"description": "图片",
 					"type": "file",
+					"enabled": true
+				},
+				{
+					"key": "label",
+					"value": "",
+					"description": "标签",
+					"type": "text",
 					"enabled": true
 				}
 			],
@@ -262,7 +272,7 @@
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1509614235551,
+			"time": 1511332501278,
 			"name": "发布",
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
@@ -419,6 +429,61 @@
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2",
 			"folder": "6a03b3d2-f3c0-6f24-68b9-a44d0c1bba0d"
+		},
+		{
+			"id": "4469ea47-b899-20ad-5c8c-858e25d7944a",
+			"headers": "",
+			"headerData": [],
+			"url": "http://anfutong.cq1b1.com/api.php/Public/find_bus",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "version",
+					"value": "1.1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "apikey",
+					"value": "f74dd39951a0b6bbed0fe73606ea5476",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "type_id",
+					"value": "1",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "type_two_id",
+					"value": "17",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user_id",
+					"value": "1",
+					"description": "用户id，用来判断是否关注店铺",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1506736463484,
+			"name": "发现--用户",
+			"description": "",
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2",
+			"folder": "e7675511-4889-3b43-96ee-4260b4e849e0"
 		},
 		{
 			"id": "46786e83-7730-8133-35ac-020f42825581",
@@ -848,13 +913,20 @@
 					"description": "经营范围",
 					"type": "text",
 					"enabled": true
+				},
+				{
+					"key": "img",
+					"value": "",
+					"description": "图片",
+					"type": "file",
+					"enabled": true
 				}
 			],
 			"dataMode": "params",
 			"tests": "",
 			"currentHelper": "normal",
 			"helperAttributes": {},
-			"time": 1508839671416,
+			"time": 1511335096447,
 			"name": "个人资料--认证中心--营业执照认证",
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
@@ -1112,6 +1184,46 @@
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2",
 			"folder": "bc04e3d6-52d3-00eb-e81c-887d56adb3b0"
+		},
+		{
+			"id": "8a85a979-6b5c-5995-25b1-72a7a2a52327",
+			"headers": "",
+			"headerData": [],
+			"url": "http://anfutong.cq1b1.com/api.php/Public/news_details",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "version",
+					"value": "1.1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "apikey",
+					"value": "f74dd39951a0b6bbed0fe73606ea5476",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "id",
+					"value": "1",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1511418496803,
+			"name": "系统消息--详情",
+			"description": "",
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
 		},
 		{
 			"id": "8cbc82c3-56c4-b8c9-865e-9f153ab6d3a3",
@@ -2292,6 +2404,46 @@
 			"description": "",
 			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2",
 			"folder": "8ac7b556-b321-fa37-317e-47dc0c144710"
+		},
+		{
+			"id": "fc92199e-de32-3199-236e-f26c1ca60327",
+			"headers": "",
+			"headerData": [],
+			"url": "http://anfutong.cq1b1.com/api.php/Public/user_news",
+			"queryParams": [],
+			"preRequestScript": "",
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [
+				{
+					"key": "version",
+					"value": "1.1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "apikey",
+					"value": "f74dd39951a0b6bbed0fe73606ea5476",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "user_id",
+					"value": "1",
+					"description": "",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1511418466141,
+			"name": "系统消息--列表",
+			"description": "",
+			"collectionId": "17593590-a9b4-e09d-b769-0d07b9205ca2"
 		}
 	]
 }

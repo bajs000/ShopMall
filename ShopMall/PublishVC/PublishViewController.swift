@@ -26,6 +26,7 @@ class PublishViewController: UITableViewController, UITextViewDelegate, UICollec
     var locationText: UITextView!
     var typeLabel: UILabel!
     var segument: UISegmentedControl!
+    var labelTextField: UITextField!
     
     let imagePicker = UIImagePickerController()
     var imgArr = [UIImage]()
@@ -81,7 +82,7 @@ class PublishViewController: UITableViewController, UITextViewDelegate, UICollec
     
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 6
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -96,6 +97,8 @@ class PublishViewController: UITableViewController, UITextViewDelegate, UICollec
             cellIdentify = "Cell"
         }else if indexPath.row == 4 {
             cellIdentify = "supplyCell"
+        }else if indexPath.row == 5 {
+            cellIdentify = "labelCell"
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentify, for: indexPath)
         if indexPath.row == 0 {
@@ -113,8 +116,10 @@ class PublishViewController: UITableViewController, UITextViewDelegate, UICollec
             locationText = cell.viewWithTag(1) as! UITextView
         }else if indexPath.row == 3 {
             typeLabel = cell.viewWithTag(2) as! UILabel
-        }else {
+        }else if indexPath.row == 4 {
             segument = cell.viewWithTag(9) as! UISegmentedControl
+        }else if indexPath.row == 5 {
+            labelTextField = cell.viewWithTag(1) as! UITextField
         }
         return cell
     }
@@ -209,6 +214,10 @@ class PublishViewController: UITableViewController, UITextViewDelegate, UICollec
             SVProgressHUD.showError(withStatus: "请选择类目")
             return
         }
+        if labelTextField.text?.characters.count == 0 {
+            SVProgressHUD.showError(withStatus: "请输入标签")
+            return
+        }
         SVProgressHUD.show()
         var gongqiu = ""
         if segument.selectedSegmentIndex == 0 {
@@ -218,6 +227,7 @@ class PublishViewController: UITableViewController, UITextViewDelegate, UICollec
         }
         UploadNetwork.request(["user_id":UserModel.share.userId,
                                "describe":textView.text,
+                               "label":labelTextField.text!,
                                "address":locationText.text,
                                "gongqiu":gongqiu,
                                "type_roue_id":currentType!["type_roue_id"] as! String], datas: imgArr, paramName: "img[]", url: "Public/release_add") { (dic) in

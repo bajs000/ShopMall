@@ -62,7 +62,7 @@ class DiscoveryViewController: UITableViewController {
         self.navigationItem.titleView = discoveryTitleView
         
         let venderBtn = UIButton(type: .custom)
-        venderBtn.setTitle("厂家", for: .normal)
+        venderBtn.setTitle("商家", for: .normal)
         venderBtn.setTitleColor(#colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1), for: .selected)
         venderBtn.setTitleColor(#colorLiteral(red: 0.6509803922, green: 0.6509803922, blue: 0.6509803922, alpha: 1), for: .normal)
         venderBtn.isSelected = true
@@ -122,10 +122,10 @@ class DiscoveryViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cellIdentify = "Cell"
-        if type == .product {
-            cellIdentify = "productCell"
-        }
+        let cellIdentify = "Cell"
+//        if type == .product {
+//            cellIdentify = "productCell"
+//        }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentify, for: indexPath)
         cell.viewWithTag(4)?.layer.borderWidth = 1
         cell.viewWithTag(4)?.layer.borderColor = #colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1)
@@ -135,14 +135,24 @@ class DiscoveryViewController: UITableViewController {
             (cell.viewWithTag(2) as! UILabel).text = dic["describe"] as? String
             let time = dic["time"] as! String
             (cell.viewWithTag(3) as! UILabel).text = String(time[..<time.index(time.startIndex, offsetBy: 10)])
+            (cell.viewWithTag(4) as! UIButton).setTitle("联系", for: .normal)
         }else{
             cell.viewWithTag(1)?.layer.cornerRadius = 22
             (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["face"] as! String)), completed: nil)
             (cell.viewWithTag(2) as! UILabel).text = dic["name"] as? String
             (cell.viewWithTag(3) as! UILabel).text = dic["jianjie"] as? String
+            (cell.viewWithTag(4) as! UIButton).setTitle("关注", for: .normal)
         }
         (cell.viewWithTag(4) as! UIButton).addTarget(self, action: #selector(rightAction(_:)), for: .touchUpInside)
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if type == .product {
+            self.performSegue(withIdentifier: "detailPush", sender: indexPath)
+        }else {
+            self.performSegue(withIdentifier: "businessPush", sender: indexPath)
+        }
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -163,8 +173,8 @@ class DiscoveryViewController: UITableViewController {
                 self.type1 = dic["type_id"] as! String
             }
         }else if segue.destination.isKind(of: GoodsDetailViewController.self) {
-            if (sender as! NSObject).isKind(of: UITableViewCell.self){
-                let indexPath = self.tableView.indexPath(for: sender as! UITableViewCell)
+            if (sender as! NSObject).isKind(of: NSIndexPath.self){
+                let indexPath = sender as? IndexPath
                 (segue.destination as! GoodsDetailViewController).detailInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as! NSDictionary
             }else{
                 let cell = Helpers.findSuperViewClass(UITableViewCell.self, with: ((sender as! UITapGestureRecognizer).view as! UICollectionView))
@@ -172,8 +182,7 @@ class DiscoveryViewController: UITableViewController {
                 (segue.destination as! GoodsDetailViewController).detailInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as! NSDictionary
             }
         }else if segue.destination.isKind(of: BusinessViewController.self) {
-            let cell = sender as! UITableViewCell
-            let indexPath = self.tableView.indexPath(for: cell)
+            let indexPath = sender as? IndexPath
             (segue.destination as! BusinessViewController).businessInfo = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as? NSDictionary
         }
     }
@@ -196,6 +205,7 @@ class DiscoveryViewController: UITableViewController {
                     if (dic as! NSDictionary)["code"] as! String == "200" {
                         SVProgressHUD.showSuccess(withStatus: "关注成功")
                     }else {
+                        SVProgressHUD.dismiss()
                         let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
                         hud.mode = .text
                         hud.label.text = (dic as! NSDictionary)["msg"] as? String

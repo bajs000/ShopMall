@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import PYPhotoBrowser
 
 class MainCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    @IBOutlet weak var collectionView: TapCollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
+    
+    open var nextResponder1: MainViewController!
     
     var imgArr: NSArray?{
         didSet{
@@ -55,6 +58,29 @@ class MainCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var urls = [String]()
+        var sourceImgageViews = [UIImageView]()
+        var i = 0
+        for dic in self.imgArr! {
+            let cell = collectionView.cellForItem(at: IndexPath(row: i, section: 0))
+            sourceImgageViews.append(cell?.viewWithTag(1) as! UIImageView)
+            let dict = dic as! NSDictionary
+            urls.append(Helpers.baseImgUrl() + (dict["img"] as! String))
+            i += 1
+            if i == 4 {
+                break
+            }
+        }
+//        let browser = PYPhotosView(thumbnailUrls: thumbnailUrls, originalUrls: thumbnailUrls)
+//        nextResponder1.view.addSubview(browser!)
+        let browser = PYPhotoBrowseView()
+        browser.sourceImgageViews = sourceImgageViews
+        browser.imagesURL = urls
+        browser.currentIndex = indexPath.row
+        browser.show()
+    }
+    
 }
 
 class TapCollectionView: UICollectionView {
@@ -63,7 +89,7 @@ class TapCollectionView: UICollectionView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapAction(_:))))
+//        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapAction(_:))))
     }
     
     @objc func tapAction(_ sender: UITapGestureRecognizer) -> Void {
