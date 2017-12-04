@@ -243,6 +243,7 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
                 self.page = 1
                 self.requestMain(dic["type_id"] as? String,type2: nil)
                 self.type1 = dic["type_id"] as! String
+                self.title = (dic["type_title"] as! String)
             }
         }else if segue.destination.isKind(of: GoodsDetailViewController.self) {
             if (sender as! NSObject).isKind(of: UITableViewCell.self){

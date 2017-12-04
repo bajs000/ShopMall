@@ -142,6 +142,15 @@ class MinePublishTableViewController: UITableViewController {
         let indexPath = self.tableView.indexPath(for: cell as! UITableViewCell)
         let dic = (self.dataSource!["list"] as! NSArray)[indexPath!.row] as! NSDictionary
         print(dic)
+        SVProgressHUD.show()
+        Network.request(["user_id":UserModel.share.userId,"release_id":dic["release_id"] as! String] as NSDictionary, url: "Public/release_list") { (dic) in
+            print(dic)
+            if (dic as! NSDictionary)["code"] as! String == "200" {
+                SVProgressHUD.showSuccess(withStatus: "发布成功")
+            }else {
+                SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
+            }
+        }
     }
 
     func requestMine() {

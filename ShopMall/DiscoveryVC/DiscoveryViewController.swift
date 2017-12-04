@@ -14,8 +14,9 @@ import MJRefresh
 import MBProgressHUD
 
 enum DiscoveryType {
-    case vender
-    case product
+    case vender     //商家
+    case product    //产品
+    case customer   //客户
 }
 
 class DiscoveryViewController: UITableViewController {
@@ -24,7 +25,7 @@ class DiscoveryViewController: UITableViewController {
     @IBOutlet weak var typeLabel: UILabel!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    var type: DiscoveryType = .vender
+    var type: DiscoveryType = .product
     var dataSource: NSDictionary?
     var type1 = "1"
     var type2: String?
@@ -50,19 +51,19 @@ class DiscoveryViewController: UITableViewController {
             self.page = self.page + 1
             self.requestDiscovery(self.type1,type2: self.type2)
         })
+        setupTitleView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        setupTitleView()
     }
     
     func setupTitleView() -> Void {
-        let discoveryTitleView = CutomTitleView(frame: CGRect(x: 0, y: 0, width: 150, height: 44))
+        let discoveryTitleView = CutomTitleView(frame: CGRect(x: 0, y: 0, width: 75 * 3, height: 44))
         self.navigationItem.titleView = discoveryTitleView
         
         let venderBtn = UIButton(type: .custom)
-        venderBtn.setTitle("商家", for: .normal)
+        venderBtn.setTitle("产品", for: .normal)
         venderBtn.setTitleColor(#colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1), for: .selected)
         venderBtn.setTitleColor(#colorLiteral(red: 0.6509803922, green: 0.6509803922, blue: 0.6509803922, alpha: 1), for: .normal)
         venderBtn.isSelected = true
@@ -72,11 +73,11 @@ class DiscoveryViewController: UITableViewController {
             _ = make?.top.equalTo()(discoveryTitleView.mas_top)
             _ = make?.left.equalTo()(discoveryTitleView.mas_left)
             _ = make?.bottom.equalTo()(discoveryTitleView.mas_bottom)
-            _ = make?.width.equalTo()(discoveryTitleView.mas_width)?.with().dividedBy()(2)
+            _ = make?.width.equalTo()(discoveryTitleView.mas_width)?.with().dividedBy()(3)
         }
         
         let productBtn = UIButton(type: .custom)
-        productBtn.setTitle("产品", for: .normal)
+        productBtn.setTitle("商家", for: .normal)
         productBtn.setTitleColor(#colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1), for: .selected)
         productBtn.setTitleColor(#colorLiteral(red: 0.6509803922, green: 0.6509803922, blue: 0.6509803922, alpha: 1), for: .normal)
         productBtn.isSelected = false
@@ -84,9 +85,23 @@ class DiscoveryViewController: UITableViewController {
         discoveryTitleView.addSubview(productBtn)
         productBtn.mas_makeConstraints { (make) in
             _ = make?.top.equalTo()(discoveryTitleView.mas_top)
+            _ = make?.left.equalTo()(venderBtn.mas_right)
+            _ = make?.bottom.equalTo()(discoveryTitleView.mas_bottom)
+            _ = make?.width.equalTo()(discoveryTitleView.mas_width)?.with().dividedBy()(3)
+        }
+        
+        let customerBtn = UIButton(type: .custom)
+        customerBtn.setTitle("客户", for: .normal)
+        customerBtn.setTitleColor(#colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1), for: .selected)
+        customerBtn.setTitleColor(#colorLiteral(red: 0.6509803922, green: 0.6509803922, blue: 0.6509803922, alpha: 1), for: .normal)
+        customerBtn.isSelected = false
+        customerBtn.tag = 5
+        discoveryTitleView.addSubview(customerBtn)
+        customerBtn.mas_makeConstraints { (make) in
+            _ = make?.top.equalTo()(discoveryTitleView.mas_top)
             _ = make?.right.equalTo()(discoveryTitleView.mas_right)
             _ = make?.bottom.equalTo()(discoveryTitleView.mas_bottom)
-            _ = make?.width.equalTo()(discoveryTitleView.mas_width)?.with().dividedBy()(2)
+            _ = make?.width.equalTo()(discoveryTitleView.mas_width)?.with().dividedBy()(3)
         }
         
         let typeView = UIView()
@@ -95,13 +110,14 @@ class DiscoveryViewController: UITableViewController {
         discoveryTitleView.addSubview(typeView)
         typeView.mas_makeConstraints { (make) in
             _ = make?.bottom.equalTo()(discoveryTitleView.mas_bottom)?.with().offset()(-10)
-            _ = make?.left.equalTo()(discoveryTitleView.mas_left)?.with().offset()(discoveryTitleView.frame.width / 4 - 20)
+            _ = make?.left.equalTo()(discoveryTitleView.mas_left)?.with().offset()(discoveryTitleView.frame.width / 6 - 20)
             _ = make?.width.equalTo()(40)
             _ = make?.height.equalTo()(1.5)
         }
         
         venderBtn.addTarget(self, action: #selector(discoveryTypeAction(_:)), for: .touchUpInside)
         productBtn.addTarget(self, action: #selector(discoveryTypeAction(_:)), for: .touchUpInside)
+        customerBtn.addTarget(self, action: #selector(discoveryTypeAction(_:)), for: .touchUpInside)
     }
 
     override func didReceiveMemoryWarning() {
@@ -122,10 +138,10 @@ class DiscoveryViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellIdentify = "Cell"
-//        if type == .product {
-//            cellIdentify = "productCell"
-//        }
+        var cellIdentify = "Cell"
+        if type == .product {
+            cellIdentify = "productCell"
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentify, for: indexPath)
         cell.viewWithTag(4)?.layer.borderWidth = 1
         cell.viewWithTag(4)?.layer.borderColor = #colorLiteral(red: 0.9624364972, green: 0.3781699538, blue: 0.3513175845, alpha: 1)
@@ -136,9 +152,11 @@ class DiscoveryViewController: UITableViewController {
             let time = dic["time"] as! String
             (cell.viewWithTag(3) as! UILabel).text = String(time[..<time.index(time.startIndex, offsetBy: 10)])
             (cell.viewWithTag(4) as! UIButton).setTitle("联系", for: .normal)
-        }else{
+        }else {
             cell.viewWithTag(1)?.layer.cornerRadius = 22
-            (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["face"] as! String)), completed: nil)
+            if dic["face"] != nil && (dic["face"] as! NSObject).isKind(of: NSString.self)  && (dic["face"] as! String).count > 0 {
+                (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["face"] as! String)), completed: nil)
+            }
             (cell.viewWithTag(2) as! UILabel).text = dic["name"] as? String
             (cell.viewWithTag(3) as! UILabel).text = dic["jianjie"] as? String
             (cell.viewWithTag(4) as! UIButton).setTitle("关注", for: .normal)
@@ -171,6 +189,16 @@ class DiscoveryViewController: UITableViewController {
                 self.page = 1
                 self.requestDiscovery(dic["type_id"] as? String,type2: nil)
                 self.type1 = dic["type_id"] as! String
+                if self.type == .product {
+//                    self.discoveryTypeAction(self.navigationItem.titleView!.viewWithTag(1) as! UIButton)
+                    self.typeLabel.text = "产品·" + (dic["type_title"] as! String)
+                }else if self.type == .vender {
+//                    self.discoveryTypeAction(self.navigationItem.titleView!.viewWithTag(3) as! UIButton)
+                    self.typeLabel.text = "商家·" + (dic["type_title"] as! String)
+                }else {
+//                    self.discoveryTypeAction(self.navigationItem.titleView!.viewWithTag(5) as! UIButton)
+                    self.typeLabel.text = "客户·" + (dic["type_title"] as! String)
+                }
             }
         }else if segue.destination.isKind(of: GoodsDetailViewController.self) {
             if (sender as! NSObject).isKind(of: NSIndexPath.self){
@@ -223,19 +251,26 @@ class DiscoveryViewController: UITableViewController {
     @objc func discoveryTypeAction(_ sender: UIButton) {
         sender.isSelected = true
         if sender.tag == 1 {
-            type = .vender
-            (sender.superview?.viewWithTag(3) as! UIButton).isSelected = false
-            typeLabel.text = "厂家·自主品牌"
-        }else {
             type = .product
-            (sender.superview?.viewWithTag(1) as! UIButton).isSelected = false
+            (sender.superview?.viewWithTag(3) as! UIButton).isSelected = false
+            (sender.superview?.viewWithTag(5) as! UIButton).isSelected = false
             typeLabel.text = "产品·自主品牌"
+        }else if sender.tag == 3 {
+            type = .vender
+            (sender.superview?.viewWithTag(1) as! UIButton).isSelected = false
+            (sender.superview?.viewWithTag(5) as! UIButton).isSelected = false
+            typeLabel.text = "商家·自主品牌"
+        }else {
+            type = .customer
+            (sender.superview?.viewWithTag(1) as! UIButton).isSelected = false
+            (sender.superview?.viewWithTag(3) as! UIButton).isSelected = false
+            typeLabel.text = "客户·自主品牌"
         }
 
         let typeView = sender.superview?.viewWithTag(2)
         typeView!.mas_remakeConstraints { (make) in
             _ = make?.bottom.equalTo()(sender.superview!.mas_bottom)?.with().offset()(-10)
-            _ = make?.left.equalTo()(sender.superview!.mas_left)?.with().offset()(sender.superview!.frame.width / 4 * CGFloat(sender.tag) - 20)
+            _ = make?.left.equalTo()(sender.superview!.mas_left)?.with().offset()(sender.superview!.frame.width / 6 * CGFloat(sender.tag) - 20)
             _ = make?.width.equalTo()(40)
             _ = make?.height.equalTo()(1.5)
         }
@@ -253,6 +288,13 @@ class DiscoveryViewController: UITableViewController {
         var url = ""
         var param = [String:String]()
         if type == .vender {
+            url = "Public/find_bus"
+            if sender == nil {
+                param = ["type_id":"1"]
+            }else {
+                param = ["type_id":sender!]
+            }
+        }else if type == .customer {
             url = "Public/find_bus"
             if sender == nil {
                 param = ["type_id":"1"]
@@ -289,17 +331,28 @@ class DiscoveryViewController: UITableViewController {
                 }
             }
             
+            self.headerView.dataSource = self.dataSource
+            self.tableView.reloadData()
             let count = (self.dataSource?["type"] as! NSArray).count / 5
             if count > 0{
+                self.tableView.tableHeaderView = nil
                 self.tableView.beginUpdates()
                 self.headerView.frame = CGRect(x: 0, y: 0, width: Int(Helpers.screanSize().width), height: 185 + count * 91)
                 self.tableView.tableHeaderView = self.headerView
                 self.tableView.endUpdates()
+            }else if (self.dataSource?["type"] as! NSArray).count > 0 {
+                self.tableView.tableHeaderView = nil
+                self.tableView.beginUpdates()
+                self.headerView.frame = CGRect(x: 0, y: 0, width: Int(Helpers.screanSize().width), height: 185 + 1 * 91)
+                self.tableView.tableHeaderView = self.headerView
+                self.tableView.endUpdates()
+            }else {
+                self.tableView.beginUpdates()
+                self.headerView.frame = CGRect(x: 0, y: 0, width: Int(Helpers.screanSize().width), height: 185)
+                self.tableView.endUpdates()
             }
             self.pageControl.numberOfPages = (self.dataSource!["img"] as! NSArray).count
             
-            self.headerView.dataSource = self.dataSource
-            self.tableView.reloadData()
         }
     }
     
@@ -307,6 +360,6 @@ class DiscoveryViewController: UITableViewController {
 
 class CutomTitleView: UIView {
     override var intrinsicContentSize: CGSize{
-        return CGSize(width: 150, height: 44)
+        return CGSize(width: 75 * 3, height: 44)
     }
 }

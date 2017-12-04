@@ -406,7 +406,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="PqB-9t-k85"/>
                             </constraints>
-                            <state key="normal" title="产品">
+                            <state key="normal" title="全部">
                                 <color key="titleColor" red="0.94117647059999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -426,7 +426,7 @@
                         <button tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtn-hT-EEK">
                             <rect key="frame" x="60" y="0.0" width="50" height="44"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="商家">
+                            <state key="normal" title="供货">
                                 <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -436,7 +436,7 @@
                         <button tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rhr-AC-zb8">
                             <rect key="frame" x="111" y="0.0" width="50" height="44"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <state key="normal" title="客户">
+                            <state key="normal" title="求购">
                                 <color key="titleColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -6169,9 +6169,9 @@
     <inferredMetricsTieBreakers>
         <segue reference="2Aq-OR-xWF"/>
         <segue reference="50l-qf-1Te"/>
-        <segue reference="r19-wT-l6o"/>
-        <segue reference="ljD-2H-yec"/>
+        <segue reference="i5G-1x-J6B"/>
+        <segue reference="Ytf-U1-H5P"/>
         <segue reference="zad-If-0b1"/>
-        <segue reference="6Ue-XT-Fwj"/>
+        <segue reference="Gv3-Ob-EDd"/>
     </inferredMetricsTieBreakers>
 </document>
