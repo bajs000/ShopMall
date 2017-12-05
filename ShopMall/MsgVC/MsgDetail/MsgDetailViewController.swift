@@ -59,7 +59,15 @@ class MsgDetailViewController: UITableViewController {
             cell.viewWithTag(6)?.isHidden = true
             (cell.viewWithTag(3) as! UILabel).text = dic["content"] as? String
             (cell.viewWithTag(4) as! UILabel).text = dic["time"] as? String
-            (cell.viewWithTag(5) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + ((dic["release"] as! NSDictionary)["img"] as! String)), completed: nil)
+            if dic["release"] != nil && (dic["release"] as! NSObject).isKind(of: NSDictionary.self) {
+                if (dic["release"] as! NSDictionary)["img"] != nil && ((dic["release"] as! NSDictionary)["img"] as! NSObject).isKind(of: NSString.self) && ((dic["release"] as! NSDictionary)["img"] as! String).count > 0 {
+                    (cell.viewWithTag(5) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + ((dic["release"] as! NSDictionary)["img"] as! String)), completed: nil)
+                }else {
+                    (cell.viewWithTag(5) as! UIImageView).image = nil
+                }
+            }else {
+                (cell.viewWithTag(5) as! UIImageView).image = nil
+            }
         }else {
             if dic["user"] != nil && (dic["user"] as! NSObject).isKind(of: NSDictionary.self){
                 (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + ((dic["user"] as! NSDictionary)["face"] as! String)), completed: nil)
@@ -68,7 +76,16 @@ class MsgDetailViewController: UITableViewController {
             }
             cell.viewWithTag(6)?.isHidden = false
             (cell.viewWithTag(3) as! UILabel).text = ""
-            (cell.viewWithTag(5) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + ((dic["release"] as! NSDictionary)["img"] as! String)), completed: nil)
+            
+            if dic["release"] != nil && (dic["release"] as! NSObject).isKind(of: NSDictionary.self) {
+                if (dic["release"] as! NSDictionary)["img"] != nil && ((dic["release"] as! NSDictionary)["img"] as! NSObject).isKind(of: NSString.self) && ((dic["release"] as! NSDictionary)["img"] as! String).count > 0 {
+                    (cell.viewWithTag(5) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + ((dic["release"] as! NSDictionary)["img"] as! String)), completed: nil)
+                }else {
+                    (cell.viewWithTag(5) as! UIImageView).image = nil
+                }
+            }else {
+                (cell.viewWithTag(5) as! UIImageView).image = nil
+            }
         }
         return cell
     }

@@ -55,10 +55,22 @@ class MineCommentViewController: UITableViewController {
         (cell.viewWithTag(3) as! UILabel).text = "评论了这篇内容"
         (cell.viewWithTag(4) as! UILabel).text = dic["time"] as? String
         (cell.viewWithTag(5) as! UILabel).text = dic["content"] as? String
-        (cell.viewWithTag(6) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + ((dic["release"] as! NSDictionary)["img"] as! String)), completed: nil)
+        if dic["release"] != nil && (dic["release"] as! NSObject).isKind(of: NSDictionary.self) {
+            if (dic["release"] as! NSDictionary)["img"] != nil && ((dic["release"] as! NSDictionary)["img"] as! NSObject).isKind(of: NSString.self) && ((dic["release"] as! NSDictionary)["img"] as! String).count > 0 {
+                (cell.viewWithTag(6) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + ((dic["release"] as! NSDictionary)["img"] as! String)), completed: nil)
+            }else {
+                (cell.viewWithTag(5) as! UIImageView).image = nil
+            }
+        }else {
+            (cell.viewWithTag(6) as! UIImageView).image = nil
+        }
         cell.viewWithTag(6)?.layer.borderColor = #colorLiteral(red: 0.8797392845, green: 0.8797599673, blue: 0.8797488809, alpha: 1)
         cell.viewWithTag(6)?.layer.borderWidth = 1
-        (cell.viewWithTag(7) as! UILabel).text = (dic["release"] as! NSDictionary)["describe"] as? String
+        if dic["release"] != nil && (dic["release"] as! NSObject).isKind(of: NSDictionary.self) {
+            (cell.viewWithTag(7) as! UILabel).text = (dic["release"] as! NSDictionary)["describe"] as? String
+        }else {
+            (cell.viewWithTag(7) as! UILabel).text = ""
+        }
         return cell
     }
     

@@ -51,7 +51,9 @@ class CommentViewController: UITableViewController {
             (cell as! MainCell).imgArr = (self.commentInfo!["list"] as! NSDictionary)["graphic"] as? NSArray
             let dic = self.commentInfo!["list"] as! NSDictionary
             cell.viewWithTag(1)?.layer.cornerRadius = 22
-            (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
+            if dic["img"] != nil && (dic["img"] as! NSObject).isKind(of: NSString.self) && (dic["img"] as! String).count > 0 {
+                (cell.viewWithTag(1) as! UIImageView).sd_setImage(with: URL(string: Helpers.baseImgUrl() + (dic["img"] as! String)), completed: nil)
+            }
             (cell.viewWithTag(2) as! UILabel).text = dic[""] as? String
             (cell.viewWithTag(3) as! UILabel).text = dic["describe"] as? String
             (cell.viewWithTag(5) as! UILabel).text = dic["time"] as? String
