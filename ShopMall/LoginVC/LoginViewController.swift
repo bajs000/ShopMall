@@ -8,14 +8,31 @@
 
 import UIKit
 import SVProgressHUD
+//import Te
 
 enum registType:Int {
     case user = 11
     case vender = 12
 }
 
-class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, TencentSessionDelegate {
+    func tencentDidLogin() {
+        print("did login")
+        qq.getUserInfo()
+    }
+    
+    func tencentDidNotLogin(_ cancelled: Bool) {
+        print("did login")
+    }
+    
+    func tencentDidNotNetWork() {
+        print("did login")
+    }
+    
+    func getUserInfoResponse(_ response: APIResponse!) {
+        print(response.jsonResponse)
+    }
+    
     @IBOutlet weak var tagLeading: NSLayoutConstraint!
     @IBOutlet weak var loginViewLeading: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView!
@@ -30,6 +47,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var registArr:[[String:Any]]!
     var verifyCode: String?
     var currentVenderType: NSDictionary?
+    var qq:TencentOAuth!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +55,7 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.registBtn.layer.cornerRadius = 12
         self.tableView.contentInset = UIEdgeInsetsMake(15, 0, 0, 0)
         self.userPhone.text = UserModel.share.phone
+        qq = TencentOAuth.init(appId: "1106537651", andDelegate: self )
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -283,6 +302,10 @@ class LoginViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 SVProgressHUD.showError(withStatus: (dic as! NSDictionary)["msg"] as? String)
             }
         }
+    }
+    
+    @IBAction func qqLogin(_ sender: Any) {
+        qq.authorize([kOPEN_PERMISSION_GET_USER_INFO,kOPEN_PERMISSION_GET_SIMPLE_USER_INFO], inSafari: false)
     }
     
     @IBAction func loginAction(_ sender: Any) {

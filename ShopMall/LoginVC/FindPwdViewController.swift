@@ -20,6 +20,8 @@ class FindPwdViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
+        self.tableView.scrollIndicatorInsets =  UIEdgeInsetsMake(64, 0, 0, 0)
     }
     
     override func viewWillAppear(_ animated: Bool) {

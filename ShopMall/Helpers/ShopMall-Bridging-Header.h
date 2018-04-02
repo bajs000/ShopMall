@@ -17,5 +17,7 @@
 #import <UMSocialCore/UMSocialCore.h>
 #import <UShareUI/UShareUI.h>
 #import <EVNCustomSearchBar/EVNCustomSearchBar.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
 //#import <PYPhotoBrowser/PYPhotoBrowser.h>
 

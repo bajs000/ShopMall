@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Oz1-Mn-yoM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Oz1-Mn-yoM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -1982,7 +1982,7 @@
                                             <action selector="loginAction:" destination="q9r-55-tll" eventType="touchUpInside" id="Gr7-jc-dz5"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emH-b0-kGh">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="emH-b0-kGh">
                                         <rect key="frame" x="0.0" y="281" width="375" height="125"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xtk-5S-hXL">
@@ -2014,6 +2014,9 @@
                                                     <constraint firstAttribute="width" constant="64" id="leL-DQ-bsM"/>
                                                 </constraints>
                                                 <state key="normal" image="login-qq"/>
+                                                <connections>
+                                                    <action selector="qqLogin:" destination="q9r-55-tll" eventType="touchUpInside" id="8yk-B6-OaD"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2399,7 +2402,7 @@
             <objects>
                 <collectionViewController storyboardIdentifier="type" hidesBottomBarWhenPushed="YES" id="pqk-7b-BiU" customClass="TypeViewController" customModule="ShopMall" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7Ir-c7-35B">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="x7U-QI-Q2y">
@@ -2409,7 +2412,7 @@
                             <inset key="sectionInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" reuseIdentifier="Cell" id="tCG-wG-7BE">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="tCG-wG-7BE">
                                 <rect key="frame" x="5" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -2417,7 +2420,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cXd-jq-UkW">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="49"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         </imageView>
                                     </subviews>
                                 </view>
@@ -2781,12 +2784,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="yzf-mm-UcC">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="yzf-mm-UcC">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="13"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yj5-vY-rUO">
-                                    <rect key="frame" x="0.0" y="12.5" width="375" height="0.5"/>
+                                    <rect key="frame" x="0.0" y="-0.5" width="375" height="0.5"/>
                                     <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="0.5" id="0O0-3Y-ohC"/>
@@ -2800,7 +2803,7 @@
                                 <constraint firstItem="Yj5-vY-rUO" firstAttribute="leading" secondItem="yzf-mm-UcC" secondAttribute="leading" id="uQW-di-PfE"/>
                             </constraints>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="Ehd-0t-InN">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="Ehd-0t-InN">
                             <rect key="frame" x="0.0" y="340" width="375" height="154"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -2819,7 +2822,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="温馨提示：每次发布求购收取手续费用0.00元" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u44-fG-Z1z">
-                                    <rect key="frame" x="54" y="130" width="266" height="16"/>
+                                    <rect key="frame" x="54" y="17" width="266" height="16"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="0.65098039215686276" green="0.65098039215686276" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
@@ -3144,7 +3147,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="scrollIndicatorInsets" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="SAa-Dv-WWf">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="SAa-Dv-WWf">
                             <rect key="frame" x="0.0" y="132" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.85098039215686272" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
@@ -3511,7 +3514,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="XAm-cg-0Pf">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="XAm-cg-0Pf">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="230"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -3619,7 +3622,7 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yhs-FP-lCE">
-                                    <rect key="frame" x="0.0" y="229.5" width="375" height="0.5"/>
+                                    <rect key="frame" x="0.0" y="116.5" width="375" height="0.5"/>
                                     <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="0.5" id="1KN-nV-I3z"/>
@@ -3914,7 +3917,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="Zv8-5w-8Xu">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="Zv8-5w-8Xu">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="116"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -3932,7 +3935,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YWb-HG-VnM">
-                                    <rect key="frame" x="0.0" y="115.5" width="375" height="0.5"/>
+                                    <rect key="frame" x="0.0" y="51.5" width="375" height="0.5"/>
                                     <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="0.5" id="A4H-O5-FPo"/>
@@ -4727,7 +4730,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="L4P-3X-kqy">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="L4P-3X-kqy">
                             <rect key="frame" x="0.0" y="248" width="375" height="268"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -4739,7 +4742,7 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b1i-Xo-Mvi">
-                                    <rect key="frame" x="112.5" y="153" width="150" height="44"/>
+                                    <rect key="frame" x="112.5" y="79" width="150" height="44"/>
                                     <color key="backgroundColor" red="0.94117647059999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="150" id="aWX-8w-XHU"/>
@@ -4940,7 +4943,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="NQr-Se-Gy0">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="NQr-Se-Gy0">
                             <rect key="frame" x="0.0" y="548" width="375" height="268"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -4952,7 +4955,7 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZ4-dK-jue">
-                                    <rect key="frame" x="112.5" y="41.5" width="150" height="44"/>
+                                    <rect key="frame" x="112.5" y="26.5" width="150" height="44"/>
                                     <color key="backgroundColor" red="0.94117647059999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="150" id="Cwb-BY-36g"/>
@@ -5754,7 +5757,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="lNg-Qc-cdg">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="lNg-Qc-cdg">
                             <rect key="frame" x="0.0" y="176" width="375" height="268"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -5766,7 +5769,7 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SMq-be-1Cw">
-                                    <rect key="frame" x="112.5" y="153" width="150" height="44"/>
+                                    <rect key="frame" x="112.5" y="111" width="150" height="44"/>
                                     <color key="backgroundColor" red="0.94117647059999998" green="0.28235294119999998" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="cB2-SB-IZr"/>
@@ -6169,7 +6172,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="2Aq-OR-xWF"/>
         <segue reference="50l-qf-1Te"/>
-        <segue reference="i5G-1x-J6B"/>
+        <segue reference="Xrd-7t-h94"/>
         <segue reference="Ytf-U1-H5P"/>
         <segue reference="zad-If-0b1"/>
         <segue reference="Gv3-Ob-EDd"/>

@@ -10,7 +10,19 @@ import UIKit
 import SVProgressHUD
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, QQApiInterfaceDelegate {
+    func onReq(_ req: QQBaseReq!) {
+        
+    }
+    
+    func onResp(_ resp: QQBaseResp!) {
+        
+    }
+    
+    func isOnlineResponse(_ response: [AnyHashable : Any]!) {
+        
+    }
+    
 
     var window: UIWindow?
 
@@ -20,14 +32,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SVProgressHUD.setMinimumDismissTimeInterval(1)
         UMSocialManager.default().openLog(true)
         UMSocialManager.default().umSocialAppkey = "59f2d0dcf43e487092000353"
-        UMSocialManager.default().setPlaform(UMSocialPlatformType.QQ, appKey: "", appSecret: "", redirectURL: "")
+        UMSocialManager.default().setPlaform(UMSocialPlatformType.QQ, appKey: "1106537651", appSecret: "o61jxjzC183EJp6n", redirectURL: "")
         UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatSession, appKey: "", appSecret: "", redirectURL: "")
         if #available(iOS 11.0, *) {
             UIScrollView.appearance().contentInsetAdjustmentBehavior = .never;
         }
-        
-        
+        UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "left_back")
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "left_back")
+        UINavigationBar.appearance().tintColor = #colorLiteral(red: 0.3234693706, green: 0.3234777451, blue: 0.3234732151, alpha: 1)
+        var offsetY = 0
+        if #available(iOS 11.0, *) {
+            offsetY = -3
+        }
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-1000, CGFloat(offsetY)), for: .default)
         return true
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        let result = UMSocialManager.default().handleOpen(url, sourceApplication: sourceApplication, annotation: annotation)
+        if TencentOAuth.canHandleOpen(url) {
+            return TencentOAuth.handleOpen(url)
+        }
+        if result {
+            
+        }
+        return result
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        let result = UMSocialManager.default().handleOpen(url, options: options)
+        TencentOAuth.handleOpen(url)
+        QQApiInterface.handleOpen(url, delegate: self)
+        if result {
+            
+        }
+        return result
+    }
+    
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+        let result = UMSocialManager.default().handleOpen(url)
+        TencentOAuth.handleOpen(url)
+        QQApiInterface.handleOpen(url, delegate: self)
+        if result {
+            
+        }
+        return result
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
