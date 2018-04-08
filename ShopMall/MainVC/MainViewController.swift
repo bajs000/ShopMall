@@ -37,7 +37,11 @@ class MainViewController: UITableViewController, UICollectionViewDataSource, UIC
         Helpers.barInit(self.tabBarController!)
         self.tableView.contentInset = UIEdgeInsetsMake(44, 0, 0, 0)
         self.tabBarController!.view.addSubview(functionView)
-        functionView.frame = CGRect(x: 0, y: 64, width: Helpers.screanSize().width, height: 44)
+        var yOffset = 64
+        if UIDevice.current.isX() {
+            yOffset = 88
+        }
+        functionView.frame = CGRect(x: 0, y: yOffset, width: Int(Helpers.screanSize().width), height: 44)
         self.tableView.tableHeaderView = headerView
         self.tabBarController?.delegate = self
         currentSupplyBtn = allBtn

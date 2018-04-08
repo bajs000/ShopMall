@@ -18,7 +18,7 @@ class SearchViewController: UITableViewController, EVNCustomSearchBarDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar = EVNCustomSearchBar(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.size.height, width: Helpers.screanSize().width, height: 44))
+        searchBar = EVNCustomSearchBar(frame: CGRect(x: 0, y: 0, width: Helpers.screanSize().width, height: 44))
         searchBar?.backgroundColor = UIColor.clear
         searchBar.iconAlign = .center
         searchBar.placeholder = "搜索"
@@ -29,7 +29,10 @@ class SearchViewController: UITableViewController, EVNCustomSearchBarDelegate {
         if #available(iOS 11.0, *) {
             searchBar.heightAnchor.constraint(lessThanOrEqualToConstant: 44).isActive = true
         }
+//        let view = UIView(frame: CGRect(x: 0, y: 0, width: 80, height: 44))
+//        view.backgroundColor = UIColor.red
         self.navigationItem.titleView = searchBar
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "left_back"), style: .plain, target: self, action: #selector(back))
     }
 
     
@@ -199,6 +202,10 @@ class SearchViewController: UITableViewController, EVNCustomSearchBarDelegate {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image!
+    }
+    
+    @objc func back() -> Void {
+        self.navigationController?.popViewController(animated: true)
     }
     
 }

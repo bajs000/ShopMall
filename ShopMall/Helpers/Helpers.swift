@@ -126,3 +126,21 @@ extension UIImage {
         return output!
     }
 }
+
+extension UIDevice {
+    public func isX() -> Bool {
+        if UIScreen.main.bounds.height == 812 {
+            return true
+        }
+        
+        return false
+    }
+    
+    public func isPlus() -> Bool {
+        if UIScreen.main.bounds.width == 414 && UIScreen.main.bounds.height == 736 {
+            return true
+        }
+        
+        return false
+    }
+}
