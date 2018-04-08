@@ -181,7 +181,17 @@ class GoodsDetailViewController: UIViewController, UITableViewDelegate, UITableV
             })
             break
         case 3:
-            UIApplication.shared.openURL(URL(string:"tel://" + (((self.dataSource!["list"] as! NSDictionary)["user"] as! NSDictionary)["phone"] as! String))!)
+//            if dic["phone"] != nil && (dic["phone"] as! NSObject).isKind(of: NSString.self){
+//                UIApplication.shared.openURL(URL(string:"tel://" + (dic["phone"] as! String))!)
+//            }else {
+//                SVProgressHUD.showError(withStatus: "系统错误，请联系管理员")
+//            }
+            if ((self.dataSource!["list"] as! NSDictionary)["user"] as! NSDictionary)["phone"] != nil && (((self.dataSource!["list"] as! NSDictionary)["user"] as! NSDictionary)["phone"] as! NSObject).isKind(of: NSString.self){
+                UIApplication.shared.openURL(URL(string:"tel://" + (((self.dataSource!["list"] as! NSDictionary)["user"] as! NSDictionary)["phone"] as! String))!)
+            } else {
+                SVProgressHUD.showError(withStatus: "系统错误，请联系管理员")
+            }
+            
             break
         default:
             break
@@ -206,7 +216,7 @@ class GoodsDetailViewController: UIViewController, UITableViewDelegate, UITableV
             moreView.isHidden = false
             UIView.animate(withDuration: 0.5, animations: {
                 self.moreView.viewWithTag(1)?.alpha = 0.8
-                self.moreViewHeight.constant = 88
+                self.moreViewHeight.constant = 44
                 self.view.layoutIfNeeded()
             })
         }

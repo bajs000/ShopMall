@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, QQApiInterfaceDelegate {
         UMSocialManager.default().setPlaform(UMSocialPlatformType.QQ, appKey: "1106537651", appSecret: "o61jxjzC183EJp6n", redirectURL: "")
         UMSocialManager.default().setPlaform(UMSocialPlatformType.wechatSession, appKey: "", appSecret: "", redirectURL: "")
         if #available(iOS 11.0, *) {
-            UIScrollView.appearance().contentInsetAdjustmentBehavior = .never;
+//            UIScrollView.appearance().contentInsetAdjustmentBehavior = .never;
         }
         UINavigationBar.appearance().backIndicatorImage = #imageLiteral(resourceName: "left_back")
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "left_back")
